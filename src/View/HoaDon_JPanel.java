@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
+
 package View;
 
 import java.awt.Color;
@@ -12,9 +9,7 @@ import java.awt.Color;
  */
 public class HoaDon_JPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form HoaDon_JPanel
-     */
+    
     public HoaDon_JPanel() {
         initComponents();
         this.setBackground(new Color(37, 108, 205));

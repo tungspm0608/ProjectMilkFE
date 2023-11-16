@@ -308,9 +308,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="JPFeature" min="-2" pref="253" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="JPPanelContainer" pref="1169" max="32767" attributes="0"/>
+                  <Component id="JPFeature" min="-2" pref="204" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <Component id="JPPanelContainer" pref="1230" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -344,7 +344,11 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
+<<<<<<< HEAD
                       <EmptySpace pref="57" max="32767" attributes="0"/>
+=======
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+>>>>>>> 1b30ceb096ed0b83948c6692e92b4c380b7d22df
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jButton15" max="32767" attributes="0"/>
                           <Component id="jPanel1" max="32767" attributes="0"/>
