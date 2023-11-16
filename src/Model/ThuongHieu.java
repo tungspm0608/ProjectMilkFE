@@ -8,36 +8,36 @@ package Model;
  *
  * @author Tung
  */
-public class LoaiHang {
-    private int maLoaiHang;
-    private String tenLoaiHang;
+public class ThuongHieu {
+    private int maThuongHieu;
+    private String tenThuongHieu;
     private String ghiChu;
     private boolean trangThai;
 
-    public LoaiHang() {
+    public ThuongHieu() {
     }
 
-    public LoaiHang(int maLoaiHang, String tenLoaiHang, String ghiChu, boolean trangThai) {
-        this.maLoaiHang = maLoaiHang;
-        this.tenLoaiHang = tenLoaiHang;
+    public ThuongHieu(int maThuongHieu, String tenThuongHieu, String ghiChu, boolean trangThai) {
+        this.maThuongHieu = maThuongHieu;
+        this.tenThuongHieu = tenThuongHieu;
         this.ghiChu = ghiChu;
         this.trangThai = trangThai;
     }
 
-    public int getMaLoaiHang() {
-        return maLoaiHang;
+    public int getMaThuongHieu() {
+        return maThuongHieu;
     }
 
-    public void setMaLoaiHang(int maLoaiHang) {
-        this.maLoaiHang = maLoaiHang;
+    public void setMaThuongHieu(int maThuongHieu) {
+        this.maThuongHieu = maThuongHieu;
     }
 
-    public String getTenLoaiHang() {
-        return tenLoaiHang;
+    public String getTenThuongHieu() {
+        return tenThuongHieu;
     }
 
-    public void setTenLoaiHang(String tenLoaiHang) {
-        this.tenLoaiHang = tenLoaiHang;
+    public void setTenThuongHieu(String tenThuongHieu) {
+        this.tenThuongHieu = tenThuongHieu;
     }
 
     public String getGhiChu() {
