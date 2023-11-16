@@ -231,13 +231,13 @@ public class KhuyenMai_JPanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Mã khuyến mại", "Tên chương trinh", "", "Giám giá", "Bắt đầu", "Kết thúc", "Ghi chú"
+                "Mã khuyến mại", "Tên chương trinh", "Giảm giá", "Bắt đầu", "Kết thúc", "Ghi chú"
             }
         ));
         jScrollPane2.setViewportView(jTable1);
