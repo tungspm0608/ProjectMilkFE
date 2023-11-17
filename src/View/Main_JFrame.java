@@ -32,9 +32,8 @@ public class Main_JFrame extends javax.swing.JFrame {
         JPFeature.setBackground(new Color(37, 108, 205));
         JPPanelContainer.setBackground(new Color(37, 108, 205));
         
-        this.setSize((int) width-450, (int) height-200);
-        
-        setLocationRelativeTo(null);
+        this.setSize((int) width, (int) height);
+        setLocation(0, 0);
 
     }
 
@@ -92,6 +91,7 @@ public class Main_JFrame extends javax.swing.JFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilities/IconSystem/Exit.png"))); // NOI18N
         jButton1.setText("Đăng xuất");
         jButton1.setBorder(null);
+        jButton1.setBounds(new java.awt.Rectangle(0, 0, 50, 50));
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -101,6 +101,7 @@ public class Main_JFrame extends javax.swing.JFrame {
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilities/IconSystem/Blue key.png"))); // NOI18N
         jButton2.setText("Đổi mật khẩu");
         jButton2.setBorder(null);
+        jButton2.setBounds(new java.awt.Rectangle(0, 5, 0, 5));
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -115,6 +116,7 @@ public class Main_JFrame extends javax.swing.JFrame {
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilities/IconSystem/Stop sign.png"))); // NOI18N
         jButton3.setText("Kết thúc");
         jButton3.setBorder(null);
+        jButton3.setBounds(new java.awt.Rectangle(0, 5, 0, 5));
         jButton3.setFocusable(false);
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -353,7 +355,7 @@ public class Main_JFrame extends javax.swing.JFrame {
         JPFeatureLayout.setHorizontalGroup(
             JPFeatureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPFeatureLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(JPFeatureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -382,7 +384,7 @@ public class Main_JFrame extends javax.swing.JFrame {
                 .addComponent(jButton16)
                 .addGap(18, 18, 18)
                 .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
 
         JPFeatureLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton11, jButton12, jButton13, jButton14, jButton15, jButton16, jButton17});
@@ -396,15 +398,13 @@ public class Main_JFrame extends javax.swing.JFrame {
         JPPanelContainer.setLayout(JPPanelContainerLayout);
         JPPanelContainerLayout.setHorizontalGroup(
             JPPanelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPPanelContainerLayout.createSequentialGroup()
-                .addGap(0, 12, Short.MAX_VALUE)
-                .addComponent(JTPMain, javax.swing.GroupLayout.PREFERRED_SIZE, 1169, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(JTPMain, javax.swing.GroupLayout.PREFERRED_SIZE, 1169, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         JPPanelContainerLayout.setVerticalGroup(
             JPPanelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(JPPanelContainerLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPPanelContainerLayout.createSequentialGroup()
                 .addComponent(JTPMain, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout JPContentLayout = new javax.swing.GroupLayout(JPContent);
@@ -413,18 +413,18 @@ public class Main_JFrame extends javax.swing.JFrame {
             JPContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPContentLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(JPFeature, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JPPanelContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 1181, Short.MAX_VALUE))
+                .addComponent(JPFeature, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(JPPanelContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 1169, Short.MAX_VALUE))
         );
         JPContentLayout.setVerticalGroup(
             JPContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPContentLayout.createSequentialGroup()
                 .addGroup(JPContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(JPPanelContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 826, Short.MAX_VALUE)
                     .addGroup(JPContentLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(JPFeature, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(JPPanelContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 826, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(JPFeature, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
