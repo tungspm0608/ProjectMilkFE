@@ -12,12 +12,12 @@ public class ThuongHieu {
     private int maThuongHieu;
     private String tenThuongHieu;
     private String ghiChu;
-    private int trangThai;
+    private boolean trangThai;
 
     public ThuongHieu() {
     }
 
-    public ThuongHieu(int maThuongHieu, String tenThuongHieu, String ghiChu, int trangThai) {
+    public ThuongHieu(int maThuongHieu, String tenThuongHieu, String ghiChu, boolean trangThai) {
         this.maThuongHieu = maThuongHieu;
         this.tenThuongHieu = tenThuongHieu;
         this.ghiChu = ghiChu;
@@ -48,11 +48,11 @@ public class ThuongHieu {
         this.ghiChu = ghiChu;
     }
 
-    public int getTrangThai() {
+    public boolean getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(int trangThai) {
+    public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
     }
     

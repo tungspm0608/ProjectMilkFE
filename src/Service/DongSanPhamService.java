@@ -23,7 +23,7 @@ public class DongSanPhamService {
     ResultSet rs = null;
     
     public List<DongSanPham> getAll(){
-        sql = "exec Select_SanPham";
+        sql = "select * from DongSanPham";
         List<DongSanPham> list = new ArrayList<>();
         
         try {

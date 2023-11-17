@@ -23,7 +23,7 @@ public class LoaiHangService {
     ResultSet rs = null;
     
     public List<LoaiHang> getAll(){
-        sql = "exec Select_SanPham";
+        sql = "select * from LoaiHang";
         List<LoaiHang> list = new ArrayList<>();
         
         try {
@@ -32,7 +32,8 @@ public class LoaiHangService {
             rs = ps.executeQuery();
             
             while(rs.next()){
-                list.add(new LoaiHang(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4)));
+                list.add(new LoaiHang(
+                        rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4)));
             }
             
             return list;
