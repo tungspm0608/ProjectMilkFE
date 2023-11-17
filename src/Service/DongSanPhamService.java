@@ -4,26 +4,26 @@
  */
 package Service;
 
-import Model.DonViTinh;
+import Model.DongSanPham;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  *
  * @author Tung
  */
-public class DonViTinh_service {
-     String sql = null;
+public class DongSanPhamService {
+         String sql = null;
     Connection con = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
     
-    public List<DonViTinh> getAll(){
-        sql = "select * from DonViTinh";
-        List<DonViTinh> list = new ArrayList<>();
+    public List<DongSanPham> getAll(){
+        sql = "exec Select_SanPham";
+        List<DongSanPham> list = new ArrayList<>();
         
         try {
             con = DBConnect.getConnection();
@@ -31,7 +31,7 @@ public class DonViTinh_service {
             rs = ps.executeQuery();
             
             while(rs.next()){
-                list.add(new DonViTinh(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4)));
+                list.add(new DongSanPham(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4)));
             }
             
             return list;
@@ -39,5 +39,5 @@ public class DonViTinh_service {
             e.printStackTrace();
             return null;
         }
-    }
+    } 
 }

@@ -31,7 +31,7 @@ public class SanPham_service {
             while(rs.next()){
                 int maSanPham = rs.getInt(1);
                 String tenSanPham = rs.getString(2);
-                LoaiHang lh = new LoaiHang(rs.getString(3));
+                LoaiHang lh = new LoaiHang()
                 list.add();
             }
             
