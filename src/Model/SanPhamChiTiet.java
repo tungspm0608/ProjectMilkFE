@@ -11,12 +11,25 @@ import java.util.Date;
  * @author Tung
  */
 public class SanPhamChiTiet {
-    
+    private int maSanPhamChiTiet;
+    private int maSanPham;
+    private int maDonViTinh;
+    private String anhSanPham;
+    private Date hanSuDung;
+    private int soLuong;
+    private float giaNhap;
+    private float donGia;
+    private float khoiLuong;
+    private String donViTinhKhoiLuong;
+    private Date ngaySanXuat;
+    private String barcode;
+    private int trangThai;
+
 
     public SanPhamChiTiet() {
     }
 
-    public SanPhamChiTiet(int maSanPhamChiTiet, int maSanPham, int maDonViTinh, String anhSanPham, Date hanSuDung, int soLuong, float giaNhap, float donGia, float khoiLuong, String donViTinhKhoiLuong, Date ngaySanXuat, String barcode, boolean trangThai) {
+    public SanPhamChiTiet(int maSanPhamChiTiet, int maSanPham, int maDonViTinh, String anhSanPham, Date hanSuDung, int soLuong, float giaNhap, float donGia, float khoiLuong, String donViTinhKhoiLuong, Date ngaySanXuat, String barcode, int trangThai) {
         this.maSanPhamChiTiet = maSanPhamChiTiet;
         this.maSanPham = maSanPham;
         this.maDonViTinh = maDonViTinh;
@@ -128,11 +141,11 @@ public class SanPhamChiTiet {
         this.barcode = barcode;
     }
 
-    public boolean isTrangThai() {
+    public int getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(boolean trangThai) {
+    public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
     

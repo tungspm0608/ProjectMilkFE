@@ -5,40 +5,39 @@
 package Service;
 
 import Helper.DBContext;
-import Model.DonViTinh;
+import Model.SanPhamChiTiet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  *
  * @author Tung
  */
-public class DonViTinh_service {
-     String sql = null;
+public class SanPhamChiTietService {
+         String sql = null;
     Connection con = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
     
-    public List<DonViTinh> getAll(){
-        sql = "select * from DonViTinh";
-        List<DonViTinh> list = new ArrayList<>();
+    public List<SanPhamChiTiet> getAll(){
+        sql = "select * from SanPhamChiTiet";
+        List<SanPhamChiTiet> list = new ArrayList<>();
         
         try {
             con = DBContext.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             
-            while(rs.next()){
-                list.add(new DonViTinh(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4)));
-            }
-            
+            while(rs.next()){                
+                list.add(new SanPhamChiTiet(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getDate(5), rs.getInt(6), rs.getFloat(7), rs.getFloat(8), rs.getFloat(9), rs.getString(10), rs.getDate(11), rs.getString(12), rs.getInt(13)));
+            }           
             return list;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-    }
+    } 
 }

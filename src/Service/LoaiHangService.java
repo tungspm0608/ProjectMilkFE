@@ -5,26 +5,26 @@
 package Service;
 
 import Helper.DBContext;
-import Model.DonViTinh;
+import Model.LoaiHang;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  *
  * @author Tung
  */
-public class DonViTinh_service {
-     String sql = null;
+public class LoaiHangService {
+    String sql = null;
     Connection con = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
     
-    public List<DonViTinh> getAll(){
-        sql = "select * from DonViTinh";
-        List<DonViTinh> list = new ArrayList<>();
+    public List<LoaiHang> getAll(){
+        sql = "select * from LoaiHang";
+        List<LoaiHang> list = new ArrayList<>();
         
         try {
             con = DBContext.getConnection();
@@ -32,7 +32,8 @@ public class DonViTinh_service {
             rs = ps.executeQuery();
             
             while(rs.next()){
-                list.add(new DonViTinh(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4)));
+                list.add(new LoaiHang(
+                        rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4)));
             }
             
             return list;
@@ -40,5 +41,5 @@ public class DonViTinh_service {
             e.printStackTrace();
             return null;
         }
-    }
+    } 
 }
