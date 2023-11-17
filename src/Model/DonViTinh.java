@@ -8,36 +8,36 @@ package Model;
  *
  * @author Tung
  */
-public class LoaiHang {
-    private int maLoaiHang;
-    private String tenLoaiHang;
+public class DonViTinh {
+    private int maDonViTinh;
+    private String tenDonViTinh;
     private String ghiChu;
     private int trangThai;
 
-    public LoaiHang() {
+    public DonViTinh() {
     }
 
-    public LoaiHang(int maLoaiHang, String tenLoaiHang, String ghiChu, int trangThai) {
-        this.maLoaiHang = maLoaiHang;
-        this.tenLoaiHang = tenLoaiHang;
+    public DonViTinh(int maDonViTinh, String tenDonViTinh, String ghiChu, int trangThai) {
+        this.maDonViTinh = maDonViTinh;
+        this.tenDonViTinh = tenDonViTinh;
         this.ghiChu = ghiChu;
         this.trangThai = trangThai;
     }
 
-    public int getMaLoaiHang() {
-        return maLoaiHang;
+    public int getMaDonViTinh() {
+        return maDonViTinh;
     }
 
-    public void setMaLoaiHang(int maLoaiHang) {
-        this.maLoaiHang = maLoaiHang;
+    public void setMaDonViTinh(int maDonViTinh) {
+        this.maDonViTinh = maDonViTinh;
     }
 
-    public String getTenLoaiHang() {
-        return tenLoaiHang;
+    public String getTenDonViTinh() {
+        return tenDonViTinh;
     }
 
-    public void setTenLoaiHang(String tenLoaiHang) {
-        this.tenLoaiHang = tenLoaiHang;
+    public void setTenDonViTinh(String tenDonViTinh) {
+        this.tenDonViTinh = tenDonViTinh;
     }
 
     public String getGhiChu() {

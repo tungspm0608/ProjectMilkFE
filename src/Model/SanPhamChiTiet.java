@@ -11,19 +11,7 @@ import java.util.Date;
  * @author Tung
  */
 public class SanPhamChiTiet {
-    private int maSanPhamChiTiet;
-    private int maSanPham;
-    private int maDonViTinh;
-    private String anhSanPham;
-    private Date hanSuDung;
-    private int soLuong;
-    private float giaNhap;
-    private float donGia;
-    private float khoiLuong;
-    private String donViTinhKhoiLuong;
-    private Date ngaySanXuat;
-    private String barcode;
-    private boolean trangThai;
+    
 
     public SanPhamChiTiet() {
     }

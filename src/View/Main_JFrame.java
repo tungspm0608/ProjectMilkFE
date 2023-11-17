@@ -32,8 +32,8 @@ public class Main_JFrame extends javax.swing.JFrame {
         JPFeature.setBackground(new Color(37, 108, 205));
         JPPanelContainer.setBackground(new Color(37, 108, 205));
         
-        this.setSize((int) width-450, (int) height-200);
-        
+        this.setSize((int) width-400, (int) height-170);
+        setLocation(0, 0);
         setLocationRelativeTo(null);
 
     }
@@ -92,6 +92,7 @@ public class Main_JFrame extends javax.swing.JFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilities/IconSystem/Exit.png"))); // NOI18N
         jButton1.setText("Đăng xuất");
         jButton1.setBorder(null);
+        jButton1.setBounds(new java.awt.Rectangle(0, 0, 50, 50));
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -101,6 +102,7 @@ public class Main_JFrame extends javax.swing.JFrame {
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilities/IconSystem/Blue key.png"))); // NOI18N
         jButton2.setText("Đổi mật khẩu");
         jButton2.setBorder(null);
+        jButton2.setBounds(new java.awt.Rectangle(0, 5, 0, 5));
         jButton2.setFocusable(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -115,6 +117,7 @@ public class Main_JFrame extends javax.swing.JFrame {
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilities/IconSystem/Stop sign.png"))); // NOI18N
         jButton3.setText("Kết thúc");
         jButton3.setBorder(null);
+        jButton3.setBounds(new java.awt.Rectangle(0, 5, 0, 5));
         jButton3.setFocusable(false);
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -353,7 +356,7 @@ public class Main_JFrame extends javax.swing.JFrame {
         JPFeatureLayout.setHorizontalGroup(
             JPFeatureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPFeatureLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(JPFeatureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -411,9 +414,9 @@ public class Main_JFrame extends javax.swing.JFrame {
             JPContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPContentLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(JPFeature, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(JPPanelContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 1230, Short.MAX_VALUE))
+                .addComponent(JPFeature, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(JPPanelContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 1169, Short.MAX_VALUE))
         );
         JPContentLayout.setVerticalGroup(
             JPContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

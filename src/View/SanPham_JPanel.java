@@ -4,7 +4,11 @@
  */
 package View;
 
+import Model.SanPham;
+import Service.SanPhamService;
 import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,9 +19,16 @@ public class SanPham_JPanel extends javax.swing.JPanel {
     /**
      * Creates new form SanPhamView
      */
+    SanPhamService service = new SanPhamService();
+    DefaultTableModel model = new DefaultTableModel();
+    int page=1,index=-1;
+    String ten="",trangThai="";
+    ArrayList<SanPham> list = new ArrayList<>();
     public SanPham_JPanel() {
         initComponents();
         this.setBackground(new Color(37, 108, 205));
+        model = (DefaultTableModel)tbl_sp.getModel();
+        loadDataToTable();
     }
 
     /**
@@ -79,7 +90,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         jTextField6 = new javax.swing.JTextField();
         jButton18 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbl_sp = new javax.swing.JTable();
         jLabel16 = new javax.swing.JLabel();
         jButton19 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -407,7 +418,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_sp.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -415,7 +426,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
                 "Mã sản phẩm", "Tên sản phẩm", "Loại hàng", "Dòng sản phẩm", "Hạn sử dụng", "Số lương", "Đơn giá", "Xuất xứ", "Khối lượng", "Đơn vị tính", "Barcode", "Ghi chú", "Ảnh"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tbl_sp);
 
         jLabel16.setBackground(new java.awt.Color(255, 255, 255));
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
@@ -687,7 +698,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addComponent(jLabel28)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                         .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addComponent(jLabel29)
@@ -1594,7 +1605,6 @@ public class SanPham_JPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
@@ -1622,5 +1632,16 @@ public class SanPham_JPanel extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JTable tbl_sp;
     // End of variables declaration//GEN-END:variables
+
+    private void loadDataToTable() {
+        list = service.pagingByTen(page, 10, ten, trangThai);
+        model.setRowCount(0);
+        for(SanPham x : list){
+            model.addRow(new Object[]{
+                x.getMaSanPhamChiTiet(),x.getTenSanPham()
+            });
+        }
+    }
 }
