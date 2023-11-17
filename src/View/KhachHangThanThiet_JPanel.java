@@ -2,7 +2,7 @@ package View;
 
 import Model.KhachHang;
 import Service.KhachHangService;
-import Until.XDate;
+import Helper.XDate;
 import java.awt.Color;
 import java.math.BigDecimal;
 import java.util.ArrayList;
