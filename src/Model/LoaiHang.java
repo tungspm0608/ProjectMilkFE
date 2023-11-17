@@ -12,12 +12,12 @@ public class LoaiHang {
     private int maLoaiHang;
     private String tenLoaiHang;
     private String ghiChu;
-    private boolean trangThai;
+    private int trangThai;
 
     public LoaiHang() {
     }
 
-    public LoaiHang(int maLoaiHang, String tenLoaiHang, String ghiChu, boolean trangThai) {
+    public LoaiHang(int maLoaiHang, String tenLoaiHang, String ghiChu, int trangThai) {
         this.maLoaiHang = maLoaiHang;
         this.tenLoaiHang = tenLoaiHang;
         this.ghiChu = ghiChu;
@@ -48,11 +48,11 @@ public class LoaiHang {
         this.ghiChu = ghiChu;
     }
 
-    public boolean isTrangThai() {
+    public int getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(boolean trangThai) {
+    public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
     

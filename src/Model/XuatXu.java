@@ -8,36 +8,36 @@ package Model;
  *
  * @author Tung
  */
-public class ThuongHieu {
-    private int maThuongHieu;
-    private String tenThuongHieu;
+public class XuatXu {
+    private int maXuatXu;
+    private String tenXuatXu;
     private String ghiChu;
     private int trangThai;
 
-    public ThuongHieu() {
+    public XuatXu() {
     }
 
-    public ThuongHieu(int maThuongHieu, String tenThuongHieu, String ghiChu, int trangThai) {
-        this.maThuongHieu = maThuongHieu;
-        this.tenThuongHieu = tenThuongHieu;
+    public XuatXu(int maXuatXu, String tenXuatXu, String ghiChu, int trangThai) {
+        this.maXuatXu = maXuatXu;
+        this.tenXuatXu = tenXuatXu;
         this.ghiChu = ghiChu;
         this.trangThai = trangThai;
     }
 
-    public int getMaThuongHieu() {
-        return maThuongHieu;
+    public int getMaXuatXu() {
+        return maXuatXu;
     }
 
-    public void setMaThuongHieu(int maThuongHieu) {
-        this.maThuongHieu = maThuongHieu;
+    public void setMaXuatXu(int maXuatXu) {
+        this.maXuatXu = maXuatXu;
     }
 
-    public String getTenThuongHieu() {
-        return tenThuongHieu;
+    public String getTenXuatXu() {
+        return tenXuatXu;
     }
 
-    public void setTenThuongHieu(String tenThuongHieu) {
-        this.tenThuongHieu = tenThuongHieu;
+    public void setTenXuatXu(String tenXuatXu) {
+        this.tenXuatXu = tenXuatXu;
     }
 
     public String getGhiChu() {
@@ -55,6 +55,5 @@ public class ThuongHieu {
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
-    
     
 }

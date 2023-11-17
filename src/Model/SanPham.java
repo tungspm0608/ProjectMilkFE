@@ -12,24 +12,29 @@ public class SanPham {
     private int maSanPham;
     private String tenSanPham;
     private String moTa;
-    private boolean trangThai; // kinh doanh or ngung kinh doanh
-    private int maThuongHieu;
-    private int maLoaiHang;
-    private int maDongSanPham;
-    private int maXuatXu;
+    private int trangThai; // kinh doanh or ngung kinh doanh
+    private ThuongHieu thuongHieu;
+    private LoaiHang loaiHang;
+    private DongSanPham dongSanPham;
+    private XuatXu xuatXu;
+    private SanPhamChiTiet spct;
+    private String ghiChu;
+    
 
     public SanPham() {
     }
 
-    public SanPham(int maSanPham, String tenSanPham, String moTa, boolean trangThai, int maThuongHieu, int maLoaiHang, int maDongSanPham, int maXuatXu) {
+    public SanPham(int maSanPham, String tenSanPham, String moTa, int trangThai, ThuongHieu thuongHieu, LoaiHang loaiHang, DongSanPham dongSanPham, XuatXu xuatXu, SanPhamChiTiet spct, String ghiChu) {
         this.maSanPham = maSanPham;
         this.tenSanPham = tenSanPham;
         this.moTa = moTa;
         this.trangThai = trangThai;
-        this.maThuongHieu = maThuongHieu;
-        this.maLoaiHang = maLoaiHang;
-        this.maDongSanPham = maDongSanPham;
-        this.maXuatXu = maXuatXu;
+        this.thuongHieu = thuongHieu;
+        this.loaiHang = loaiHang;
+        this.dongSanPham = dongSanPham;
+        this.xuatXu = xuatXu;
+        this.spct = spct;
+        this.ghiChu = ghiChu;
     }
 
     public int getMaSanPham() {
@@ -56,45 +61,60 @@ public class SanPham {
         this.moTa = moTa;
     }
 
-    public boolean isTrangThai() {
+    public int getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(boolean trangThai) {
+    public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
 
-    public int getMaThuongHieu() {
-        return maThuongHieu;
+    public ThuongHieu getThuongHieu() {
+        return thuongHieu;
     }
 
-    public void setMaThuongHieu(int maThuongHieu) {
-        this.maThuongHieu = maThuongHieu;
+    public void setThuongHieu(ThuongHieu thuongHieu) {
+        this.thuongHieu = thuongHieu;
     }
 
-    public int getMaLoaiHang() {
-        return maLoaiHang;
+    public LoaiHang getLoaiHang() {
+        return loaiHang;
     }
 
-    public void setMaLoaiHang(int maLoaiHang) {
-        this.maLoaiHang = maLoaiHang;
+    public void setLoaiHang(LoaiHang loaiHang) {
+        this.loaiHang = loaiHang;
     }
 
-    public int getMaDongSanPham() {
-        return maDongSanPham;
+    public DongSanPham getDongSanPham() {
+        return dongSanPham;
     }
 
-    public void setMaDongSanPham(int maDongSanPham) {
-        this.maDongSanPham = maDongSanPham;
+    public void setDongSanPham(DongSanPham dongSanPham) {
+        this.dongSanPham = dongSanPham;
     }
 
-    public int getMaXuatXu() {
-        return maXuatXu;
+    public XuatXu getXuatXu() {
+        return xuatXu;
     }
 
-    public void setMaXuatXu(int maXuatXu) {
-        this.maXuatXu = maXuatXu;
+    public void setXuatXu(XuatXu xuatXu) {
+        this.xuatXu = xuatXu;
     }
-    
+
+    public SanPhamChiTiet getSpct() {
+        return spct;
+    }
+
+    public void setSpct(SanPhamChiTiet spct) {
+        this.spct = spct;
+    }
+
+    public String getGhiChu() {
+        return ghiChu;
+    }
+
+    public void setGhiChu(String ghiChu) {
+        this.ghiChu = ghiChu;
+    }
     
 }

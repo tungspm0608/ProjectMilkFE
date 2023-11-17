@@ -4,6 +4,7 @@
  */
 package Service;
 
+import Model.LoaiHang;
 import Model.SanPham;
 import java.sql.*;
 import java.util.ArrayList;
@@ -28,12 +29,16 @@ public class SanPham_service {
             rs = ps.executeQuery();
             
             while(rs.next()){
-                list.add(new SanPham(0, sql, sql, true, 0, 0, 0, 0))
+                int maSanPham = rs.getInt(1);
+                String tenSanPham = rs.getString(2);
+                LoaiHang lh = new LoaiHang(rs.getString(3));
+                list.add();
             }
             
             return list;
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
     } 
 }
