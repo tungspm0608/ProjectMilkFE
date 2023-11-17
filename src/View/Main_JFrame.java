@@ -381,7 +381,7 @@ public class Main_JFrame extends javax.swing.JFrame {
                 .addComponent(jButton16)
                 .addGap(18, 18, 18)
                 .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         JPFeatureLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton11, jButton12, jButton13, jButton14, jButton15, jButton16, jButton17});
@@ -395,13 +395,15 @@ public class Main_JFrame extends javax.swing.JFrame {
         JPPanelContainer.setLayout(JPPanelContainerLayout);
         JPPanelContainerLayout.setHorizontalGroup(
             JPPanelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(JTPMain, javax.swing.GroupLayout.PREFERRED_SIZE, 1169, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPPanelContainerLayout.createSequentialGroup()
+                .addGap(0, 12, Short.MAX_VALUE)
+                .addComponent(JTPMain, javax.swing.GroupLayout.PREFERRED_SIZE, 1169, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         JPPanelContainerLayout.setVerticalGroup(
             JPPanelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPPanelContainerLayout.createSequentialGroup()
+            .addGroup(JPPanelContainerLayout.createSequentialGroup()
                 .addComponent(JTPMain, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout JPContentLayout = new javax.swing.GroupLayout(JPContent);
@@ -410,18 +412,18 @@ public class Main_JFrame extends javax.swing.JFrame {
             JPContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPContentLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(JPFeature, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(JPPanelContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 1230, Short.MAX_VALUE))
+                .addComponent(JPFeature, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(JPPanelContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 1181, Short.MAX_VALUE))
         );
         JPContentLayout.setVerticalGroup(
             JPContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPContentLayout.createSequentialGroup()
                 .addGroup(JPContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(JPPanelContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 826, Short.MAX_VALUE)
                     .addGroup(JPContentLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(JPFeature, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(6, 6, 6)
+                        .addComponent(JPFeature, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(JPPanelContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 826, Short.MAX_VALUE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
