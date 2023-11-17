@@ -31,13 +31,13 @@ public class NhanVienService {
                 x.setMaNhanVien(rs.getString(1));
                 x.setMatKhau(rs.getString(2));
                 x.setTenNhanVien(rs.getString(3));
-                x.setGioiTinh(rs.getInt(4)==1?"Nam":"Nữ");
-                x.setNgaySinh(XDate.toString(rs.getDate(5),"dd-MM-yyyy"));
+                x.setGioiTinh(rs.getInt(4) == 1 ? "Nam" : "Nữ");
+                x.setNgaySinh(XDate.toString(rs.getDate(5), "dd-MM-yyyy"));
                 x.setSoDienThoai(rs.getString(6));
                 x.setEmail(rs.getString(7));
                 x.setAnhNhanVien(rs.getString(8));
-                x.setVaiTro(rs.getInt(9)==1?"Quản lý":"Nhân Viên");
-                x.setTrangThai(rs.getInt(10)==1?"Đang làm":"Nghỉ việc");
+                x.setVaiTro(rs.getInt(9) == 1 ? "Quản lý" : "Nhân Viên");
+                x.setTrangThai(rs.getInt(10) == 1 ? "Đang làm" : "Nghỉ việc");
                 x.setGhiChu(rs.getString(11));
                 list.add(x);
             }
@@ -49,48 +49,46 @@ public class NhanVienService {
     }
 
     public Integer insert(NhanVien x) {
-        String sql = "insert into NhanVien(maNhanVien,matKhau,tenNhanVien,anhNhanVien,soDienThoai,"
-                + "ngaySinh,gioiTinh,diaChi,email,vaiTro,trangThai,ngayTao) values(?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into NhanVien(maNhanVien,matKhau,hoTen,hinhAnh,soDienThoai,"
+                + "ngaySinh,gioiTinh,email,vaiTro,trangThai,ghiChu) values(?,?,?,?,?,?,?,?,?,?,?)";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
             pstm.setString(1, x.getMaNhanVien());
             pstm.setString(2, x.getMatKhau());
             pstm.setString(3, x.getTenNhanVien());
             pstm.setString(4, x.getAnhNhanVien());
             pstm.setString(5, x.getSoDienThoai());
-            pstm.setString(6, x.getNgaySinh());
+            Date date = new Date(XDate.toDate(x.getNgaySinh(),"dd-MM-yyyy").getTime());
+            pstm.setDate(6, date);
             pstm.setInt(7, x.getGioiTinh().equalsIgnoreCase("nam") ? 1 : 0);
-            
+            pstm.setString(8, x.getEmail());
+            pstm.setInt(9, x.getVaiTro().equalsIgnoreCase("Quản lý") ? 1 : 0);
+            pstm.setInt(10, x.getTrangThai().equalsIgnoreCase("Đang làm") ? 1 : 0);
+            pstm.setString(11, x.getGhiChu());
             int rs = pstm.executeUpdate();
             return rs;
         } catch (Exception e) {
-            
+
             e.printStackTrace();
         }
         return null;
     }
 
     public Integer update(NhanVien x) {
-        String sql = "update NhanVien set matKhau=?,tenNhanVien=?,anhNhanVien=?,soDienThoai=?,"
-                + "ngaySinh=?,gioiTinh=?,diaChi=?,email=?,vaiTro=?,trangThai=? where maNhanVien=?";
+        String sql = "update NhanVien set matKhau=?,hoTen=?,hinhAnh=?,soDienThoai=?,"
+                + "ngaySinh=?,gioiTinh=?,email=?,vaiTro=?,trangThai=?,ghiChu=? where maNhanVien=?";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
             pstm.setString(11, x.getMaNhanVien());
             pstm.setString(1, x.getMatKhau());
             pstm.setString(2, x.getTenNhanVien());
             pstm.setString(3, x.getAnhNhanVien());
             pstm.setString(4, x.getSoDienThoai());
-           
-            Integer rs = pstm.executeUpdate();
-            return rs;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    public Integer delete(String key) {
-        String sql = "delete NhanVien where maNhanVien=?";
-        try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
-            pstm.setString(1, key);
+            Date date = new Date(XDate.toDate(x.getNgaySinh(),"dd-MM-yyyy").getTime());
+            pstm.setDate(5, date);
+            pstm.setInt(6, x.getGioiTinh().equalsIgnoreCase("nam") ? 1 : 0);
+            pstm.setString(7, x.getEmail());
+            pstm.setInt(8, x.getVaiTro().equalsIgnoreCase("Quản lý") ? 1 : 0);
+            pstm.setInt(9, x.getTrangThai().equalsIgnoreCase("Đang làm") ? 1 : 0);
+            pstm.setString(10, x.getGhiChu());
             Integer rs = pstm.executeUpdate();
             return rs;
         } catch (Exception e) {
