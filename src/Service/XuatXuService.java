@@ -4,6 +4,7 @@
  */
 package Service;
 
+import Helper.DBContext;
 import Model.XuatXu;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,7 +27,7 @@ public class XuatXuService {
         List<XuatXu> list = new ArrayList<>();
         
         try {
-            con = DBConnect.getConnection();
+            con = DBContext.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             

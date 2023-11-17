@@ -5,7 +5,7 @@
 package Service;
 
 import Helper.DBContext;
-import Model.DongSanPham;
+import Model.ThuongHieu;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,15 +16,15 @@ import java.util.List;
  *
  * @author Tung
  */
-public class DongSanPhamService {
+public class ThuongHieuService {
          String sql = null;
     Connection con = null;
     PreparedStatement ps = null;
     ResultSet rs = null;
     
-    public List<DongSanPham> getAll(){
+    public List<ThuongHieu> getAll(){
         sql = "exec Select_SanPham";
-        List<DongSanPham> list = new ArrayList<>();
+        List<ThuongHieu> list = new ArrayList<>();
         
         try {
             con = DBContext.getConnection();
@@ -32,7 +32,7 @@ public class DongSanPhamService {
             rs = ps.executeQuery();
             
             while(rs.next()){
-                list.add(new DongSanPham(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4)));
+                list.add(new ThuongHieu(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(3)));
             }
             
             return list;

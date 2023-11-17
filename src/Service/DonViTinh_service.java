@@ -4,6 +4,7 @@
  */
 package Service;
 
+import Helper.DBContext;
 import Model.DonViTinh;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,7 +27,7 @@ public class DonViTinh_service {
         List<DonViTinh> list = new ArrayList<>();
         
         try {
-            con = DBConnect.getConnection();
+            con = DBContext.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             
