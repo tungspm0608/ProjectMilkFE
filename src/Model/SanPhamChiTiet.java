@@ -15,21 +15,20 @@ public class SanPhamChiTiet {
     private int maSanPham;
     private int maDonViTinh;
     private String anhSanPham;
-    private Date hanSuDung;
+    private String hanSuDung;
     private int soLuong;
     private float giaNhap;
     private float donGia;
     private float khoiLuong;
     private String donViTinhKhoiLuong;
-    private Date ngaySanXuat;
+    private String ngaySanXuat;
     private String barcode;
-    private int trangThai;
-
+    private boolean trangThai;
 
     public SanPhamChiTiet() {
     }
 
-    public SanPhamChiTiet(int maSanPhamChiTiet, int maSanPham, int maDonViTinh, String anhSanPham, Date hanSuDung, int soLuong, float giaNhap, float donGia, float khoiLuong, String donViTinhKhoiLuong, Date ngaySanXuat, String barcode, int trangThai) {
+    public SanPhamChiTiet(int maSanPhamChiTiet, int maSanPham, int maDonViTinh, String anhSanPham, String hanSuDung, int soLuong, float giaNhap, float donGia, float khoiLuong, String donViTinhKhoiLuong, String ngaySanXuat, String barcode,boolean trangThai) {
         this.maSanPhamChiTiet = maSanPhamChiTiet;
         this.maSanPham = maSanPham;
         this.maDonViTinh = maDonViTinh;
@@ -77,11 +76,11 @@ public class SanPhamChiTiet {
         this.anhSanPham = anhSanPham;
     }
 
-    public Date getHanSuDung() {
+    public String getHanSuDung() {
         return hanSuDung;
     }
 
-    public void setHanSuDung(Date hanSuDung) {
+    public void setHanSuDung(String hanSuDung) {
         this.hanSuDung = hanSuDung;
     }
 
@@ -125,11 +124,11 @@ public class SanPhamChiTiet {
         this.donViTinhKhoiLuong = donViTinhKhoiLuong;
     }
 
-    public Date getNgaySanXuat() {
+    public String getNgaySanXuat() {
         return ngaySanXuat;
     }
 
-    public void setNgaySanXuat(Date ngaySanXuat) {
+    public void setNgaySanXuat(String ngaySanXuat) {
         this.ngaySanXuat = ngaySanXuat;
     }
 
@@ -141,13 +140,13 @@ public class SanPhamChiTiet {
         this.barcode = barcode;
     }
 
-    public int getTrangThai() {
+    public boolean getTrangThai() {
         return trangThai;
     }
 
-    public void setTrangThai(int trangThai) {
+    public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
     }
-    
+
     
 }
