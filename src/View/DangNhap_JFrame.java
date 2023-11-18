@@ -4,6 +4,9 @@
  */
 package View;
 
+import Helper.DialogHelper;
+import Service.NhanVienService;
+
 /**
  *
  * @author dovan
@@ -15,6 +18,8 @@ public class DangNhap_JFrame extends javax.swing.JFrame {
      */
     public DangNhap_JFrame() {
         initComponents();
+        this.clearError();
+        
     }
 
     /**
@@ -28,11 +33,15 @@ public class DangNhap_JFrame extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jTextField9 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txttaiKhoan = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
+        txtmatKhau = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        lblloiTaiKhoan = new javax.swing.JLabel();
+        lblloiMatKhau = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
@@ -40,40 +49,60 @@ public class DangNhap_JFrame extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(37, 108, 205));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilities/image/MilkFE.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 134, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel2)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jTextField9.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        jTextField9.setForeground(new java.awt.Color(0, 204, 204));
-        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+        txttaiKhoan.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        txttaiKhoan.setForeground(new java.awt.Color(0, 204, 204));
+        txttaiKhoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField9ActionPerformed(evt);
+                txttaiKhoanActionPerformed(evt);
             }
         });
 
         jLabel19.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         jLabel19.setText("Mật Khẩu");
 
-        jTextField10.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        jTextField10.setForeground(new java.awt.Color(0, 204, 204));
-        jTextField10.addActionListener(new java.awt.event.ActionListener() {
+        txtmatKhau.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        txtmatKhau.setForeground(new java.awt.Color(0, 204, 204));
+        txtmatKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField10ActionPerformed(evt);
+                txtmatKhauActionPerformed(evt);
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jButton2.setText("Đăng nhập");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel20.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         jLabel20.setText("Tên đăng nhập:");
+
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 20)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 204));
+        jLabel1.setText("Welcome back to MilkFE ");
+
+        lblloiTaiKhoan.setForeground(new java.awt.Color(255, 51, 51));
+        lblloiTaiKhoan.setText("Loi ");
+
+        lblloiMatKhau.setForeground(new java.awt.Color(255, 51, 51));
+        lblloiMatKhau.setText("Loi ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -82,48 +111,114 @@ public class DangNhap_JFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField9)
-                            .addComponent(jTextField10)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel19)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(17, 17, 17))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel20)
-                        .addContainerGap(103, Short.MAX_VALUE))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel20)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblloiTaiKhoan)
+                    .addComponent(jLabel19)
+                    .addComponent(lblloiMatKhau)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txttaiKhoan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                        .addComponent(txtmatKhau, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(61, 61, 61)
                 .addComponent(jLabel20)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
+                .addComponent(txttaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblloiTaiKhoan)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel19)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
-                .addComponent(jButton2)
-                .addGap(19, 19, 19))
+                .addComponent(txtmatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblloiMatKhau)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+    private void txttaiKhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttaiKhoanActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField9ActionPerformed
+    }//GEN-LAST:event_txttaiKhoanActionPerformed
 
-    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
+    private void txtmatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmatKhauActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField10ActionPerformed
+    }//GEN-LAST:event_txtmatKhauActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        String taiKhoan = txttaiKhoan.getText();
+        String matKhau = txtmatKhau.getText();
+        
+        if (!taiKhoan.matches("[a-zA-Z0-9-_]*")) {
+            this.setLoiTaiKhoan("*Không chứa kí tự đặc biệt trừ (-,_)");
+            return;
+        }
+        if (!taiKhoan.matches("^[a-zA-Z0-9-_]{3,10}$")) {
+            this.setLoiTaiKhoan("Độ dài phải từ 3 đến 10 kí tự");
+            return;
+        }
+        
+        if (!taiKhoan.matches("[a-zA-Z0-9_-]*")) {
+            this.setLoiMatKhau("*Không chứa kí tự đặc biệt trừ (-,_)");
+            return;
+        }
+        if (!taiKhoan.matches("^[a-zA-Z0-9_-]{3,10}$")) {
+            this.setLoiMatKhau("Độ dài phải từ 3 đến 10 kí tự");
+            return;
+        }
+        
+        this.clearError();
+        NhanVienService nhanVienService = new NhanVienService();
+        switch (nhanVienService.checkDangNhap(taiKhoan, matKhau)) {
+            case 0:
+                this.clearError();
+                this.setLoiTaiKhoan("Sai tài khoản");
+                break;
+            case 1:
+                this.clearError();
+                this.setLoiMatKhau("Sai mật khẩu");
+                break;
+            case 2:
+                this.clearError();
+                DialogHelper.alert(this, "Nhân viên đã nghỉ việc không được sử dụng");
+                break;
+            case 3:
+                this.clearError();
+                DialogHelper.alert(this, "Đăng nhập thành công");
+//                this.dispose();
+//                Main_JFrame main = new Main_JFrame();
+//                main.setVisible(true);
+                break;
+            default:
+                throw new AssertionError();
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    void clearError () {
+        lblloiTaiKhoan.setText("");
+        lblloiMatKhau.setText("");
+    }
+    
+    void setLoiTaiKhoan(String text) {
+        lblloiTaiKhoan.setText(text);
+    }
+    
+    void setLoiMatKhau(String text) {
+        lblloiMatKhau.setText(text);
+    }
     /**
      * @param args the command line arguments
      */
@@ -165,10 +260,14 @@ public class DangNhap_JFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JLabel lblloiMatKhau;
+    private javax.swing.JLabel lblloiTaiKhoan;
+    private javax.swing.JTextField txtmatKhau;
+    private javax.swing.JTextField txttaiKhoan;
     // End of variables declaration//GEN-END:variables
 }

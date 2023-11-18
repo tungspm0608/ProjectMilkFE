@@ -32,7 +32,7 @@ public class Main_JFrame extends javax.swing.JFrame {
         JPFeature.setBackground(new Color(37, 108, 205));
         JPPanelContainer.setBackground(new Color(37, 108, 205));
         
-        this.setSize((int) width-400, (int) height-170);
+        this.setSize((int) width, (int) height);
         setLocation(0, 0);
         setLocationRelativeTo(null);
 
