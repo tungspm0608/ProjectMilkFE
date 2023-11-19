@@ -3,28 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
+            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/Service/NhanVienService.java</file>
             <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/View/Main_JFrame.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/View/KhuyenMai_JPanel.java</file>
-=======
-<<<<<<< HEAD
-            <file>file:/C:/Users/Tung/OneDrive/Máy%20tính/ProjectMilkFE/src/Service/DBConnect.java</file>
-            <file>file:/C:/Users/Tung/OneDrive/Máy%20tính/ProjectMilkFE/src/Model/SanPham.java</file>
-            <file>file:/C:/Users/Tung/OneDrive/Máy%20tính/ProjectMilkFE/src/View/SanPham_JPanel.java</file>
-            <file>file:/C:/Users/Tung/OneDrive/Máy%20tính/ProjectMilkFE/src/Service/SanPham_service.java</file>
-            <file>file:/C:/Users/Tung/OneDrive/Máy%20tính/ProjectMilkFE/src/Model/SanPhamChiTiet.java</file>
-=======
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/Model/NhanVien.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/Until/DBContext.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/View/KhachHangThanThiet_JPanel.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/Service/NhanVienService.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/View/NhanVien_JPanel.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/View/Main_JFrame.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/Service/KhachHangService.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/Until/XDate.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/Model/KhachHang.java</file>
->>>>>>> e71bc12b3605aeefe8bd75e01b653fc1e87805ed
->>>>>>> 4190182b23d035c5d33148d0a8575c96d80d6e6f
+            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/Service/Auth.java</file>
+            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/View/DangNhap_JFrame.java</file>
+            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/View/Welcome.java</file>
         </group>
     </open-files>
 </project-private>

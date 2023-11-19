@@ -4,6 +4,8 @@
  */
 package View;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author Admin
@@ -15,6 +17,7 @@ public class ThemLoaiHang_JFrame extends javax.swing.JFrame {
      */
     public ThemLoaiHang_JFrame() {
         initComponents();
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**

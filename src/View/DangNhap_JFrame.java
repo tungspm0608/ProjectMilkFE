@@ -5,6 +5,8 @@
 package View;
 
 import Helper.DialogHelper;
+import Model.NhanVien;
+import Service.Auth;
 import Service.NhanVienService;
 
 /**
@@ -181,30 +183,39 @@ public class DangNhap_JFrame extends javax.swing.JFrame {
         }
         
         this.clearError();
-        NhanVienService nhanVienService = new NhanVienService();
-        switch (nhanVienService.checkDangNhap(taiKhoan, matKhau)) {
-            case 0:
-                this.clearError();
-                this.setLoiTaiKhoan("Sai tài khoản");
-                break;
-            case 1:
-                this.clearError();
-                this.setLoiMatKhau("Sai mật khẩu");
-                break;
-            case 2:
-                this.clearError();
-                DialogHelper.alert(this, "Nhân viên đã nghỉ việc không được sử dụng");
-                break;
-            case 3:
-                this.clearError();
-                DialogHelper.alert(this, "Đăng nhập thành công");
+//        NhanVienService nhanVienService = new NhanVienService();
+//        switch (nhanVienService.checkDangNhap(taiKhoan, matKhau)) {
+//            case 0:
+//                this.clearError();
+//                this.setLoiTaiKhoan("Sai tài khoản");
+//                break;
+//            case 1:
+//                this.clearError();
+//                this.setLoiMatKhau("Sai mật khẩu");
+//                break;
+//            case 2:
+//                this.clearError();
+//                DialogHelper.alert(this, "Nhân viên đã nghỉ việc không được sử dụng");
+//                break;
+//            case 3:
+//                this.clearError();
+//                DialogHelper.alert(this, "Đăng nhập thành công");
 //                this.dispose();
 //                Main_JFrame main = new Main_JFrame();
 //                main.setVisible(true);
-                break;
-            default:
-                throw new AssertionError();
-        }
+//                break;
+//            default:
+//                throw new AssertionError();
+//        }
+        DialogHelper.alert(this, "Đăng nhập thành công");
+        this.dispose();
+        NhanVien x = new NhanVien();
+        x.setTenNhanVien("Tung phung");
+        x.setVaiTro("Quản lý");
+//        : "Nhân Viên"
+        Auth.user = x;
+        Main_JFrame main = new Main_JFrame();
+        main.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     void clearError () {

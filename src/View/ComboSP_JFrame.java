@@ -4,6 +4,8 @@
  */
 package View;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author Tung
@@ -15,6 +17,7 @@ public class ComboSP_JFrame extends javax.swing.JFrame {
      */
     public ComboSP_JFrame() {
         initComponents();
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**

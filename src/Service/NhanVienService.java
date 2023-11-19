@@ -112,6 +112,7 @@ public class NhanVienService {
                     // Dung mat khau
                     System.out.println("Dung mat khau");
                     if (rs.getInt(10) == 1) {
+                        //Trang thai dang lam viec
                         NhanVien x = new NhanVien();
                         x.setMaNhanVien(rs.getString(1));
                         x.setMatKhau(rs.getString(2));
@@ -125,9 +126,7 @@ public class NhanVienService {
                         x.setTrangThai(rs.getInt(10) == 1 ? "Đang làm" : "Nghỉ việc");
                         x.setGhiChu(rs.getString(11));
                         Auth.user = x;
-                        //Trang thai dang lam viec
                         //Dang nhap thanh cong
-                        System.out.println("zô");
                         return 3;
                     } else {
                         //Trang thai nghi viec

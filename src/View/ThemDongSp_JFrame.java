@@ -1,12 +1,15 @@
 
 package View;
 
+import javax.swing.JFrame;
+
 
 public class ThemDongSp_JFrame extends javax.swing.JFrame {
 
    
     public ThemDongSp_JFrame() {
         initComponents();
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**

@@ -4,8 +4,12 @@
  */
 package View;
 
+import Helper.DialogHelper;
+import Helper.XDate;
+import Service.Auth;
 import java.awt.Color;
 import java.awt.Toolkit;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -35,7 +39,15 @@ public class Main_JFrame extends javax.swing.JFrame {
         this.setSize((int) width, (int) height);
         setLocation(0, 0);
         setLocationRelativeTo(null);
-
+        
+        //Hien thi du lieu nhan vien
+        lblTenNhanVien.setText(Auth.user.getTenNhanVien());
+        lblVaiTro.setText(Auth.user.getVaiTro());
+        lblThoiGianVao.setText(XDate.toString(XDate.now(), "HH:mm:ss dd/MM/yyyy"));
+        if (Auth.user.getVaiTro().equalsIgnoreCase("Nhân Viên")) {
+            jButton15.setEnabled(false);
+            jButton15.setBackground(Color.LIGHT_GRAY);
+        }
     }
 
     /**
@@ -63,6 +75,7 @@ public class Main_JFrame extends javax.swing.JFrame {
         JPTitle = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         JPContent = new javax.swing.JPanel();
         JPFeature = new javax.swing.JPanel();
         jButton11 = new javax.swing.JButton();
@@ -76,9 +89,9 @@ public class Main_JFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblThoiGianVao = new javax.swing.JLabel();
+        lblVaiTro = new javax.swing.JLabel();
+        lblTenNhanVien = new javax.swing.JLabel();
         JPPanelContainer = new javax.swing.JPanel();
         JTPMain = new javax.swing.JTabbedPane();
 
@@ -96,6 +109,11 @@ public class Main_JFrame extends javax.swing.JFrame {
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         JTBActivity.add(jButton1);
 
         jButton2.setFont(new java.awt.Font("Lucida Grande", 0, 9)); // NOI18N
@@ -121,6 +139,11 @@ public class Main_JFrame extends javax.swing.JFrame {
         jButton3.setFocusable(false);
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         JTBActivity.add(jButton3);
         JTBActivity.add(jSeparator1);
 
@@ -145,6 +168,11 @@ public class Main_JFrame extends javax.swing.JFrame {
         jButton5.setFocusable(false);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         JTBActivity.add(jButton5);
 
         jButton6.setFont(new java.awt.Font("Lucida Grande", 0, 9)); // NOI18N
@@ -154,6 +182,11 @@ public class Main_JFrame extends javax.swing.JFrame {
         jButton6.setFocusable(false);
         jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
         JTBActivity.add(jButton6);
 
         jButton7.setFont(new java.awt.Font("Lucida Grande", 0, 9)); // NOI18N
@@ -163,6 +196,11 @@ public class Main_JFrame extends javax.swing.JFrame {
         jButton7.setFocusable(false);
         jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
         JTBActivity.add(jButton7);
         JTBActivity.add(jSeparator2);
 
@@ -200,6 +238,13 @@ public class Main_JFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setText("Minimize");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout JPTitleLayout = new javax.swing.GroupLayout(JPTitle);
         JPTitle.setLayout(JPTitleLayout);
         JPTitleLayout.setHorizontalGroup(
@@ -207,7 +252,9 @@ public class Main_JFrame extends javax.swing.JFrame {
             .addGroup(JPTitleLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(508, 508, 508)
+                .addGap(445, 445, 445)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addGap(25, 25, 25))
         );
@@ -217,7 +264,8 @@ public class Main_JFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(JPTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4))
                 .addContainerGap())
         );
 
@@ -306,11 +354,11 @@ public class Main_JFrame extends javax.swing.JFrame {
 
         jLabel7.setText("Thời gian :");
 
-        jLabel8.setText("02:40:60 CH 30/01/2023");
+        lblThoiGianVao.setText("02:40:60 CH 30/01/2023");
 
-        jLabel6.setText("Chủ cửa hàng");
+        lblVaiTro.setText("Chủ cửa hàng");
 
-        jLabel4.setText("Phùng Văn Tùng");
+        lblTenNhanVien.setText("Phùng Văn Tùng");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -322,15 +370,15 @@ public class Main_JFrame extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel8))
+                        .addComponent(lblThoiGianVao))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6))
+                        .addComponent(lblVaiTro))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4)))
+                        .addComponent(lblTenNhanVien)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -339,15 +387,15 @@ public class Main_JFrame extends javax.swing.JFrame {
                 .addContainerGap(198, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                    .addComponent(lblTenNhanVien))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
+                    .addComponent(lblVaiTro)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel8))
+                    .addComponent(lblThoiGianVao))
                 .addContainerGap())
         );
 
@@ -459,7 +507,10 @@ public class Main_JFrame extends javax.swing.JFrame {
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
-        this.dispose();
+        boolean check = DialogHelper.confirm(this, "Bạn có chắc chắn muốn kết thúc phiên làm việc không ?");
+        if (check == true) {
+            System.exit(0);
+        }
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
@@ -484,15 +535,7 @@ public class Main_JFrame extends javax.swing.JFrame {
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
         // TODO add your handling code here:
-        int tabSelect = checkTabSelect("Khach Hang");
-        if (tabSelect >= 0) {
-            JTPMain.setSelectedIndex(tabSelect);
-        } else {
-            KhachHangThanThiet_JPanel newtab = new KhachHangThanThiet_JPanel();
-            JTPMain.addTab("Khach Hang", newtab);
-            int tabSelected = JTPMain.getTabCount();
-            JTPMain.setSelectedIndex(tabSelected - 1);
-        }
+        this.moKhachHang();
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
@@ -523,28 +566,12 @@ public class Main_JFrame extends javax.swing.JFrame {
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         // TODO add your handling code here:
-        int tabSelect = checkTabSelect("San Pham");
-        if (tabSelect >= 0) {
-            JTPMain.setSelectedIndex(tabSelect);
-        } else {
-            SanPham_JPanel newtab = new SanPham_JPanel();
-            JTPMain.addTab("San Pham", newtab);
-            int tabSelected = JTPMain.getTabCount();
-            JTPMain.setSelectedIndex(tabSelected - 1);
-        }
+        this.moSanPham();
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         // TODO add your handling code here:
-        int tabSelect = checkTabSelect("Hoa Don");
-        if (tabSelect >= 0) {
-            JTPMain.setSelectedIndex(tabSelect);
-        } else {
-            HoaDon_JPanel newtab = new HoaDon_JPanel();
-            JTPMain.addTab("Hoa Don", newtab);
-            int tabSelected = JTPMain.getTabCount();
-            JTPMain.setSelectedIndex(tabSelected - 1);
-        }
+        this.moHoaDon();
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -567,7 +594,83 @@ public class Main_JFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton14ActionPerformed
 
-    int checkTabSelect(String tabName) {
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        boolean check = DialogHelper.confirm(this, "Bạn có chắc chắn muốn đăng xuất không ?");
+        if (check == true) {
+            Auth.clear();
+            this.dispose();
+            //trường hợp mở các form khác nữa thì chưa dispose hết
+            DangNhap_JFrame newFrame = new DangNhap_JFrame();
+            newFrame.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        boolean check = DialogHelper.confirm(this, "Bạn có chắc chắn muốn kết thúc phiên làm việc không ?");
+        if (check == true) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        this.moKhachHang();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        this.moHoaDon();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        this.moSanPham();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        // TODO add your handling code here:
+        this.setExtendedState(JFrame.ICONIFIED);
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void moKhachHang () {
+        int tabSelect = checkTabSelect("Khach Hang");
+        if (tabSelect >= 0) {
+            JTPMain.setSelectedIndex(tabSelect);
+        } else {
+            KhachHangThanThiet_JPanel newtab = new KhachHangThanThiet_JPanel();
+            JTPMain.addTab("Khach Hang", newtab);
+            int tabSelected = JTPMain.getTabCount();
+            JTPMain.setSelectedIndex(tabSelected - 1);
+        }
+    }
+    
+    private void moHoaDon () {
+        int tabSelect = checkTabSelect("Hoa Don");
+        if (tabSelect >= 0) {
+            JTPMain.setSelectedIndex(tabSelect);
+        } else {
+            HoaDon_JPanel newtab = new HoaDon_JPanel();
+            JTPMain.addTab("Hoa Don", newtab);
+            int tabSelected = JTPMain.getTabCount();
+            JTPMain.setSelectedIndex(tabSelected - 1);
+        }
+    }
+    
+    private void moSanPham() {
+        int tabSelect = checkTabSelect("San Pham");
+        if (tabSelect >= 0) {
+            JTPMain.setSelectedIndex(tabSelect);
+        } else {
+            SanPham_JPanel newtab = new SanPham_JPanel();
+            JTPMain.addTab("San Pham", newtab);
+            int tabSelected = JTPMain.getTabCount();
+            JTPMain.setSelectedIndex(tabSelected - 1);
+        }
+    }
+    
+    private int checkTabSelect(String tabName) {
         int countTab = JTPMain.getTabCount();
         for (int i = 0; i < countTab; i++) {
             if (JTPMain.getTitleAt(i).equalsIgnoreCase(tabName)) {
@@ -641,12 +744,13 @@ public class Main_JFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
+    private javax.swing.JLabel lblTenNhanVien;
+    private javax.swing.JLabel lblThoiGianVao;
+    private javax.swing.JLabel lblVaiTro;
     // End of variables declaration//GEN-END:variables
 }

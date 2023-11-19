@@ -1,6 +1,8 @@
 
 package View;
 
+import javax.swing.JFrame;
+
 
 public class DoiMatKhau_JDialog extends javax.swing.JDialog {
 
@@ -8,6 +10,7 @@ public class DoiMatKhau_JDialog extends javax.swing.JDialog {
     public DoiMatKhau_JDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 //        setBackground();
     }
 
