@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package View;
+package view;
 
-import Model.NhanVien;
-import Service.NhanVienService;
-import Helper.FileChoose;
-import Helper.XDate;
+import model.NhanVien;
+import service.NhanVienService;
+import helper.FileChoose;
+import helper.XDate;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;

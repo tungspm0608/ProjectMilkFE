@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package View;
+package view;
 
-import Helper.DialogHelper;
-import Model.NhanVien;
-import Service.Auth;
-import Service.NhanVienService;
+import helper.DialogHelper;
+import model.NhanVien;
+import service.Auth;
+import service.NhanVienService;
 
 /**
  *
@@ -119,9 +119,8 @@ public class DangNhap_JFrame extends javax.swing.JFrame {
                     .addComponent(lblloiTaiKhoan)
                     .addComponent(jLabel19)
                     .addComponent(lblloiMatKhau)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txttaiKhoan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
-                        .addComponent(txtmatKhau, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(txttaiKhoan)
+                    .addComponent(txtmatKhau)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(16, Short.MAX_VALUE))
         );

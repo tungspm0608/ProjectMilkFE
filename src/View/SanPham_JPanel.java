@@ -2,22 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package View;
+package view;
 
-import Model.DonViTinh;
-import Model.DongSanPham;
-import Model.LoaiHang;
-import Model.SanPham;
-import Model.SanPhamChiTiet;
-import Model.ThuongHieu;
-import Model.XuatXu;
-import Service.DonViTinh_service;
-import Service.DongSanPhamService;
-import Service.LoaiHangService;
-import Service.SanPhamChiTietService;
-import Service.SanPhamService;
-import Service.ThuongHieuService;
-import Service.XuatXuService;
+import model.DonViTinh;
+import model.DongSanPham;
+import model.LoaiHang;
+import model.SanPham;
+import model.SanPhamChiTiet;
+import model.ThuongHieu;
+import model.XuatXu;
+import service.DonViTinh_service;
+import service.DongSanPhamService;
+import service.LoaiHangService;
+import service.SanPhamChiTietService;
+import service.SanPhamService;
+import service.ThuongHieuService;
+import service.XuatXuService;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;

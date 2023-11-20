@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Service;
+package service;
 
-import Helper.DBContext;
-import Helper.XDate;
-import Model.SanPham;
-import Model.SanPhamChiTiet;
+import helper.DBContext;
+import helper.XDate;
+import model.SanPham;
+import model.SanPhamChiTiet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -5,8 +5,19 @@
         <group>
             <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/Service/NhanVienService.java</file>
             <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/View/Main_JFrame.java</file>
+            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/Utilities/image/MilkFE.png</file>
             <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/Service/Auth.java</file>
+            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/View/ThemLoaiHang_JFrame.java</file>
+            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/Helper/XDate.java</file>
             <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/View/DangNhap_JFrame.java</file>
+            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/View/ThemXuatXu_JFrame.java</file>
+            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/View/ThemKhoiLuong_JFrame.java</file>
+            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/View/ThemDongSp_JFrame.java</file>
+            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/View/DoiMatKhau_JDialog.java</file>
+            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/Helper/DialogHelper.java</file>
+            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/View/ComboSP_JFrame.java</file>
+            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/View/BanHang_JPanel.java</file>
+            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/View/ThemDonViTinh_JFrame.java</file>
             <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/View/Welcome.java</file>
         </group>
     </open-files>

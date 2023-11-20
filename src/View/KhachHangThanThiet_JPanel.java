@@ -1,8 +1,8 @@
-package View;
+package view;
 
-import Model.KhachHang;
-import Service.KhachHangService;
-import Helper.XDate;
+import model.KhachHang;
+import service.KhachHangService;
+import helper.XDate;
 import java.awt.Color;
 import java.math.BigDecimal;
 import java.util.ArrayList;

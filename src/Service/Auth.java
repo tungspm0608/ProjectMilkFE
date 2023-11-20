@@ -1,5 +1,5 @@
-package Service;
-import Model.NhanVien;
+package service;
+import model.NhanVien;
 
 
 /*

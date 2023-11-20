@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Service;
+package service;
 
-import Model.KhuyenMai;
+import model.KhuyenMai;
 import java.util.ArrayList;
 
 /**

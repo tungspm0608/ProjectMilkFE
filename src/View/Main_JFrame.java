@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package View;
+package view;
 
-import Helper.DialogHelper;
-import Helper.XDate;
-import Service.Auth;
+import helper.DialogHelper;
+import helper.XDate;
+import service.Auth;
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
@@ -92,6 +92,7 @@ public class Main_JFrame extends javax.swing.JFrame {
         lblThoiGianVao = new javax.swing.JLabel();
         lblVaiTro = new javax.swing.JLabel();
         lblTenNhanVien = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         JPPanelContainer = new javax.swing.JPanel();
         JTPMain = new javax.swing.JTabbedPane();
 
@@ -360,6 +361,8 @@ public class Main_JFrame extends javax.swing.JFrame {
 
         lblTenNhanVien.setText("Phùng Văn Tùng");
 
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilities/image/MilkFE_63-5.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -367,6 +370,7 @@ public class Main_JFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -384,7 +388,9 @@ public class Main_JFrame extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(198, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(lblTenNhanVien))
@@ -744,6 +750,7 @@ public class Main_JFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToolBar.Separator jSeparator1;

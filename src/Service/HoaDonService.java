@@ -1,7 +1,7 @@
 
-package Service;
+package service;
 
-import Model.HoaDon;
+import model.HoaDon;
 import java.util.ArrayList;
 
 /**
