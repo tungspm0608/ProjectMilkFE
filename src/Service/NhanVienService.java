@@ -98,7 +98,7 @@ public class NhanVienService {
         return null;
     }
 
-    public int checkDangNhap(String taiKhoan, String matKhau) {
+    public int dangNhap(String taiKhoan, String matKhau) {
         String checkTK = "select * from NhanVien where maNhanVien = ?";
         try {
             Connection con = DBContext.getConnection();
@@ -145,5 +145,18 @@ public class NhanVienService {
             e.printStackTrace();
         }
         return 3;
+    }
+    
+    public int doiMatKhau(String maNhanVien,String matKhau) {
+        String sql = "update NhanVien set matKhau = ? where maNhanVien = ?";
+        try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
+            pstm.setString(1, matKhau);
+            pstm.setString(2, maNhanVien);
+            int res = pstm.executeUpdate();
+            return res;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 }
