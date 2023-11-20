@@ -31,7 +31,7 @@ public class Welcome extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent ae) {
                 int value = progressbar.getValue();
                 if (value < 100) {
-                    progressbar.setValue(value + 1);
+                    progressbar.setValue(value + 5);
                 } else {
                     t.stop();
                     Welcome.this.dispose();

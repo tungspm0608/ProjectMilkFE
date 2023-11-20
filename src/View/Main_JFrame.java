@@ -231,15 +231,14 @@ public class Main_JFrame extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(172, 214, 255));
         jLabel1.setText("Phần mềm bán sữa MilkFE");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilities/IconSystem/Exit.png"))); // NOI18N
-        jLabel2.setText("Exit");
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utilities/iconSystem/close.png"))); // NOI18N
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel2MouseClicked(evt);
             }
         });
 
-        jLabel4.setText("Minimize");
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/utilities/iconSystem/minus.png"))); // NOI18N
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel4MouseClicked(evt);
@@ -251,13 +250,13 @@ public class Main_JFrame extends javax.swing.JFrame {
         JPTitleLayout.setHorizontalGroup(
             JPTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPTitleLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(624, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(445, 445, 445)
+                .addGap(470, 470, 470)
                 .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addGap(25, 25, 25))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
         );
         JPTitleLayout.setVerticalGroup(
             JPTitleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -410,22 +409,23 @@ public class Main_JFrame extends javax.swing.JFrame {
         JPFeatureLayout.setHorizontalGroup(
             JPFeatureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPFeatureLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(JPFeatureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(JPFeatureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jButton16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         JPFeatureLayout.setVerticalGroup(
             JPFeatureLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPFeatureLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton12)
@@ -439,7 +439,7 @@ public class Main_JFrame extends javax.swing.JFrame {
                 .addComponent(jButton16)
                 .addGap(18, 18, 18)
                 .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
 
         JPFeatureLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jButton11, jButton12, jButton13, jButton14, jButton15, jButton16, jButton17});
@@ -453,7 +453,9 @@ public class Main_JFrame extends javax.swing.JFrame {
         JPPanelContainer.setLayout(JPPanelContainerLayout);
         JPPanelContainerLayout.setHorizontalGroup(
             JPPanelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(JTPMain, javax.swing.GroupLayout.PREFERRED_SIZE, 1169, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(JPPanelContainerLayout.createSequentialGroup()
+                .addComponent(JTPMain, javax.swing.GroupLayout.PREFERRED_SIZE, 1169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         JPPanelContainerLayout.setVerticalGroup(
             JPPanelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -467,20 +469,17 @@ public class Main_JFrame extends javax.swing.JFrame {
         JPContentLayout.setHorizontalGroup(
             JPContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPContentLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(JPFeature, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(JPPanelContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 1169, Short.MAX_VALUE))
+                .addComponent(JPFeature, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(JPPanelContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 1175, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         JPContentLayout.setVerticalGroup(
             JPContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(JPContentLayout.createSequentialGroup()
-                .addGroup(JPContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(JPPanelContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 826, Short.MAX_VALUE)
-                    .addGroup(JPContentLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(JPFeature, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGroup(JPContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(JPPanelContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 826, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JPFeature, javax.swing.GroupLayout.PREFERRED_SIZE, 846, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -488,12 +487,13 @@ public class Main_JFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(JPContent, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(JPTitle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(JTBActivity, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(JPContent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(JPTitle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(6, 6, 6)
+                            .addComponent(JTBActivity, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                 .addGap(0, 6, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -503,8 +503,7 @@ public class Main_JFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(JTBActivity, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(JPContent, javax.swing.GroupLayout.PREFERRED_SIZE, 840, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(JPContent, javax.swing.GroupLayout.PREFERRED_SIZE, 846, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -522,12 +521,12 @@ public class Main_JFrame extends javax.swing.JFrame {
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
 //        JTPMain.setSelectedIndex(JTPMain.getSe);
-        int tabSelect = checkTabSelect("Ban Hang");
+        int tabSelect = checkTabSelect("Bán hàng");
         if (tabSelect >= 0) {
             JTPMain.setSelectedIndex(tabSelect);
         } else {
             BanHang_JPanel newtab = new BanHang_JPanel();
-            JTPMain.addTab("Ban Hang", newtab);
+            JTPMain.addTab("Bán hàng", newtab);
             int tabSelected = JTPMain.getTabCount();
             JTPMain.setSelectedIndex(tabSelected - 1);
         }
@@ -546,12 +545,12 @@ public class Main_JFrame extends javax.swing.JFrame {
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
         // TODO add your handling code here:
-        int tabSelect = checkTabSelect("Nhan Vien");
+        int tabSelect = checkTabSelect("Nhân viên");
         if (tabSelect >= 0) {
             JTPMain.setSelectedIndex(tabSelect);
         } else {
             NhanVien_JPanel newtab = new NhanVien_JPanel();
-            JTPMain.addTab("Nhan Vien", newtab);
+            JTPMain.addTab("Nhân viên", newtab);
             int tabSelected = JTPMain.getTabCount();
             JTPMain.setSelectedIndex(tabSelected - 1);
         }
@@ -559,12 +558,12 @@ public class Main_JFrame extends javax.swing.JFrame {
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         // TODO add your handling code here:
-        int tabSelect = checkTabSelect("Thong Ke");
+        int tabSelect = checkTabSelect("Thống kê");
         if (tabSelect >= 0) {
             JTPMain.setSelectedIndex(tabSelect);
         } else {
             ThongKe_JPanel newtab = new ThongKe_JPanel();
-            JTPMain.addTab("Thong Ke", newtab);
+            JTPMain.addTab("Thống kê", newtab);
             int tabSelected = JTPMain.getTabCount();
             JTPMain.setSelectedIndex(tabSelected - 1);
         }
@@ -589,12 +588,12 @@ public class Main_JFrame extends javax.swing.JFrame {
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         // TODO add your handling code here:
-        int tabSelect = checkTabSelect("Khuyen Mai");
+        int tabSelect = checkTabSelect("Khuyến mãi");
         if (tabSelect >= 0) {
             JTPMain.setSelectedIndex(tabSelect);
         } else {
             KhuyenMai_JPanel newtab = new KhuyenMai_JPanel();
-            JTPMain.addTab("Khuyen Mai", newtab);
+            JTPMain.addTab("Khuyến mãi", newtab);
             int tabSelected = JTPMain.getTabCount();
             JTPMain.setSelectedIndex(tabSelected - 1);
         }
@@ -641,36 +640,36 @@ public class Main_JFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void moKhachHang () {
-        int tabSelect = checkTabSelect("Khach Hang");
+        int tabSelect = checkTabSelect("Khách hàng");
         if (tabSelect >= 0) {
             JTPMain.setSelectedIndex(tabSelect);
         } else {
             KhachHangThanThiet_JPanel newtab = new KhachHangThanThiet_JPanel();
-            JTPMain.addTab("Khach Hang", newtab);
+            JTPMain.addTab("Khách hàng", newtab);
             int tabSelected = JTPMain.getTabCount();
             JTPMain.setSelectedIndex(tabSelected - 1);
         }
     }
     
     private void moHoaDon () {
-        int tabSelect = checkTabSelect("Hoa Don");
+        int tabSelect = checkTabSelect("Hoá đơn");
         if (tabSelect >= 0) {
             JTPMain.setSelectedIndex(tabSelect);
         } else {
             HoaDon_JPanel newtab = new HoaDon_JPanel();
-            JTPMain.addTab("Hoa Don", newtab);
+            JTPMain.addTab("Hoá đơn", newtab);
             int tabSelected = JTPMain.getTabCount();
             JTPMain.setSelectedIndex(tabSelected - 1);
         }
     }
     
     private void moSanPham() {
-        int tabSelect = checkTabSelect("San Pham");
+        int tabSelect = checkTabSelect("Sản phẩm");
         if (tabSelect >= 0) {
             JTPMain.setSelectedIndex(tabSelect);
         } else {
             SanPham_JPanel newtab = new SanPham_JPanel();
-            JTPMain.addTab("San Pham", newtab);
+            JTPMain.addTab("Sản phẩm", newtab);
             int tabSelected = JTPMain.getTabCount();
             JTPMain.setSelectedIndex(tabSelected - 1);
         }

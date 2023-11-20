@@ -21,7 +21,8 @@ public class DangNhap_JFrame extends javax.swing.JFrame {
     public DangNhap_JFrame() {
         initComponents();
         this.clearError();
-        
+        txttaiKhoan.setText("1234");
+        txtmatKhau.setText("1234");
     }
 
     /**
@@ -67,7 +68,6 @@ public class DangNhap_JFrame extends javax.swing.JFrame {
         );
 
         txttaiKhoan.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        txttaiKhoan.setForeground(new java.awt.Color(0, 204, 204));
         txttaiKhoan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txttaiKhoanActionPerformed(evt);
@@ -78,7 +78,6 @@ public class DangNhap_JFrame extends javax.swing.JFrame {
         jLabel19.setText("Mật Khẩu");
 
         txtmatKhau.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        txtmatKhau.setForeground(new java.awt.Color(0, 204, 204));
         txtmatKhau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtmatKhauActionPerformed(evt);
@@ -163,7 +162,7 @@ public class DangNhap_JFrame extends javax.swing.JFrame {
         String taiKhoan = txttaiKhoan.getText();
         String matKhau = txtmatKhau.getText();
         
-        if (!taiKhoan.matches("[a-zA-Z0-9-_]*")) {
+        if (!taiKhoan.matches("[a-zA-Z0-9-_]+")) {
             this.setLoiTaiKhoan("*Không chứa kí tự đặc biệt trừ (-,_)");
             return;
         }
@@ -172,7 +171,7 @@ public class DangNhap_JFrame extends javax.swing.JFrame {
             return;
         }
         
-        if (!taiKhoan.matches("[a-zA-Z0-9_-]*")) {
+        if (!taiKhoan.matches("[a-zA-Z0-9_-]+")) {
             this.setLoiMatKhau("*Không chứa kí tự đặc biệt trừ (-,_)");
             return;
         }
