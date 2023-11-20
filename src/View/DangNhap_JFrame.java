@@ -39,12 +39,13 @@ public class DangNhap_JFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txttaiKhoan = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        txtmatKhau = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jLabel20 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         lblloiTaiKhoan = new javax.swing.JLabel();
         lblloiMatKhau = new javax.swing.JLabel();
+        chbhienThiMatKhau = new javax.swing.JCheckBox();
+        txtmatKhau = new javax.swing.JPasswordField();
 
         jButton1.setText("jButton1");
 
@@ -77,13 +78,6 @@ public class DangNhap_JFrame extends javax.swing.JFrame {
         jLabel19.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         jLabel19.setText("Mật Khẩu");
 
-        txtmatKhau.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
-        txtmatKhau.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtmatKhauActionPerformed(evt);
-            }
-        });
-
         jButton2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jButton2.setText("Đăng nhập");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -105,6 +99,15 @@ public class DangNhap_JFrame extends javax.swing.JFrame {
         lblloiMatKhau.setForeground(new java.awt.Color(255, 51, 51));
         lblloiMatKhau.setText("Loi ");
 
+        chbhienThiMatKhau.setText("hiển thị");
+        chbhienThiMatKhau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chbhienThiMatKhauActionPerformed(evt);
+            }
+        });
+
+        txtmatKhau.setText("jPasswordField1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -116,11 +119,14 @@ public class DangNhap_JFrame extends javax.swing.JFrame {
                     .addComponent(jLabel20)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblloiTaiKhoan)
-                    .addComponent(jLabel19)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel19)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(chbhienThiMatKhau))
                     .addComponent(lblloiMatKhau)
                     .addComponent(txttaiKhoan)
-                    .addComponent(txtmatKhau)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtmatKhau))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -135,14 +141,16 @@ public class DangNhap_JFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblloiTaiKhoan)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel19)
+                    .addComponent(chbhienThiMatKhau))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtmatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(7, 7, 7)
                 .addComponent(lblloiMatKhau)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
@@ -153,14 +161,10 @@ public class DangNhap_JFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txttaiKhoanActionPerformed
 
-    private void txtmatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmatKhauActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtmatKhauActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         String taiKhoan = txttaiKhoan.getText();
-        String matKhau = txtmatKhau.getText();
+        String matKhau = String.valueOf(txtmatKhau.getPassword());
         
         if (!taiKhoan.matches("[a-zA-Z0-9-_]+")) {
             this.setLoiTaiKhoan("*Không chứa kí tự đặc biệt trừ (-,_)");
@@ -171,18 +175,18 @@ public class DangNhap_JFrame extends javax.swing.JFrame {
             return;
         }
         
-        if (!taiKhoan.matches("[a-zA-Z0-9_-]+")) {
+        if (!matKhau.matches("[a-zA-Z0-9_-]+")) {
             this.setLoiMatKhau("*Không chứa kí tự đặc biệt trừ (-,_)");
             return;
         }
-        if (!taiKhoan.matches("^[a-zA-Z0-9_-]{3,10}$")) {
+        if (!matKhau.matches("^[a-zA-Z0-9_-]{3,10}$")) {
             this.setLoiMatKhau("Độ dài phải từ 3 đến 10 kí tự");
             return;
         }
         
         this.clearError();
 //        NhanVienService nhanVienService = new NhanVienService();
-//        switch (nhanVienService.checkDangNhap(taiKhoan, matKhau)) {
+//        switch (nhanVienService.dangNhap(taiKhoan, matKhau)) {
 //            case 0:
 //                this.clearError();
 //                this.setLoiTaiKhoan("Sai tài khoản");
@@ -209,12 +213,22 @@ public class DangNhap_JFrame extends javax.swing.JFrame {
         this.dispose();
         NhanVien x = new NhanVien();
         x.setTenNhanVien("Tung phung");
+        x.setMaNhanVien("NV010");
         x.setVaiTro("Quản lý");
 //        : "Nhân Viên"
         Auth.user = x;
         Main_JFrame main = new Main_JFrame();
         main.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void chbhienThiMatKhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbhienThiMatKhauActionPerformed
+        // TODO add your handling code here:
+        if (chbhienThiMatKhau.isSelected()) {
+            txtmatKhau.setEchoChar((char)0);
+        } else {
+            txtmatKhau.setEchoChar('*');
+        }
+    }//GEN-LAST:event_chbhienThiMatKhauActionPerformed
 
     void clearError () {
         lblloiTaiKhoan.setText("");
@@ -267,6 +281,7 @@ public class DangNhap_JFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox chbhienThiMatKhau;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -276,7 +291,7 @@ public class DangNhap_JFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblloiMatKhau;
     private javax.swing.JLabel lblloiTaiKhoan;
-    private javax.swing.JTextField txtmatKhau;
+    private javax.swing.JPasswordField txtmatKhau;
     private javax.swing.JTextField txttaiKhoan;
     // End of variables declaration//GEN-END:variables
 }
