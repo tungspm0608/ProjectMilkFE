@@ -332,5 +332,5 @@ insert into DonHang values
 (7,'NV004',2,1,'','2023/04/10',25000,900000,N'Đặt hàng','0363456789',N'Hoàng Mai - Hà Nội'),
 (4,'NV004',2,1,'','2023/07/25',26000,560000,N'Đặt hàng','0366666689',N'TP Hà Nội')
 
-
-
+select * from DonHang
+select maDonHang, maNhanVien, maKhachHang, tongTien, ngayTao, ghiChu, trangThai from DonHang

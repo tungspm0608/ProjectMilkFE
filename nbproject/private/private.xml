@@ -2,39 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/model/SanPham.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/service/NhanVienService.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/service/DongSanPhamService.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/view/ThemXuatXu_JFrame.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/view/ThemKhoiLuong_JFrame.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/service/HoaDonService.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/model/ThuongHieu.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/view/NhanVien_JPanel.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/helper/ImportExcell.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/service/DonViTinh_service.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/view/DangNhap_JFrame.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/model/DonViTinh.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/service/KhachHangService.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/view/DoiMatKhau_JDialog.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/service/SanPhamService.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/view/ThemDongSp_JFrame.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/service/SanPhamChiTietService.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/model/DongSanPham.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/service/ThuongHieuService.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/view/SanPham_JPanel.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/service/XuatXuService.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/service/KhuyenMaiService.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/model/SanPhamChiTiet.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/view/Main_JFrame.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/model/XuatXu.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/view/ThemDonViTinh_JFrame.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/service/LoaiHangService.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/view/ThemLoaiHang_JFrame.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/helper/DBContext.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/view/Welcome.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/view/KhuyenMai_JPanel.java</file>
-            <file>file:/Users/phungvantung/NetBeansProjects/ProjectMilkFE/src/model/LoaiHang.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

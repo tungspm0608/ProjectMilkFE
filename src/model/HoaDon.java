@@ -4,40 +4,44 @@
  */
 package model;
 
+import java.util.Date;
+
+
+
 /**
  *
  * @author Admin
  */
 public class HoaDon {
-    private int maDonHangChiTiet;
     private int  maDonHang;
-    private int maSanPhamChiTiet ;
-    private int soLuong ;
-    private float donGia ;
-    private float giaGiam;
-    private float tongGia;
-    private int trangThai ;
+    private int maKhachHang ;
+    private String maNhanVien ;
+    private int maHinhThucThanhToan ;
+    private boolean trangThai;
+    private String ghiChu;
+    private Date ngayTao;
+    private float phiKhac;
+    private float tongTien;
+    private String loaiDonHang;
+    private int soDienThoai;
+    private String DiaChi;
 
     public HoaDon() {
     }
 
-    public HoaDon(int maDonHangChiTiet, int maDonHang, int maSanPhamChiTiet, int soLuong, float donGia, float giaGiam, float tongGia, int trangThai) {
-        this.maDonHangChiTiet = maDonHangChiTiet;
+    public HoaDon(int maDonHang, int maKhachHang, String maNhanVien, int maHinhThucThanhToan, boolean trangThai, String ghiChu, Date ngayTao, float phiKhac, float tongTien, String loaiDonHang, int soDienThoai, String DiaChi) {
         this.maDonHang = maDonHang;
-        this.maSanPhamChiTiet = maSanPhamChiTiet;
-        this.soLuong = soLuong;
-        this.donGia = donGia;
-        this.giaGiam = giaGiam;
-        this.tongGia = tongGia;
+        this.maKhachHang = maKhachHang;
+        this.maNhanVien = maNhanVien;
+        this.maHinhThucThanhToan = maHinhThucThanhToan;
         this.trangThai = trangThai;
-    }
-
-    public int getMaDonHangChiTiet() {
-        return maDonHangChiTiet;
-    }
-
-    public void setMaDonHangChiTiet(int maDonHangChiTiet) {
-        this.maDonHangChiTiet = maDonHangChiTiet;
+        this.ghiChu = ghiChu;
+        this.ngayTao = ngayTao;
+        this.phiKhac = phiKhac;
+        this.tongTien = tongTien;
+        this.loaiDonHang = loaiDonHang;
+        this.soDienThoai = soDienThoai;
+        this.DiaChi = DiaChi;
     }
 
     public int getMaDonHang() {
@@ -48,53 +52,93 @@ public class HoaDon {
         this.maDonHang = maDonHang;
     }
 
-    public int getMaSanPhamChiTiet() {
-        return maSanPhamChiTiet;
+    public int getMaKhachHang() {
+        return maKhachHang;
     }
 
-    public void setMaSanPhamChiTiet(int maSanPhamChiTiet) {
-        this.maSanPhamChiTiet = maSanPhamChiTiet;
+    public void setMaKhachHang(int maKhachHang) {
+        this.maKhachHang = maKhachHang;
     }
 
-    public int getSoLuong() {
-        return soLuong;
+    public String getMaNhanVien() {
+        return maNhanVien;
     }
 
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
+    public void setMaNhanVien(String maNhanVien) {
+        this.maNhanVien = maNhanVien;
     }
 
-    public float getDonGia() {
-        return donGia;
+    public int getMaHinhThucThanhToan() {
+        return maHinhThucThanhToan;
     }
 
-    public void setDonGia(float donGia) {
-        this.donGia = donGia;
+    public void setMaHinhThucThanhToan(int maHinhThucThanhToan) {
+        this.maHinhThucThanhToan = maHinhThucThanhToan;
     }
 
-    public float getGiaGiam() {
-        return giaGiam;
+    public String isTrangThai() {
+        if(trangThai ==true) return "Đã thanh toán";
+        else return "Hủy đơn hàng";
     }
 
-    public void setGiaGiam(float giaGiam) {
-        this.giaGiam = giaGiam;
-    }
-
-    public float getTongGia() {
-        return tongGia;
-    }
-
-    public void setTongGia(float tongGia) {
-        this.tongGia = tongGia;
-    }
-
-    public int getTrangThai() {
-        return trangThai;
-    }
-
-    public void setTrangThai(int trangThai) {
+    public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
     }
-    
-    
+
+    public String getGhiChu() {
+        return ghiChu;
+    }
+
+    public void setGhiChu(String ghiChu) {
+        this.ghiChu = ghiChu;
+    }
+
+    public Date getNgayTao() {
+        return ngayTao;
+    }
+
+    public void setNgayTao(Date ngayTao) {
+        this.ngayTao = ngayTao;
+    }
+
+    public float getPhiKhac() {
+        return phiKhac;
+    }
+
+    public void setPhiKhac(float phiKhac) {
+        this.phiKhac = phiKhac;
+    }
+
+    public float getTongTien() {
+        return tongTien;
+    }
+
+    public void setTongTien(float tongTien) {
+        this.tongTien = tongTien;
+    }
+
+    public String getLoaiDonHang() {
+        return loaiDonHang;
+    }
+
+    public void setLoaiDonHang(String loaiDonHang) {
+        this.loaiDonHang = loaiDonHang;
+    }
+
+    public int getSoDienThoai() {
+        return soDienThoai;
+    }
+
+    public void setSoDienThoai(int soDienThoai) {
+        this.soDienThoai = soDienThoai;
+    }
+
+    public String getDiaChi() {
+        return DiaChi;
+    }
+
+    public void setDiaChi(String DiaChi) {
+        this.DiaChi = DiaChi;
+    }
+
 }
