@@ -15,6 +15,9 @@ import java.util.Date;
 public class XDate {
     static SimpleDateFormat formater = new SimpleDateFormat();
     public static Date toDate(String date,String pattern){
+        if (pattern.isEmpty()) {
+            pattern="dd-MM-yyyy";
+        }
         try {
             formater.applyPattern(pattern);
             return formater.parse(date);
@@ -28,6 +31,9 @@ public class XDate {
     //return date kết quả
 
     public static String toString(Date date,String pattern){
+        if (pattern.isEmpty()) {
+            pattern="dd-MM-yyyy";
+        }
         formater.applyPattern(pattern);
         return formater.format(date);
     }

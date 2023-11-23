@@ -19,7 +19,7 @@ public class HoaDonService {
     
     public List<HoaDon> getAllHD(){
         ArrayList<HoaDon> list =new ArrayList<>();
-        String sql="select maDonHang, maNhanVien, maKhachHang, tongTien, ngayTao, ghiChu, trangThai from DonHang";
+        sql="select maDonHang, maNhanVien, maKhachHang, tongTien, ngayTao, ghiChu, trangThai from DonHang";
         
         try {
             con =DBContext.getConnection();
@@ -45,7 +45,7 @@ public class HoaDonService {
     
     public List<HoaDon> getByDate(String d1, String d2){
         ArrayList<HoaDon> list =new ArrayList<>();
-        String sql="select maDonHang, maNhanVien, maKhachHang, tongTien, ngayTao, ghiChu, trangThai from DonHang where ngayTao between ? and ? ";
+        sql="select maDonHang, maNhanVien, maKhachHang, tongTien, ngayTao, ghiChu, trangThai from DonHang where ngayTao between ? and ? ";
         
         try {
             con =DBContext.getConnection();
@@ -53,6 +53,7 @@ public class HoaDonService {
             ps.setObject(1, d1);
             ps.setObject(2, d2);
             rs = ps.executeQuery();
+            System.out.println(rs);
             while(rs.next()){
                 HoaDon h = new HoaDon();
                 h.setMaDonHang(rs.getInt(1));
@@ -69,7 +70,5 @@ public class HoaDonService {
             e.printStackTrace();
             return null;
         }
-    }
-
-   
+    }   
 }

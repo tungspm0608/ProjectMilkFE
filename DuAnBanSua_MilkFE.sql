@@ -203,7 +203,45 @@ VALUES  ('Vietnam','x',1),
 		('Germany','x',0),
 		('Japan','x',0),
 		('Brazil','x',0),
-		('USA','x',1)
+		('USA','x',1),
+		('Albania','x',0),
+		('Algeria','x',0),
+		('Argentina','x',0),
+		('Australia','x',0),
+		('Canada','x',0),
+		('Colombia','x',0),
+		('Croatia','x',0),
+		('Cuba','x',0),
+		('France','x',0),
+		('India','x',0),
+		('Indonesia','x',0),
+		('Iran','x',0),
+		('Iraq','x',0),
+		('Israel','x',0),
+		('Italy','x',0),
+		('Mexico','x',0),
+		('New Zealand','x',0),
+		('Nigeria','x',0),
+		('Pakistan','x',0),
+		('Philippines','x',0),
+		('Poland','x',0),
+		('Russia','x',0),
+		('Spain','x',0),
+		('South Korea','x',0),
+		('Laos','x',0),
+		('Campuchia','x',0),
+		('Thái Lan','x',0),
+		('Singapore','x',0),
+		('Chile','x',0),
+		('Brunei','x',0),
+		('Ecuador','x',0),
+		('Ghana','x',0),
+		('Hungary','x',0),
+		('Iceland','x',0),
+		('Jamaica','x',0),
+		('Jordan','x',0),
+		('Kazakhstan','x',0),
+		('Liberia','x',0)
 go
 
 INSERT INTO DonViTinh (tenDonViTinh, ghiChu, trangThai)
@@ -223,16 +261,21 @@ VALUES
     ('Dutch Lady', 'Description for Dutch Lady', 1),
     ('Mead Johnson', 'Description for Mead Johnson', 1),
     ('Abbott', 'Description for Abbott', 1),
-    ('Friso', 'Description for Friso', 1)
+    ('Friso', 'Description for Friso', 1),
+	('Nutifood', 'Description for Nutifood', 1),
+	('TH true milk', 'Description for TH true milk', 1)
 go
 
+    
     
 
 INSERT INTO LoaiHang (tenLoaiHang, ghiChu,trangThai)
 VALUES (N'Cho trẻ em', 'Fresh cow milk',1),
 (N'Cho người già', 'Fresh cow milk',1),
 (N'Cho bà bầu', 'Fresh cow milk',1),
-(N'Mọi lứa tuổi', 'Fresh cow milk',1)
+(N'Mọi lứa tuổi', 'Fresh cow milk',1),
+(N'Cho người loãng xương', 'Fresh cow milk',1),
+(N'Cho người bệnh', 'Fresh cow milk',1)
 go
 
 INSERT INTO DongSanPham (tenDongSanPham, ghiChu, trangThai)
@@ -240,7 +283,8 @@ VALUES
     (N'Sữa bột', 'Mô tả cho Sữa Vinamilk', 1),
     (N'Sữa tươi', 'Mô tả cho Sữa Nestle', 1),
     (N'Sữa không đường', 'Mô tả cho Sữa Dutch Lady', 1),
-    (N'Sữa hạt', 'Mô tả cho Sữa Mead Johnson', 1)
+    (N'Sữa hạt', 'Mô tả cho Sữa Mead Johnson', 1),
+	(N'Sữa ít đường', 'Mô tả cho Sữa Nestle', 1)
 go
 INSERT INTO SanPham (maSanPham,tenSanPham, moTa, trangThai, maThuongHieu, maLoaiHang, maDongSanPham, maXuatXu)
 VALUES
@@ -249,16 +293,29 @@ VALUES
     ('SP03',N'Sữa Dutch Lady 1', 'Mô tả cho Sữa Dutch Lady 1', 1, 3, 1, 3, 3),
     ('SP04',N'Sữa Mead Johnson 1', 'Mô tả cho Sữa Mead Johnson 1', 1, 4, 1, 4, 4),
     ('SP05',N'Sữa Abbott 1', 'Mô tả cho Sữa Abbott 1', 1, 5, 1, 3, 5),
-    ('SP06',N'Sữa Friso 1', 'Mô tả cho Sữa Friso 1', 1, 6, 1, 4, 6)
+    ('SP06',N'Sữa Friso 1', 'Mô tả cho Sữa Friso 1', 1, 6, 1, 4, 6),
+	('SP07',N'Sữa Nutifood 1', 'Mô tả cho Sữa Nutifood 1', 1, 7, 1, 2, 1),
+	('SP08',N'Sữa TH true milk 1', 'Mô tả cho Sữa TH true milk 1', 1, 8, 1, 2, 1)
+	
 go
 
 INSERT INTO SanPhamChiTiet (maSanPham, maDonViTinh, AnhSanPham, hanSuDung, soLuong, giaNhap, donGia, khoiLuong, donViTinhKhoiLuong, ngaySanXuat, barcode, trangThai)
-VALUES
+VALUES	
     ('SP01', 1, 'SP01.jpg', '2023-12-31', 50, 20000, 25000, 0.5, 'kg', '2023-01-01', 'SPCT0001', 1),
     ('SP02', 2, 'SP02.png', '2023-12-31', 80, 35000, 45000, 1, 'L', '2023-01-15', 'SPCT0002', 1),
     ('SP03', 3, 'SP03.png', '2023-12-31', 60, 28000, 35000, 0.75, 'L', '2023-02-01', 'SPCT0003', 1),
     ('SP04', 4, 'SP05.jpg', '2023-12-31', 40, 32000, 38000, 0.8, 'L', '2023-02-15', 'SPCT0004', 1),
     ('SP05', 5, 'SP06.jpg', '2023-12-31', 70, 38000, 42000, 0.9, 'L', '2023-03-01', 'SPCT0005', 1),
+	('SP07', 1, 'SP07.jpg', '2023-12-31', 30, 20000, 25000, 0.5, 'kg', '2023-01-01', 'SPCT0013', 1),
+    ('SP08', 6, 'SP08.png', '2023-12-31', 20, 35000, 45000, 1, 'L', '2023-01-15', 'SPCT0014', 1),
+    ('SP01', 1, 'SP09.png', '2023-12-31', 40, 28000, 35000, 0.75, 'L', '2023-02-01', 'SPCT0015', 1),
+    ('SP02', 2, 'SP010.jpg', '2023-12-31', 90, 32000, 38000, 0.8, 'L', '2023-02-15', 'SPCT0016', 1),
+    ('SP07', 4, 'SP011.jpg', '2023-12-31', 70, 38000, 42000, 0.9, 'L', '2023-03-01', 'SPCT0017', 1),
+	('SP08', 1, 'SP012.jpg', '2023-12-31', 50, 20000, 25000, 0.5, 'kg', '2023-01-01', 'SPCT0018', 1),
+    ('SP04', 5, 'SP013.png', '2023-12-31', 80, 35000, 45000, 1, 'L', '2023-01-15', 'SPCT0019', 1),
+    ('SP03', 3, 'SP014.png', '2023-12-31', 60, 28000, 35000, 0.75, 'L', '2023-02-01', 'SPCT0020', 1),
+    ('SP06', 6, 'SP015.jpg', '2023-12-31', 40, 32000, 38000, 0.8, 'L', '2023-02-15', 'SPCT0021', 1),
+    ('SP05', 5, 'SP016.jpg', '2023-12-31', 70, 38000, 42000, 0.9, 'L', '2023-03-01', 'SPCT0022', 1),
     ('SP06', 6, 'anh_san_pham_6.jpg', '2023-12-31', 30, 30000, 32000, 0.7, 'L', '2023-03-15', 'SPCT0006', 1),
     ('SP01', 1, 'anh_san_pham_7.jpg', '2023-12-31', 50, 20000, 25000, 0.5, 'kg', '2023-01-01', 'SPCT0007', 1),
     ('SP02', 2, 'anh_san_pham_8.jpg', '2023-12-31', 80, 35000, 45000, 1, 'L', '2023-01-15', 'SPCT0008', 1),
@@ -270,10 +327,13 @@ go
 
 INSERT INTO NhanVien (maNhanVien, matKhau, hoTen, gioiTinh, ngaySinh, soDienThoai, email, hinhAnh, VaiTro, trangThai, ghiChu)
 VALUES
+	
     ('NV001', 'password1', N'Nguyễn Văn A', 1, '1990-01-15', '0123456789', 'nvA@gmail.com', 'avatar_A.jpg', 1, 1, N'Ghi chú cho Nhân viên A'),
     ('NV002', 'password2', N'Trần Thị B', 0, '1995-03-20', '0987654321', 'nvB@gmail.com', 'avatar_B.jpg', 0, 1, N'Ghi chú cho Nhân viên B'),
     ('NV003', 'password3', N'Lê Văn C', 1, '1988-07-10', '0345678901', 'nvC@gmail.com', 'avatar_C.jpg', 1, 1, N'Ghi chú cho Nhân viên C'),
-    ('NV004', 'password4', N'Phạm Thị D', 0, '1992-05-02', '0765432109', 'nvD@gmail.com', 'avatar_D.jpg', 0, 1, N'Ghi chú cho Nhân viên D')
+    ('NV004', 'password4', N'Phạm Thị D', 0, '1992-05-02', '0765432109', 'nvD@gmail.com', 'avatar_D.jpg', 0, 1, N'Ghi chú cho Nhân viên D'),
+	('NV005', 'password5', N'Hoàng Mạnh E', 1, '2000-08-10', '0333456789', 'hmE@gmail.com', 'avatar_E.jpg', 0, 0, N'Ghi chú cho Nhân viên E'),
+	('NV006', 'password6', N'Ngô Gia F', 1, '1995-02-10', '02223456789', 'ngF@gmail.com', 'avatar_F.jpg', 0, 1, N'Ghi chú cho Nhân viên F')
 go
 
 INSERT INTO KhachHang (hoTen, gioiTinh, ngaySinh, soDienThoai, email, diem, ghiChu, ngayDangKy)
@@ -295,7 +355,7 @@ VALUES
     (N'Lê Thị Q', 0, '1990-05-18', '0345678901', 'thiQ@gmail.com', 115, N'Ghi chú cho Khách hàng Q', '2023-03-15'),
     (N'Phạm Văn R', 1, '1988-08-01', '0765432109', 'vanR@gmail.com', 135, N'Ghi chú cho Khách hàng R', '2023-04-22'),
     (N'Trần Thị S', 0, '1995-09-15', '0123456789', 'thiS@gmail.com', 99, N'Ghi chú cho Khách hàng S', '2023-05-10'),
-(N'Nguyễn Văn T', 1, '1983-11-28', '0987654321', 'vanT@gmail.com', 120, N'Ghi chú cho Khách hàng T', '2023-06-18'),
+	(N'Nguyễn Văn T', 1, '1983-11-28', '0987654321', 'vanT@gmail.com', 120, N'Ghi chú cho Khách hàng T', '2023-06-18'),
     (N'Lê Thị U', 0, '1998-02-10', '0345678901', 'thiU@gmail.com', 80, N'Ghi chú cho Khách hàng U', '2023-07-25'),
     (N'Phạm Văn V', 1, '1987-04-25', '0765432109', 'vanV@gmail.com', 155, N'Ghi chú cho Khách hàng V', '2023-08-30')
 go
@@ -304,7 +364,9 @@ INSERT INTO KhuyenMai (maKhuyenMai,tenChuongTrinh, ngayBatDau, ngayKetThuc, moTa
 VALUES ('KM01','Khuyến mãi mùa hè', '2023-06-01', '2023-06-30', N'Giảm giá cho sản phẩm mùa hè', 1, 5000, 'VND'),
 		('KM02','Khuyen mai ngay hoi Tre em', '2023-05-20', '2023-06-02', N'Giảm giá cho sản phẩm sữa cho trẻ', 1, 50000, 'VND'),
 		('KM03','Khuyen mai ngay Tet Doc lap', '2023-08-25', '2023-09-05', N'Giảm giá cho sản phẩm sữa', 1, 30000, 'VND'),
-		('KM04','Khuyen mai ngay Tet Nguyen Dan', '2024-01-15', '2024-01-30', N'Giảm giá cho sản phẩm sữa', 1, 25000, 'VND')
+		('KM04','Khuyen mai ngay Tet Nguyen Dan', '2024-01-15', '2024-01-30', N'Giảm giá cho sản phẩm sữa', 1, 25000, 'VND'),
+		('KM05','Khuyen mai Back Friday', '2023-06-13', '2024-06-30', N'Giảm giá cho sản phẩm sữa', 1, 30, '%'),
+		('KM06','Khuyen mai Noel', '2023-12-10', '2024-12-31', N'Giảm giá cho sản phẩm sữa', 1, 45000, 'VND')
 
 INSERT INTO KhuyenMaiSanPham(maKhuyenMai, maSanPhamChiTiet,trangThai)
 VALUES ('KM01',1 ,1),
@@ -332,5 +394,17 @@ insert into DonHang values
 (7,'NV004',2,1,'','2023/04/10',25000,900000,N'Đặt hàng','0363456789',N'Hoàng Mai - Hà Nội'),
 (4,'NV004',2,1,'','2023/07/25',26000,560000,N'Đặt hàng','0366666689',N'TP Hà Nội')
 
-select * from DonHang
-select maDonHang, maNhanVien, maKhachHang, tongTien, ngayTao, ghiChu, trangThai from DonHang
+select * from XuatXu
+select * from ThuongHieu
+select * from LoaiHang
+select * from DongSanPham
+select * from NhanVien
+select * from KhachHang
+select * from HinhThucThanhToan
+select * from KhuyenMai
+select * from KhuyenMaiSanPham
+select * from SanPham
+select * from SanPhamChiTiet
+select maDonHang, maNhanVien, maKhachHang, tongTien, ngayTao, ghiChu, trangThai from DonHang where ngayTao between '2023-01-01' and '2023-05-01' 
+
+

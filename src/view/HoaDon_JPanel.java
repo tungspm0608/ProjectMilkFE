@@ -1,8 +1,9 @@
 
 package view;
 
+import helper.XDate;
 import java.awt.Color;
-import java.sql.Date;
+import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
@@ -34,10 +35,10 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
         }
     }
     
-    void Loc(){
-         SimpleDateFormat sqlDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String d1 = dateDau.getDateFormatString();
-        String d2 = dateCuoi.getDateFormatString();
+    void Loc(){        
+        String d1 = XDate.toString(dateDau.getDate(), "");
+        String d2 = XDate.toString(dateCuoi.getDate(),"" );
+        System.out.println(dateDau.getDate());
         fillTableDH(hdsv.getByDate(d1, d2));
     }
     /**
@@ -77,9 +78,9 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
             }
         });
 
-        dateDau.setDateFormatString("yyyy-MM-dd");
+        dateDau.setDateFormatString("dd-MM-yyyy");
 
-        dateCuoi.setDateFormatString("yyyy-MM-dd");
+        dateCuoi.setDateFormatString("dd-MM-yyyy");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
