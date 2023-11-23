@@ -246,12 +246,12 @@ go
 
 INSERT INTO DonViTinh (tenDonViTinh, ghiChu, trangThai)
 VALUES
-    (N'Hộp', 'Description for Hộp', 1),
-    (N'Chai', 'Description for Chai', 1),
-    (N'Lọ', 'Description for Lọ', 1),
-    (N'Túi', 'Description for Túi', 1),
-    (N'Gói', 'Description for Gói', 1),
-    (N'Cái', 'Description for Cái', 1)
+    (N'Hộp giấy', N'Description for Hộp', 1),
+    (N'Chai', N'Description for Chai', 1),
+    (N'Lọ', N'Description for Lọ', 1),
+    (N'Túi', N'Description for Túi', 1),
+    (N'Gói', N'Description for Gói', 1),
+    (N'Hộp thiếc', N'Description for Cái', 1)
 go
 
 INSERT INTO ThuongHieu (tenThuongHieu, ghiChu, trangThai)
@@ -280,60 +280,72 @@ go
 
 INSERT INTO DongSanPham (tenDongSanPham, ghiChu, trangThai)
 VALUES
-    (N'Sữa bột', 'Mô tả cho Sữa Vinamilk', 1),
-    (N'Sữa tươi', 'Mô tả cho Sữa Nestle', 1),
-    (N'Sữa không đường', 'Mô tả cho Sữa Dutch Lady', 1),
-    (N'Sữa hạt', 'Mô tả cho Sữa Mead Johnson', 1),
-	(N'Sữa ít đường', 'Mô tả cho Sữa Nestle', 1)
+    (N'Sữa bột', N'Mô tả cho sữa bột', 1),
+    (N'Sữa tươi', N'Mô tả cho sữa tươi', 1),
+    (N'Sữa không đường', N'Mô tả cho sữa không đường', 1),
+    (N'Sữa hạt', N'Mô tả cho sữa hạt', 1),
+	(N'Sữa ít đường', N'Mô tả cho ít đường', 1)
 go
 INSERT INTO SanPham (maSanPham,tenSanPham, moTa, trangThai, maThuongHieu, maLoaiHang, maDongSanPham, maXuatXu)
 VALUES
-    ('SP01',N'Sữa Vinamilk 1', 'Mô tả cho Sữa Vinamilk 1', 1, 1, 1, 1, 1),
-    ('SP02',N'Sữa Nestle 1', 'Mô tả cho Sữa Nestle 1', 1, 2, 1, 2, 2),
-    ('SP03',N'Sữa Dutch Lady 1', 'Mô tả cho Sữa Dutch Lady 1', 1, 3, 1, 3, 3),
-    ('SP04',N'Sữa Mead Johnson 1', 'Mô tả cho Sữa Mead Johnson 1', 1, 4, 1, 4, 4),
-    ('SP05',N'Sữa Abbott 1', 'Mô tả cho Sữa Abbott 1', 1, 5, 1, 3, 5),
-    ('SP06',N'Sữa Friso 1', 'Mô tả cho Sữa Friso 1', 1, 6, 1, 4, 6),
-	('SP07',N'Sữa Nutifood 1', 'Mô tả cho Sữa Nutifood 1', 1, 7, 1, 2, 1),
-	('SP08',N'Sữa TH true milk 1', 'Mô tả cho Sữa TH true milk 1', 1, 8, 1, 2, 1)
+    ('SP01',N'Sữa bột Vinamilk Colos Gold', N'Mô tả cho Sữa Vinamilk', 1, 1, 1, 1, 7),
+    ('SP02',N'Sữa tươi Vinamlik không đường ', N'Mô tả cho Sữa Vinamilk', 1, 1, 4, 3, 2),
+    ('SP03',N'Sữa bột Vinamilk Yoko Gold', N'Mô tả cho Sữa Vinamilk', 1, 1, 1, 1, 3),
+    ('SP04',N'Sữa tuôi tiệt trùng Vinamilk 100% hương dâu', N'Mô tả cho Sữa Vinamilk', 1, 1, 4, 2, 5),
+    ('SP05',N'Sữa tươi tiệt trùng có đường Cô Gái Hà Lan', N'Mô tả cho Sữa Dutch Lady', 1, 3, 4, 2, 1),
+    ('SP06',N'Sữa bột DUTCH LADY nguyên kem', N'Mô tả cho Sữa Dutch Lady', 1, 3, 4, 1, 11),
+	('SP07',N'Sữa tươi tiệt trùng Cô Gái Hà Lan vị Socola', N'Mô tả cho Sữa Dutch Lady', 1, 3, 4, 2, 29),
+	('SP08',N'Sữa bột Grow Plus hộp đỏ', N'Mô tả cho Sữa Nutifood', 1, 7, 1, 1, 35),
+	('SP09',N'Sữa Enplus Gold 900g', N'Mô tả cho Sữa Nutifood', 1, 7, 2, 1, 7),
+    ('SP10',N'Sữa Famna số 4 850g', N'Mô tả cho Sữa Nutifood', 1, 7, 1, 1, 2),
+    ('SP11',N'Sữa Nuvi Grow 900g', N'Mô tả cho Sữa Nutifood', 1, 7, 1, 1, 3),
+    ('SP12',N'Thức Uống Lúa Mạch Nestlé MILO Sữa 3 Trong 1', N'Mô tả cho Sữa Nestle', 1, 2, 4, 2, 1),
+    ('SP13',N'Sữa tươi NutriStrong', N'Mô tả cho Sữa Nestle', 1, 2, 4, 3, 5),
+    ('SP14',N'Sữa Enfamama A+ DHA hương vani cho mẹ bầu', N'Mô tả cho Sữa Mead Johnson', 1, 4, 3, 1, 11),
+	('SP15',N'Sữa bột Frisolac Gold số 4 850g', N'Mô tả cho Sữa Friso', 1, 6, 1, 1, 29),
+	('SP16',N'Sữa bột Abbott Grow 3 900g', N'Mô tả cho Sữa Abbott', 1, 5, 1, 1, 35),
+	('SP17',N'Sữa bột pha sẵn PediaSure socola 237ml', N'Mô tả cho Sữa Abbott', 1, 5, 1, 1, 7),
+    ('SP18',N'Sữa hạt óc chó TH true nut 180ml ', N'Mô tả cho Sữa TH True Milk', 1, 8, 4, 4, 2),
+    ('SP19',N'Sữa tươi tiệt trùng trùng ít đường TH true milk', N'Mô tả cho Sữa TH True Milk', 1, 8, 4, 5, 3),
+    ('SP20',N'Sữa trái cây TH True Milk vị dâu 300ml', N'Mô tả cho Sữa TH True Milk', 1, 8, 4, 2, 1)
+    
 	
 go
-
+select * from SanPhamChiTiet
+select * from DonViTinh
 INSERT INTO SanPhamChiTiet (maSanPham, maDonViTinh, AnhSanPham, hanSuDung, soLuong, giaNhap, donGia, khoiLuong, donViTinhKhoiLuong, ngaySanXuat, barcode, trangThai)
 VALUES	
-    ('SP01', 1, 'SP01.jpg', '2023-12-31', 50, 20000, 25000, 0.5, 'kg', '2023-01-01', 'SPCT0001', 1),
-    ('SP02', 2, 'SP02.png', '2023-12-31', 80, 35000, 45000, 1, 'L', '2023-01-15', 'SPCT0002', 1),
-    ('SP03', 3, 'SP03.png', '2023-12-31', 60, 28000, 35000, 0.75, 'L', '2023-02-01', 'SPCT0003', 1),
-    ('SP04', 4, 'SP05.jpg', '2023-12-31', 40, 32000, 38000, 0.8, 'L', '2023-02-15', 'SPCT0004', 1),
-    ('SP05', 5, 'SP06.jpg', '2023-12-31', 70, 38000, 42000, 0.9, 'L', '2023-03-01', 'SPCT0005', 1),
-	('SP07', 1, 'SP07.jpg', '2023-12-31', 30, 20000, 25000, 0.5, 'kg', '2023-01-01', 'SPCT0013', 1),
-    ('SP08', 6, 'SP08.png', '2023-12-31', 20, 35000, 45000, 1, 'L', '2023-01-15', 'SPCT0014', 1),
-    ('SP01', 1, 'SP09.png', '2023-12-31', 40, 28000, 35000, 0.75, 'L', '2023-02-01', 'SPCT0015', 1),
-    ('SP02', 2, 'SP010.jpg', '2023-12-31', 90, 32000, 38000, 0.8, 'L', '2023-02-15', 'SPCT0016', 1),
-    ('SP07', 4, 'SP011.jpg', '2023-12-31', 70, 38000, 42000, 0.9, 'L', '2023-03-01', 'SPCT0017', 1),
-	('SP08', 1, 'SP012.jpg', '2023-12-31', 50, 20000, 25000, 0.5, 'kg', '2023-01-01', 'SPCT0018', 1),
-    ('SP04', 5, 'SP013.png', '2023-12-31', 80, 35000, 45000, 1, 'L', '2023-01-15', 'SPCT0019', 1),
-    ('SP03', 3, 'SP014.png', '2023-12-31', 60, 28000, 35000, 0.75, 'L', '2023-02-01', 'SPCT0020', 1),
-    ('SP06', 6, 'SP015.jpg', '2023-12-31', 40, 32000, 38000, 0.8, 'L', '2023-02-15', 'SPCT0021', 1),
-    ('SP05', 5, 'SP016.jpg', '2023-12-31', 70, 38000, 42000, 0.9, 'L', '2023-03-01', 'SPCT0022', 1),
-    ('SP06', 6, 'anh_san_pham_6.jpg', '2023-12-31', 30, 30000, 32000, 0.7, 'L', '2023-03-15', 'SPCT0006', 1),
-    ('SP01', 1, 'anh_san_pham_7.jpg', '2023-12-31', 50, 20000, 25000, 0.5, 'kg', '2023-01-01', 'SPCT0007', 1),
-    ('SP02', 2, 'anh_san_pham_8.jpg', '2023-12-31', 80, 35000, 45000, 1, 'L', '2023-01-15', 'SPCT0008', 1),
-    ('SP03', 3, 'anh_san_pham_9.jpg', '2023-12-31', 60, 28000, 35000, 0.75, 'L', '2023-02-01', 'SPCT0009', 1),
-    ('SP04', 4, 'anh_san_pham_10.jpg', '2023-12-31', 40, 32000, 38000, 0.8, 'L', '2023-02-15', 'SPCT0010', 1),
-    ('SP05', 5, 'anh_san_pham_11.jpg', '2023-12-31', 70, 38000, 42000, 0.9, 'L', '2023-03-01', 'SPCT0011', 1),
-    ('SP06', 6, 'anh_san_pham_12.jpg', '2023-12-31', 30, 30000, 32000, 0.7, 'L', '2023-03-15', 'SPCT0012', 1)
+    ('SP01', 6, 'SP01.jpg', '2026-12-31', 50, 330000, 411000, 0.8, 'kg', '2023-01-01', '8934673001137', 1),
+    ('SP02', 1, 'SP02.png', '2025-12-31', 80, 28000, 35000, 1, 'L', '2023-01-15', '8934673576390', 1),
+    ('SP03', 6, 'SP03.png', '2026-12-31', 60, 195000, 225000, 0.35, 'kg', '2023-02-01', '8934673000284', 1),
+    ('SP04', 1, 'SP04.jpg', '2025-12-31', 40, 3200, 5000, 0.11, 'L', '2023-02-15', '8934673574327', 1),
+    ('SP05', 1, 'SP05.jpg', '2026-12-31', 70, 25000, 30000, 1, 'L', '2023-03-01', '8718182063103', 1),
+	('SP06', 1, 'SP06.jpg', '2025-12-31', 30, 72000, 91000, 0.4, 'kg', '2023-03-20', '8936036771862', 1),
+    ('SP07', 1, 'SP07.png', '2026-12-31', 20, 6000, 8000, 0.18, 'L', '2023-04-01', '18934841901877', 1),
+    ('SP08', 6, 'SP08.png', '2025-12-31', 40, 280000, 360000, 0.9, 'kg', '2023-04-11', '8935049002345', 1),
+    ('SP09', 6, 'SP09.jpg', '2026-12-31', 90, 380000, 480000, 0.9, 'kg', '2023-04-15', '8935049001676', 1),
+    ('SP10', 6, 'SP010.jpg', '2025-12-31', 70, 350000, 410000, 0.85, 'kg', '2023-05-01', '7350107130609', 1),
+	('SP11', 6, 'SP011.jpg', '2026-12-31', 50, 230000, 290000, 0.9, 'kg', '2023-05-21', '8935049014010', 1),
+    ('SP12', 4, 'SP012.png', '2025-12-31', 80, 45000, 58000, 0.33, 'kg', '2023-06-15', '8934804040783', 1),
+    ('SP13', 1, 'SP013.png', '2026-12-31', 60, 5000, 8000, 0.18, 'L', '2023-07-01', '8934804033051', 1),
+    ('SP14', 6, 'SP014.jpg', '2025-12-31', 40, 380000, 480000, 0.83, 'kg', '2023-07-15', '0300875132203>', 1),
+    ('SP15', 6, 'SP015.jpg', '2025-12-31', 70, 380000, 480000, 0.85, 'kg', '2023-08-01', '8936036774658', 1),
+    ('SP16', 6, 'SP016.jpg', '2026-12-31', 30, 230000, 280000, 0.9, 'kg', '2023-08-15', '5099864008739', 1),
+    ('SP17', 2, 'SP017.jpg', '2026-12-31', 50, 26000, 38000, 0.237, 'L', '2023-09-01', '07007412005', 1),
+    ('SP18', 1, 'SP018.jpg', '2026-12-31', 80, 11000, 15000, 0.18, 'kg', '2023-09-15', '893521746414', 1),
+    ('SP19', 4, 'SP019.jpg', '2025-12-31', 60, 6000, 9000, 0.22, 'L', '2023-10-01', '8935217400393', 1),
+    ('SP20', 2, 'SP020.jpg', '2026-12-31', 40, 9000, 13000, 0.3, 'L', '2023-12-15', '8936127794107', 1)
 go
 
 INSERT INTO NhanVien (maNhanVien, matKhau, hoTen, gioiTinh, ngaySinh, soDienThoai, email, hinhAnh, VaiTro, trangThai, ghiChu)
 VALUES
 	
-    ('NV001', 'password1', N'Nguyễn Văn A', 1, '1990-01-15', '0123456789', 'nvA@gmail.com', 'avatar_A.jpg', 1, 1, N'Ghi chú cho Nhân viên A'),
-    ('NV002', 'password2', N'Trần Thị B', 0, '1995-03-20', '0987654321', 'nvB@gmail.com', 'avatar_B.jpg', 0, 1, N'Ghi chú cho Nhân viên B'),
-    ('NV003', 'password3', N'Lê Văn C', 1, '1988-07-10', '0345678901', 'nvC@gmail.com', 'avatar_C.jpg', 1, 1, N'Ghi chú cho Nhân viên C'),
-    ('NV004', 'password4', N'Phạm Thị D', 0, '1992-05-02', '0765432109', 'nvD@gmail.com', 'avatar_D.jpg', 0, 1, N'Ghi chú cho Nhân viên D'),
-	('NV005', 'password5', N'Hoàng Mạnh E', 1, '2000-08-10', '0333456789', 'hmE@gmail.com', 'avatar_E.jpg', 0, 0, N'Ghi chú cho Nhân viên E'),
-	('NV006', 'password6', N'Ngô Gia F', 1, '1995-02-10', '02223456789', 'ngF@gmail.com', 'avatar_F.jpg', 0, 1, N'Ghi chú cho Nhân viên F')
+    ('NV001', '123456', N'Nguyễn Văn An', 1, '1990-01-15', '0999999999', 'nvA@gmail.com', 'avatar_A.jpg', 1, 1, N'Ghi chú cho Nhân viên An'),
+    ('NV002', '123456', N'Trần Thị Bình', 0, '1995-03-20', '0988888888', 'nvB@gmail.com', 'avatar_B.jpg', 0, 1, N'Ghi chú cho Nhân viên Bình'),
+    ('NV003', '123456', N'Lê Văn Cường', 1, '1988-07-10', '0987777777', 'nvC@gmail.com', 'avatar_C.jpg', 1, 1, N'Ghi chú cho Nhân viên Cường'),
+    ('NV004', '123456', N'Phạm Thị Duyên', 0, '1992-05-02', '0987666666', 'nvD@gmail.com', 'avatar_D.jpg', 0, 1, N'Ghi chú cho Nhân viên Duyên'),
+	('NV005', '123456', N'Hoàng Mạnh Chức', 1, '2000-08-10', '0987655555', 'hmE@gmail.com', 'avatar_E.jpg', 0, 0, N'Ghi chú cho Nhân viên Chức'),
+	('NV006', '123456', N'Ngô Gia Pháp', 1, '1995-02-10', '0987654444', 'ngF@gmail.com', 'avatar_F.jpg', 0, 1, N'Ghi chú cho Nhân viên Pháp')
 go
 
 INSERT INTO KhachHang (hoTen, gioiTinh, ngaySinh, soDienThoai, email, diem, ghiChu, ngayDangKy)
@@ -405,6 +417,7 @@ select * from KhuyenMai
 select * from KhuyenMaiSanPham
 select * from SanPham
 select * from SanPhamChiTiet
-select maDonHang, maNhanVien, maKhachHang, tongTien, ngayTao, ghiChu, trangThai from DonHang where ngayTao between '2023-01-01' and '2023-05-01' 
+ 
+
 
 
