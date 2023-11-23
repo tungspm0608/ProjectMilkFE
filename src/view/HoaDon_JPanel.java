@@ -36,8 +36,13 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
     }
     
     void Loc(){        
-        String d1 = XDate.toString(dateDau.getDate(), "");
-        String d2 = XDate.toString(dateCuoi.getDate(),"" );
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        String d1 = XDate.toString(dateDau.getDate(), "");
+        Date date1 = dateDau.getDate();
+        String d1 = sdf.format(date1);
+        System.out.println(d1);
+        Date date2 = dateCuoi.getDate();
+        String d2 = sdf.format(date2);
         fillTableDH(hdsv.getByDate(d1, d2));
     }
     /**
@@ -55,6 +60,7 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
         btnLoc = new javax.swing.JButton();
         dateDau = new com.toedter.calendar.JDateChooser();
         dateCuoi = new com.toedter.calendar.JDateChooser();
+        jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblHoaDon = new javax.swing.JTable();
 
@@ -68,7 +74,7 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
         jLabel10.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
         jLabel10.setText("Đến");
 
-        btnLoc.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
+        btnLoc.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
         btnLoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Utilities/IconSystem/icon 2/Wizard.png"))); // NOI18N
         btnLoc.setText("Lọc");
         btnLoc.addActionListener(new java.awt.event.ActionListener() {
@@ -80,6 +86,14 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
         dateDau.setDateFormatString("dd-MM-yyyy");
 
         dateCuoi.setDateFormatString("dd-MM-yyyy");
+
+        jButton1.setFont(new java.awt.Font("DialogInput", 1, 14)); // NOI18N
+        jButton1.setText("Làm mới");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -95,6 +109,8 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(dateCuoi, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(114, 114, 114)
                 .addComponent(btnLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -102,13 +118,17 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnLoc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(dateDau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(dateCuoi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnLoc)
+                            .addComponent(dateDau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dateCuoi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 1, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         tblHoaDon.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
@@ -152,11 +172,17 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
         this.Loc();
     }//GEN-LAST:event_btnLocActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.fillTableDH(hdsv.getAllHD());
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLoc;
     private com.toedter.calendar.JDateChooser dateCuoi;
     private com.toedter.calendar.JDateChooser dateDau;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
