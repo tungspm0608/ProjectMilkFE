@@ -53,7 +53,7 @@ public class HoaDonService {
             ps.setObject(1, d1);
             ps.setObject(2, d2);
             rs = ps.executeQuery();
-            System.out.println(rs);
+            
             while(rs.next()){
                 HoaDon h = new HoaDon();
                 h.setMaDonHang(rs.getInt(1));

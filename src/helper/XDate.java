@@ -32,7 +32,7 @@ public class XDate {
 
     public static String toString(Date date,String pattern){
         if (pattern.isEmpty()) {
-            pattern="dd-MM-yyyy";
+            pattern="yyyy-MM-dd";
         }
         formater.applyPattern(pattern);
         return formater.format(date);

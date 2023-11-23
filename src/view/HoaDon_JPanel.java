@@ -38,7 +38,6 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
     void Loc(){        
         String d1 = XDate.toString(dateDau.getDate(), "");
         String d2 = XDate.toString(dateCuoi.getDate(),"" );
-        System.out.println(dateDau.getDate());
         fillTableDH(hdsv.getByDate(d1, d2));
     }
     /**
