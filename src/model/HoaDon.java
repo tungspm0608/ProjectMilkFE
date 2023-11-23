@@ -78,7 +78,7 @@ public class HoaDon {
 
     public String isTrangThai() {
         if(trangThai ==true) return "Đã thanh toán";
-        else return "Chưa đơn hàng";
+        else return "Hủy đơn hàng";
     }
 
     public void setTrangThai(boolean trangThai) {
