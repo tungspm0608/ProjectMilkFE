@@ -100,11 +100,18 @@ public class KhuyenMai {
 
     public String TrangThai(){
         if (getTrangThai() == 1) {
+            return "Cho phép hoạt động";
+        } else  {
+            return "Ngừng hoạt động";
+        }
+    }
+    public String getStatusTrangThai(){
+         if (getTrangThai() == 1) {
             return "Đang hoạt động";
-        } else if (getTrangThai()==0) {
+        } else if(getTrangThai() == 0)  {
             return "Đã kết thúc";
         }else{
-            return "Chưa bắt đầu";
+            return "Chưa diễn ra";
         }
     }
 }
