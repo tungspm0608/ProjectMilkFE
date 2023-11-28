@@ -4,13 +4,11 @@
  */
 package model;
 
-import java.util.Date;
-
 /**
  *
- * @author Admin
+ * @author dovan
  */
-public class HoaDon {
+public class DonHang {
     private int maDonHang;
     private int maKhachHang;
     private String maNhanVien;
@@ -26,10 +24,10 @@ public class HoaDon {
     private String dienThoai;
     private String diaChi;
 
-    public HoaDon() {
+    public DonHang() {
     }
 
-    public HoaDon(int maDonHang, int maKhachHang, String maNhanVien, int maHHTT, int trangThai, String ghiChu, String ngayTao, float phiKhac, float tienGiam, float tienHang, float tongTien, int loaiDonHang, String dienThoai, String diaChi) {
+    public DonHang(int maDonHang, int maKhachHang, String maNhanVien, int maHHTT, int trangThai, String ghiChu, String ngayTao, float phiKhac, float tienGiam, float tienHang, float tongTien, int loaiDonHang, String dienThoai, String diaChi) {
         this.maDonHang = maDonHang;
         this.maKhachHang = maKhachHang;
         this.maNhanVien = maNhanVien;
@@ -45,6 +43,10 @@ public class HoaDon {
         this.dienThoai = dienThoai;
         this.diaChi = diaChi;
     }
+
+    
+
+    
 
     public int getMaDonHang() {
         return maDonHang;

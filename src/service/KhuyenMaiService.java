@@ -298,4 +298,34 @@ public class KhuyenMaiService {
         return row;
     }
 
+    public KhuyenMai searchKMofSP(int maSanPhamChiTiet) {
+        String sql = "select * from KhuyenMai\n"
+                + "inner join KhuyenMaiSanPham on KhuyenMaiSanPham.maKhuyenMai = KhuyenMai.maKhuyenMai\n"
+                + " where maSanPhamChiTiet = ? and KhuyenMai.trangThai=1 and KhuyenMaiSanPham.trangThai=1\n"
+                + " and (? between KhuyenMai.ngayBatDau and KhuyenMai.ngayKetThuc)";
+        try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
+            pstm.setInt(1, maSanPhamChiTiet);
+            Date date1 = new Date(XDate.toDate(XDate.toString(XDate.now(), "dd-MM-yyyy"), "dd-MM-yyyy").getTime());
+            System.out.println(date1);
+            pstm.setDate(2, date1);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                KhuyenMai km = new KhuyenMai();
+                km.setMaKhuyenMai(rs.getString("maKhuyenMai"));
+                km.setTenChuongTrinh(rs.getString("tenChuongTrinh"));
+                km.setNgayBatDau(XDate.toString(rs.getDate("ngayBatDau"), "dd-MM-yyyy"));
+                km.setNgayKetThuc(XDate.toString(rs.getDate("ngayKetThuc"), "dd-MM-yyyy"));
+                km.setMoTa(rs.getString("moTa"));
+                km.setTrangThai(rs.getInt("trangThai"));
+                km.setGiatriGiam(rs.getInt("giaTriGiam"));
+                km.setDonViGiam(rs.getString("donViGiam"));
+                return km;
+            }
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

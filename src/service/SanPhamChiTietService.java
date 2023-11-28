@@ -81,7 +81,7 @@ public class SanPhamChiTietService {
         }
         return null;
     }
-    
+
     public Integer updateSP(SanPham x) {
         String sql = "update SanPham set tenSanPham=?, moTa=?, trangThai=?, maThuongHieu=?, maLoaiHang=?, maDongSanPham=?, maXuatXu=? \n"
                 + "where maSanPham = ?";
@@ -110,7 +110,7 @@ public class SanPhamChiTietService {
                 + " VALUES(?,?,?,?,?,?,?,?,?,?,?, ?)";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
 
-            pstm.setString(1,sp.getMaSanPham());
+            pstm.setString(1, sp.getMaSanPham());
             pstm.setInt(2, spct.getMaDonViTinh());
             pstm.setString(3, spct.getAnhSanPham());
             Date date = new Date(XDate.toDate(spct.getHanSuDung(), "dd-MM-yyyy").getTime());
@@ -131,15 +131,17 @@ public class SanPhamChiTietService {
         }
         return null;
     }
-    
+
     public Integer updateSPCT(SanPham sp, SanPhamChiTiet spct) {
-        updateSP(sp);
+        if (sp.getMaSanPham() != null) {
+            updateSP(sp);
+        }
         String sql = "update SanPhamChiTiet set maDonViTinh=?, AnhSanPham=?, hanSuDung=?, soLuong=?, giaNhap=?,"
                 + " donGia=?, khoiLuong=?, donViTinhKhoiLuong=?, ngaySanXuat=?, barcode=?, trangThai=? \n"
                 + " where maSanPhamChiTiet = ?";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
 
-            pstm.setInt(12,spct.getMaSanPhamChiTiet());
+            pstm.setInt(12, spct.getMaSanPhamChiTiet());
             pstm.setInt(1, spct.getMaDonViTinh());
             pstm.setString(2, spct.getAnhSanPham());
             Date date = new Date(XDate.toDate(spct.getHanSuDung(), "dd-MM-yyyy").getTime());
@@ -152,7 +154,7 @@ public class SanPhamChiTietService {
             date = new Date(XDate.toDate(spct.getNgaySanXuat(), "dd-MM-yyyy").getTime());
             pstm.setDate(9, date);
             pstm.setString(10, spct.getBarcode());
-            pstm.setInt(11, spct.getTrangThai()?1:0);
+            pstm.setInt(11, spct.getTrangThai() ? 1 : 0);
             Integer rs = pstm.executeUpdate();
             return rs;
         } catch (Exception e) {
@@ -187,6 +189,62 @@ public class SanPhamChiTietService {
         }
         return null;
     }
-    
-    
+
+    public SanPhamChiTiet searchByIdBarcode(String barcode) {
+        String sql = "select * from SanPhamChiTiet where barcode = ?";
+        try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
+            pstm.setString(1, barcode);
+            ResultSet rs = pstm.executeQuery();
+            ArrayList<SanPham> list = new ArrayList<>();
+            while (rs.next()) {
+                SanPhamChiTiet x = new SanPhamChiTiet();
+                x.setMaSanPham(rs.getString("maSanPham"));
+                x.setMaSanPhamChiTiet(rs.getInt("maSanPhamChiTiet"));
+                x.setMaDonViTinh(rs.getInt("maDonViTinh"));
+                x.setAnhSanPham(rs.getString("AnhSanPham"));
+                x.setHanSuDung(XDate.toString(rs.getDate("hanSuDung"), "dd-MM-yyyy"));
+                x.setSoLuong(rs.getInt("soLuong"));
+                x.setGiaNhap(rs.getFloat("giaNhap"));
+                x.setDonGia(rs.getFloat("donGia"));
+                x.setKhoiLuong(rs.getFloat("khoiLuong"));
+                x.setDonViTinhKhoiLuong(rs.getString("donViTinhKhoiLuong"));
+                x.setNgaySanXuat(XDate.toString(rs.getDate("ngaySanXuat"), "dd-MM-yyyy"));
+                x.setBarcode(rs.getString("barcode"));
+                x.setTrangThai(rs.getInt("trangThai") == 1 ? true : false);
+                return x;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public SanPhamChiTiet searchByIdSPCT(int maspct) {
+        String sql = "select * from SanPhamChiTiet where maSanPhamChiTiet = ?";
+        try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
+            pstm.setInt(1, maspct);
+            ResultSet rs = pstm.executeQuery();
+            ArrayList<SanPham> list = new ArrayList<>();
+            while (rs.next()) {
+                SanPhamChiTiet x = new SanPhamChiTiet();
+                x.setMaSanPham(rs.getString("maSanPham"));
+                x.setMaSanPhamChiTiet(rs.getInt("maSanPhamChiTiet"));
+                x.setMaDonViTinh(rs.getInt("maDonViTinh"));
+                x.setAnhSanPham(rs.getString("AnhSanPham"));
+                x.setHanSuDung(XDate.toString(rs.getDate("hanSuDung"), "dd-MM-yyyy"));
+                x.setSoLuong(rs.getInt("soLuong"));
+                x.setGiaNhap(rs.getFloat("giaNhap"));
+                x.setDonGia(rs.getFloat("donGia"));
+                x.setKhoiLuong(rs.getFloat("khoiLuong"));
+                x.setDonViTinhKhoiLuong(rs.getString("donViTinhKhoiLuong"));
+                x.setNgaySanXuat(XDate.toString(rs.getDate("ngaySanXuat"), "dd-MM-yyyy"));
+                x.setBarcode(rs.getString("barcode"));
+                x.setTrangThai(rs.getInt("trangThai") == 1 ? true : false);
+                return x;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

@@ -31,11 +31,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -97,28 +99,28 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         comboboxdsp = (DefaultComboBoxModel<String>) cboDongSP.getModel();
         comboboxdsp.removeAllElements();
         for (DongSanPham x : dspsv.getAll()) {
-            if(x.getTrangThai()){
+            if (x.getTrangThai()) {
                 comboboxdsp.addElement(x.getTenDongSanPham());
             }
         }
         comboboxdvt = (DefaultComboBoxModel<String>) cboDonViTinh.getModel();
         comboboxdvt.removeAllElements();
         for (DonViTinh x : dvtsv.getAll()) {
-           if(x.getTrangThai()){
+            if (x.getTrangThai()) {
                 comboboxdvt.addElement(x.getTenDonViTinh());
-           }
+            }
         }
         comboboxxx = (DefaultComboBoxModel<String>) cboXuatXu.getModel();
         comboboxxx.removeAllElements();
         for (XuatXu x : xxsv.getAll()) {
-            if(x.getTrangThai()){
+            if (x.getTrangThai()) {
                 comboboxxx.addElement(x.getTenXuatXu());
             }
         }
         comboboxth = (DefaultComboBoxModel<String>) cboThuongHieu.getModel();
         comboboxth.removeAllElements();
         for (ThuongHieu x : thsv.getAll()) {
-            if(x.getTrangThai()){
+            if (x.getTrangThai()) {
                 comboboxth.addElement(x.getTenThuongHieu());
             }
         }
@@ -128,7 +130,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         this.fillDonViTinh();
         this.fillDongSanPham();
         this.fillLoaiHang();
-        this.fillThuongHieu(thsv.getAll());
+        this.fillThuongHieu();
         this.fillXuatXu(xxsv.getAll());
     }
 
@@ -168,6 +170,15 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         }
     }
 
+    void fillThuongHieu() {
+        DefaultTableModel mol4 = new DefaultTableModel();
+        mol4 = (DefaultTableModel) tblThuongHieu.getModel();
+        mol4.setRowCount(0);
+        for (ThuongHieu th : thsv.getAll()) {
+            mol4.addRow(new Object[]{th.getMaThuongHieu(), th.getTenThuongHieu(), th.getTrangThai(), th.getGhiChu()});
+        }
+    }
+
     void fillXuatXu(List<XuatXu> list) {
         DefaultTableModel mol5 = new DefaultTableModel();
         mol5 = (DefaultTableModel) tblXuatXu.getModel();
@@ -189,6 +200,8 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         dvt.setTenDonViTinh(txtTenDVT.getText());
         dvt.setGhiChu(txtGhiChuDVT.getText());
         dvt.setTrangThai(true);
+        boolean trangThai = (boolean) tblDonViTinh.getValueAt(row, 3);
+        dvt.setTrangThai(trangThai);
         return dvt;
     }
 
@@ -204,6 +217,8 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         dsp.setTenDongSanPham(txtTenDSP.getText());
         dsp.setGhiChu(txtGhiChuDSP.getText());
         dsp.setTrangThai(true);
+        boolean trangThai = (boolean) tblDongSP.getValueAt(row, 3);
+        dsp.setTrangThai(trangThai);
         return dsp;
     }
 
@@ -234,71 +249,6 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         this.fillXuatXu(xxsv.getByName(Name));
     }
 
-    void showformTH() {
-        ThuongHieu th = thsv.getAll().get(row);
-        txtTenTH.setText(th.getTenThuongHieu());
-        txtGhiChuTH.setText(th.getGhiChu());
-    }
-
-    ThuongHieu readformTH() {
-        ThuongHieu th = new ThuongHieu();
-        th.setTenThuongHieu(txtTenTH.getText());
-        th.setGhiChu(txtGhiChuTH.getText());
-        th.setTrangThai(true);
-        return th;
-    }
-    
-    boolean checkDVT() {
-        if (txtTenDVT.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Cần nhập tên đơn vị tính");
-            txtTenDVT.requestFocus();
-            return false;
-        } else if (txtGhiChuDVT.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Cần nhập ghi chú cho don vi tinh");
-            txtGhiChuDVT.requestFocus();
-            return false;
-        }
-        return true;
-    }
-
-    boolean checkTH() {
-        if (txtTenTH.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Cần nhập tên thương hiệu");
-            txtTenTH.requestFocus();
-            return false;
-        } else if (txtGhiChuTH.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Cần nhập ghi chú cho thương hiệu");
-            txtGhiChuTH.requestFocus();
-            return false;
-        }
-        return true;
-    }
-    
-     boolean checkDSP() {
-        if (txtTenDSP.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Cần nhập tên dòng sản phẩm");
-            txtTenDSP.requestFocus();
-            return false;
-        } else if (txtGhiChuDSP.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Cần nhập ghi chú cho dòng sản phẩm");
-            txtGhiChuDSP.requestFocus();
-            return false;
-        }
-        return true;
-    }
-     
-     boolean checkLH() {
-        if (txtTenLH.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Cần nhập tên loại hàng");
-            txtTenLH.requestFocus();
-            return false;
-        } else if (txtGhiChuLH.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Cần nhập ghi chú cho loại hàng");
-            txtGhiChuLH.requestFocus();
-            return false;
-        }
-        return true;
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -367,10 +317,10 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         jLabel31 = new javax.swing.JLabel();
         txt_kl = new javax.swing.JTextField();
         jLabel32 = new javax.swing.JLabel();
-        txt_dvtkl = new javax.swing.JTextField();
         jButton9 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        cbo_dvkl = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
@@ -772,10 +722,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
 
         jLabel32.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
         jLabel32.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel32.setText("DVT KL: ");
-
-        txt_dvtkl.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        txt_dvtkl.setForeground(new java.awt.Color(0, 204, 204));
+        jLabel32.setText("Đơn vị KL: ");
 
         jButton9.setText("Prev");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
@@ -798,6 +745,8 @@ public class SanPham_JPanel extends javax.swing.JPanel {
                 jButton4ActionPerformed(evt);
             }
         });
+
+        cbo_dvkl.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "lít", "ml", "g", "kg" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -893,8 +842,8 @@ public class SanPham_JPanel extends javax.swing.JPanel {
                                                 .addGap(42, 42, 42)
                                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(txt_gianhap)
-                                                    .addComponent(txt_dvtkl, javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(txt_barcode))))
+                                                    .addComponent(txt_barcode)
+                                                    .addComponent(cbo_dvkl, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -973,12 +922,12 @@ public class SanPham_JPanel extends javax.swing.JPanel {
                                     .addComponent(jLabel12))
                                 .addGap(15, 15, 15)
                                 .addComponent(txt_gianhap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(15, 15, 15)
+                        .addGap(16, 16, 16)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
                             .addComponent(txt_sl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_dvtkl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel32))
+                            .addComponent(jLabel32)
+                            .addComponent(cbo_dvkl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(15, 15, 15)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel31)
@@ -1004,7 +953,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton9)
                     .addComponent(jButton13))
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Sản phẩm", jPanel2);
@@ -1026,6 +975,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
 
         txtMaDVT.setEditable(false);
         txtMaDVT.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        txtMaDVT.setForeground(new java.awt.Color(0, 204, 204));
         txtMaDVT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMaDVTActionPerformed(evt);
@@ -1037,6 +987,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         jLabel29.setText("Tên DVT: ");
 
         txtTenDVT.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        txtTenDVT.setForeground(new java.awt.Color(0, 204, 204));
         txtTenDVT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTenDVTActionPerformed(evt);
@@ -1260,6 +1211,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         jLabel35.setText("Tên DSP: ");
 
         txtTenDSP.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
+        txtTenDSP.setForeground(new java.awt.Color(0, 204, 204));
         txtTenDSP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTenDSPActionPerformed(evt);
@@ -1829,7 +1781,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1177, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1177, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -1952,12 +1904,10 @@ public class SanPham_JPanel extends javax.swing.JPanel {
 
     private void btnThem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem1ActionPerformed
         // TODO add your handling code here:
-        if(checkDVT()==true){
         DonViTinh dvt = this.readformDVT();
         dvtsv.add(dvt);
         this.fillDonViTinh();
         JOptionPane.showMessageDialog(this, "Them thanh cong");
-        }
     }//GEN-LAST:event_btnThem1ActionPerformed
 
     private void btnMoi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoi1ActionPerformed
@@ -1969,16 +1919,13 @@ public class SanPham_JPanel extends javax.swing.JPanel {
 
     private void btnSua1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSua1ActionPerformed
         // TODO add your handling code here:      
-       if(checkDVT() == true){
         row = tblDonViTinh.getSelectedRow();
         int MaDVT = (int) tblDonViTinh.getValueAt(row, 0);
         DonViTinh dvt = this.readformDVT();
-        boolean trangThai = (boolean) tblDonViTinh.getValueAt(row, 3);
-        dvt.setTrangThai(trangThai);
         dvtsv.update(dvt, MaDVT);
         fillDonViTinh();
         JOptionPane.showMessageDialog(this, "Sửa thành công");
-        }
+        fillCombox();
     }//GEN-LAST:event_btnSua1ActionPerformed
 
     private void btnXoa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa1ActionPerformed
@@ -1997,45 +1944,42 @@ public class SanPham_JPanel extends javax.swing.JPanel {
 
     private void btnThemDSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDSPActionPerformed
         // TODO add your handling code here:
-        if(checkDSP()==true){
         DongSanPham dsp = this.readformDSP();
         dspsv.add(dsp);
         this.fillDongSanPham();
         JOptionPane.showMessageDialog(this, "Them thanh cong");
-        }
     }//GEN-LAST:event_btnThemDSPActionPerformed
 
     private void btnSuaDSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaDSPActionPerformed
         // TODO add your handling code here:
-        if(checkDSP()==true){
         row = tblDongSP.getSelectedRow();
         int MaDSP = (int) tblDongSP.getValueAt(row, 0);
         DongSanPham dsp = this.readformDSP();
-        boolean trangThai = (boolean) tblDongSP.getValueAt(row, 3);
-        dsp.setTrangThai(trangThai);
         dspsv.update(dsp, MaDSP);
         fillDongSanPham();
         JOptionPane.showMessageDialog(this, "Sửa thành công");
-        }
     }//GEN-LAST:event_btnSuaDSPActionPerformed
 
     private void btnXoaDSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaDSPActionPerformed
         // TODO add your handling code here:
         row = tblDongSP.getSelectedRow();
         int MaDSP = (int) tblDongSP.getValueAt(row, 0);
-        if(dspsv.CheckXoa(MaDSP)==null){
         dspsv.delete(MaDSP);
         this.fillDongSanPham();
-        JOptionPane.showMessageDialog(this, "Xóa thành công");
-        txtGhiChuDSP.setText(null);
-        txtTenDSP.setText(null);
-        }
-        else JOptionPane.showMessageDialog(this, "Chỉ được xóa mềm dòng này!!!");
+        JOptionPane.showConfirmDialog(this, "Xóa thành công");
     }//GEN-LAST:event_btnXoaDSPActionPerformed
 
     private void btnMoiDSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiDSPActionPerformed
-        txtGhiChuDSP.setText(null);
-        txtTenDSP.setText(null);
+        row = tblDongSP.getSelectedRow();
+        int MaDSP = (int) tblDongSP.getValueAt(row, 0);
+        if (dspsv.CheckXoa(MaDSP) == null) {
+            dspsv.delete(MaDSP);
+            this.fillDongSanPham();
+            JOptionPane.showMessageDialog(this, "Xóa thành công");
+            txtGhiChuDSP.setText(null);
+            txtTenDSP.setText(null);
+        } else
+            JOptionPane.showMessageDialog(this, "Chỉ được xóa mềm dòng này!!!");
     }//GEN-LAST:event_btnMoiDSPActionPerformed
 
     private void tblDongSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDongSPMouseClicked
@@ -2046,12 +1990,10 @@ public class SanPham_JPanel extends javax.swing.JPanel {
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
         // TODO add your handling code here:
-        if(checkLH() == true){
         LoaiHang lh = this.readformLH();
         lhsv.add(lh);
         this.fillLoaiHang();
         JOptionPane.showMessageDialog(this, "Them thanh cong");
-        }
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
@@ -2101,26 +2043,10 @@ public class SanPham_JPanel extends javax.swing.JPanel {
 
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
         // TODO add your handling code here:
-        if(checkTH()==true){
-        ThuongHieu th = this.readformTH();
-        thsv.add(th);
-        this.fillThuongHieu(thsv.getAll());
-        JOptionPane.showMessageDialog(this, "Them thanh cong");
-        }
     }//GEN-LAST:event_jButton24ActionPerformed
 
     private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
         // TODO add your handling code here:
-        if(checkTH()==true){
-        row = tblThuongHieu.getSelectedRow();
-        int MaTH = (int) tblThuongHieu.getValueAt(row, 0);
-        ThuongHieu th = this.readformTH();
-        boolean trangThai = (boolean) tblThuongHieu.getValueAt(row, 2);
-        th.setTrangThai(trangThai);
-        thsv.update(th, MaTH);
-        fillThuongHieu(thsv.getAll());
-        JOptionPane.showMessageDialog(this, "Sửa thành công");
-        }
     }//GEN-LAST:event_jButton25ActionPerformed
 
     private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
@@ -2139,8 +2065,6 @@ public class SanPham_JPanel extends javax.swing.JPanel {
 
     private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
         // TODO add your handling code here:
-        txtGhiChuTH.setText(null);
-        txtTenTH.setText(null);
     }//GEN-LAST:event_jButton27ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -2184,9 +2108,11 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         }
         SanPham sp = readFormSP();
         SanPhamChiTiet spct = readFormSPCT();
+        spct.setBarcode(generateRandomCode(15));
         Integer rs = spctservice.insertSPCT(sp, spct);
         if (rs != null) {
             JOptionPane.showMessageDialog(null, "Thêm thành công");
+            qrcode(sp,spct);
             loadDataToTable();
         } else
             JOptionPane.showMessageDialog(null, "Thêm thất bại");
@@ -2232,14 +2158,16 @@ public class SanPham_JPanel extends javax.swing.JPanel {
             System.out.println(x.get(0).getMaLoaiHang());
             System.out.println(spct.get(0).getAnhSanPham());
             System.out.println(spct.get(0).getMaDonViTinh());
-            
-        Integer rs = spctservice.insertSPCT(x.get(0), spct.get(0));
-        if (rs != null) {
-            JOptionPane.showMessageDialog(null, "Thêm thành công");
-            qrcode(spct.get(0).getBarcode());
-            loadDataToTable();
-        } else
-            JOptionPane.showMessageDialog(null, "Thêm thất bại");
+
+            Integer rs = spctservice.insertSPCT(x.get(0), spct.get(0));
+            if (rs != null) {
+                JOptionPane.showMessageDialog(null, "Thêm thành công");
+                SanPham sp = spservice.searchById(spct.get(0).getMaSanPhamChiTiet());
+                qrcode(sp,spct.get(0));
+                loadDataToTable();
+            } else {
+                JOptionPane.showMessageDialog(null, "Thêm thất bại");
+            }
         }
 
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -2265,6 +2193,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cboLoaiSP;
     private javax.swing.JComboBox<String> cboThuongHieu;
     private javax.swing.JComboBox<String> cboXuatXu;
+    private javax.swing.JComboBox<String> cbo_dvkl;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -2375,7 +2304,6 @@ public class SanPham_JPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtTimKiemXX;
     private javax.swing.JTextField txt_barcode;
     private javax.swing.JTextField txt_dongia;
-    private javax.swing.JTextField txt_dvtkl;
     private javax.swing.JTextField txt_gianhap;
     private javax.swing.JTextField txt_hansd;
     private javax.swing.JTextField txt_kl;
@@ -2391,6 +2319,10 @@ private void loadDataToTable() {
 
         for (SanPhamChiTiet spct : list) {
             SanPham sp = spctservice.searchByIdSP(spct.getMaSanPham());
+            DecimalFormat decimalFormat = new DecimalFormat("#,### VND");
+
+            // Định dạng số và in ra
+            String formattedAmount = decimalFormat.format(spct.getDonGia());
             mol.addRow(new Object[]{
                 spct.getMaSanPhamChiTiet(), sp.getTenSanPham(),
                 thsv.findByID(sp.getMaThuongHieu()).getTenThuongHieu(),
@@ -2399,7 +2331,7 @@ private void loadDataToTable() {
                 dvtsv.findByID(spct.getMaDonViTinh()).getTenDonViTinh(),
                 spct.getHanSuDung(),
                 spct.getSoLuong(),
-                spct.getDonGia(),
+                formattedAmount,
                 xxsv.findByID(sp.getMaXuatXu()).getTenXuatXu(),
                 spct.getKhoiLuong() + " " + spct.getDonViTinhKhoiLuong(),
                 spct.getBarcode(),
@@ -2413,15 +2345,20 @@ private void loadDataToTable() {
         SanPhamChiTiet spct = list.get(index);
         SanPham sp = spctservice.searchByIdSP(spct.getMaSanPham());
         txt_barcode.setText(spct.getBarcode());
-        txt_dongia.setText(String.valueOf(spct.getDonGia()));
+        DecimalFormat decimalFormat = new DecimalFormat("#,### VND");
+
+        // Định dạng số và in ra
+        String formattedAmount = decimalFormat.format(spct.getDonGia());
+        txt_dongia.setText(formattedAmount);
         txt_hansd.setText(spct.getHanSuDung());
         txt_ma.setText(spct.getMaSanPham());
         txt_ngayxk.setText(spct.getNgaySanXuat());
         txt_sl.setText(String.valueOf(spct.getSoLuong()));
         txt_ten.setText(sp.getTenSanPham());
         txt_kl.setText(String.valueOf(spct.getKhoiLuong()));
-        txt_dvtkl.setText(spct.getDonViTinhKhoiLuong());
-        txt_gianhap.setText(String.valueOf(spct.getGiaNhap()));
+        cbo_dvkl.setSelectedItem(spct.getDonViTinhKhoiLuong());
+        formattedAmount = decimalFormat.format(spct.getGiaNhap());
+        txt_gianhap.setText(formattedAmount);
         comboboxdsp.setSelectedItem(mol.getValueAt(index, 4));
         comboboxdvt.setSelectedItem(mol.getValueAt(index, 5));
         comboboxlh.setSelectedItem(mol.getValueAt(index, 3));
@@ -2438,10 +2375,10 @@ private void loadDataToTable() {
         x.setMaSanPham(txt_ma.getText());
         x.setTenSanPham(txt_ten.getText());
         x.setMoTa("");
-        x.setMaThuongHieu(thsv.getByName(cboThuongHieu.getSelectedItem()+"").get(0).getMaThuongHieu());
+        x.setMaThuongHieu(thsv.getByName(cboThuongHieu.getSelectedItem() + "").get(0).getMaThuongHieu());
         x.setMaLoaiHang(cboLoaiSP.getSelectedIndex() + 1);
         x.setMaDongSanPham(cboDongSP.getSelectedIndex() + 1);
-        x.setMaXuatXu(xxsv.getByName(cboXuatXu.getSelectedItem()+"").get(0).getMaXuatXu());
+        x.setMaXuatXu(xxsv.getByName(cboXuatXu.getSelectedItem() + "").get(0).getMaXuatXu());
         return x;
     }
 
@@ -2455,7 +2392,7 @@ private void loadDataToTable() {
         x.setGiaNhap(Float.valueOf(txt_gianhap.getText()));
         x.setDonGia(Float.valueOf(txt_dongia.getText()));
         x.setKhoiLuong(Float.valueOf(txt_kl.getText()));
-        x.setDonViTinhKhoiLuong(txt_dvtkl.getText());
+        x.setDonViTinhKhoiLuong(cbo_dvkl.getSelectedItem() + "");
         x.setNgaySanXuat(txt_ngayxk.getText());
         x.setBarcode(txt_barcode.getText());
 
@@ -2477,7 +2414,8 @@ private void loadDataToTable() {
         txt_sl.setText(String.valueOf(spct.getSoLuong()));
         txt_ten.setText(sp.getTenSanPham());
         txt_kl.setText(String.valueOf(spct.getKhoiLuong()));
-        txt_dvtkl.setText(spct.getDonViTinhKhoiLuong());
+        cbo_dvkl.setSelectedItem(spct.getDonViTinhKhoiLuong());
+
         txt_gianhap.setText(String.valueOf(spct.getGiaNhap()));
         comboboxdsp.setSelectedItem("");
         comboboxdvt.setSelectedItem("");
@@ -2489,7 +2427,7 @@ private void loadDataToTable() {
 
     public boolean checkValidate() {
         if (txt_ma.getText().isEmpty() || txt_ten.getText().isEmpty() || txt_dongia.getText().isEmpty()
-                || txt_gianhap.getText().isEmpty() || txt_kl.getText().isEmpty() || txt_dvtkl.getText().isEmpty()) {
+                || txt_gianhap.getText().isEmpty() || txt_kl.getText().isEmpty()) {
             return false;
         }
         return true;
@@ -2502,10 +2440,10 @@ private void loadDataToTable() {
             txt_ma.setEditable(true);
         }
     }
-    
-    public void qrcode(String barcode){
+
+    public void qrcode(SanPham sp,SanPhamChiTiet spct) {
         int size = 200; // Kích thước của mã QR code
-        String text = barcode;
+        String text = spct.getBarcode();
         try {
             QRCodeWriter qrCodeWriter = new QRCodeWriter();
             BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, size, size);
@@ -2513,7 +2451,7 @@ private void loadDataToTable() {
 
             // Đường dẫn mặc định là ổ C và tên tệp là "QRCode.png"
             String defaultDirectory = "C:\\Users\\dovan\\OneDrive\\Desktop\\images\\QRCode";
-            String fileName = barcode + ".png";
+            String fileName = sp.getTenSanPham() + spct.getKhoiLuong() + ".png";
             File outputFile = new File(defaultDirectory, fileName);
 
             ImageIO.write(image, "PNG", outputFile);
@@ -2523,5 +2461,16 @@ private void loadDataToTable() {
             ex.printStackTrace();
         }
     }
+    
+    public static String generateRandomCode(int length) {
+        Random random = new Random();
+        StringBuilder codeBuilder = new StringBuilder();
 
+        for (int i = 0; i < length; i++) {
+            int randomNumber = random.nextInt(10); // Sinh số ngẫu nhiên từ 0 đến 9
+            codeBuilder.append(randomNumber);
+        }
+
+        return codeBuilder.toString();
+    }
 }
