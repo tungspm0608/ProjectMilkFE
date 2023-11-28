@@ -170,7 +170,7 @@ create table DonHang
     ngayTao date null,
     phiKhac float null,
     tongTien float null,
-    loaiDonHang nvarchar(50) null,
+    loaiDonHang int null,
     dienThoai varchar(50) null,
     diaChi nvarchar(50) null,
     primary key(maDonHang),
@@ -393,18 +393,18 @@ insert into HinhThucThanhToan (tenHinhThucThanhToan) values (N'Tiền mặt'),
 
 
 insert into DonHang values 
-(1,'NV001',1,1,'','2023/01/03',23000,560000,N'Bán tại quầy','0123456789',N'TP Hà Nội'),
-(null,'NV001',1,1,'','2023/03/10',0,660000,N'Bán tại quầy','0132456789',N'Hoài Đức - Hà Nội'),
-(2,'NV002',2,1,'','2023/06/24',10000,980000,N'Đặt hàng','0124356789',N'Nam Từ Liêm - Hà Nội'),
-(3,'NV002',1,1,'','2023/11/21',20000,1060000,N'Bán tại quầy','0321456789',N'TP Hà Nội'),
-(null,'NV002',2,0,'','2023/02/08',20000,820000,N'Đặt hàng','0123546789',N'Phúc Thọ - Hà Nội'),
-(6,'NV003',1,1,'','2023/10/05',23000,500000,N'Bán tại quầy','0123457689',N'Phú Xuyên - Hà Nội'),
-(10,'NV003',1,1,'','2023/09/03',5000,120000,N'Bán tại quầy','0123456987',N'Hà Đông Hà Nội'),
-(null,'NV004',2,1,'','2023/12/12',33000,620000,N'Đặt hàng','0123475689',N'TP Hà Nội'),
-(15,'NV004',2,1,'','2023/05/23',3000,560000,N'Đặt hàng','0123456009',N'Cầu Giấy Hà Nội'),
-(18,'NV004',1,0,'','2023/01/30',13000,1260000,N'Bán tại quầy','0963456789',N'Thường Tín - Hà Nội'),
-(7,'NV004',2,1,'','2023/04/10',25000,900000,N'Đặt hàng','0363456789',N'Hoàng Mai - Hà Nội'),
-(4,'NV004',2,1,'','2023/07/25',26000,560000,N'Đặt hàng','0366666689',N'TP Hà Nội')
+(1,'NV001',1,1,'','2023/01/03',23000,560000,2,'0123456789',N'TP Hà Nội'),
+(null,'NV001',1,1,'','2023/03/10',0,660000,2,'0132456789',N'Hoài Đức - Hà Nội'),
+(2,'NV002',2,1,'','2023/06/24',10000,980000,4,'0124356789',N'Nam Từ Liêm - Hà Nội'),
+(3,'NV002',1,1,'','2023/11/21',20000,1060000,2,'0321456789',N'TP Hà Nội'),
+(null,'NV002',2,0,'','2023/02/08',20000,820000,4,'0123546789',N'Phúc Thọ - Hà Nội'),
+(6,'NV003',1,1,'','2023/10/05',23000,500000,2,'0123457689',N'Phú Xuyên - Hà Nội'),
+(10,'NV003',1,1,'','2023/09/03',5000,120000,2,'0123456987',N'Hà Đông Hà Nội'),
+(null,'NV004',2,1,'','2023/12/12',33000,620000,4,'0123475689',N'TP Hà Nội'),
+(15,'NV004',2,1,'','2023/05/23',3000,560000,2,'0123456009',N'Cầu Giấy Hà Nội'),
+(18,'NV004',1,0,'','2023/01/30',13000,1260000,4,'0963456789',N'Thường Tín - Hà Nội'),
+(7,'NV004',2,1,'','2023/04/10',25000,900000,2,'0363456789',N'Hoàng Mai - Hà Nội'),
+(4,'NV004',2,1,'','2023/07/25',26000,560000,2,'0366666689',N'TP Hà Nội')
 
 select * from XuatXu
 select * from ThuongHieu
@@ -417,7 +417,251 @@ select * from KhuyenMai
 select * from KhuyenMaiSanPham
 select * from SanPham
 select * from SanPhamChiTiet
- 
+select * from DonHang
+select * from DonHangChiTiet
 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- Create the stored procedure in the specified schema
+CREATE PROCEDURE [dbo].[doanhThuTheoNgay]
+-- add more stored procedure parameters here
+@doanhThu float output,
+@donHangThanhCong int output,
+@donHangThatBai int output
+AS
+BEGIN
+    -- body of the stored procedure
+    set @doanhThu = (
+    SELECT
+        SUM(DonHang.tongTien) - SUM(SanPhamChiTiet.giaNhap * DonHangChiTiet.soLuong) AS DoanhThu
+    FROM
+        DonHang
+    INNER JOIN
+        DonHangChiTiet ON DonHang.maDonHang = DonHangChiTiet.maDonHang
+    INNER JOIN
+        SanPhamChiTiet ON DonHangChiTiet.maSanPhamChiTiet = SanPhamChiTiet.maSanPhamChiTiet
+    where 
+        ngayTao = CAST(GETDATE() as date)
+    AND
+        DonHang.trangThai = 1
+    AND
+        DonHangChiTiet.trangThai = 1
+    )
+    set @donHangThanhCong = (select sum(maDonHang) from DonHang where trangThai = 1 and ngayTao = CAST(GETDATE() as date));
+    set @donHangThatBai = (select sum(maDonHang) from DonHang where trangThai = 0 and ngayTao = CAST(GETDATE() as date));
+END
+GO
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- Create the stored procedure in the specified schema
+CREATE PROCEDURE [dbo].[doanhThuTheoThang]
+@doanhThu float output,
+@donHangThanhCong int output,
+@donHangThatBai int output
+AS
+BEGIN
+    -- body of the stored procedure
+    set @doanhThu = (
+    SELECT
+        SUM(DonHang.tongTien) - SUM(SanPhamChiTiet.giaNhap * DonHangChiTiet.soLuong) AS DoanhThu
+    FROM
+        DonHang
+    INNER JOIN
+        DonHangChiTiet ON DonHang.maDonHang = DonHangChiTiet.maDonHang
+    INNER JOIN
+        SanPhamChiTiet ON DonHangChiTiet.maSanPhamChiTiet = SanPhamChiTiet.maSanPhamChiTiet
+    where 
+        MONTH(ngayTao) = MONTH(GETDATE()) 
+    AND 
+        YEAR(ngayTao) = YEAR(GETDATE())
+    AND
+        DonHang.trangThai = 1
+    AND
+        DonHangChiTiet.trangThai = 1
+    )
+    set @donHangThanhCong = (select sum(maDonHang) from DonHang where trangThai = 1 and MONTH(ngayTao) = MONTH(GETDATE()) 
+    AND 
+        YEAR(ngayTao) = YEAR(GETDATE()));
+    set @donHangThatBai = (select sum(maDonHang) from DonHang where trangThai = 0 and MONTH(ngayTao) = MONTH(GETDATE()) 
+    AND 
+        YEAR(ngayTao) = YEAR(GETDATE()));
+END
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[doanhThuTheoThangChiTiet]
+    @Year INT
+AS
+BEGIN
+    SELECT
+        MONTH(DonHang.ngayTao) AS Thang,
+        SUM(DonHang.tongTien) - SUM(SanPhamChiTiet.giaNhap * DonHangChiTiet.soLuong) AS DoanhThu,
+        COUNT(DISTINCT DonHang.maDonHang) AS SoDonHang,
+        (SUM(DonHang.tongTien) - SUM(SanPhamChiTiet.giaNhap * DonHangChiTiet.soLuong)) / DAY(EOMONTH(DATEFROMPARTS(@Year, MONTH(DonHang.ngayTao), 1))) AS DoanhThuTrungBinh
+    FROM
+        DonHang
+    INNER JOIN
+        DonHangChiTiet ON DonHang.maDonHang = DonHangChiTiet.maDonHang
+    INNER JOIN
+        SanPhamChiTiet ON DonHangChiTiet.maSanPhamChiTiet = SanPhamChiTiet.maSanPhamChiTiet
+    WHERE
+        YEAR(DonHang.ngayTao) = @Year
+    AND
+        DonHang.trangThai = 1
+    AND
+        DonHangChiTiet.trangThai = 1
+    GROUP BY
+        MONTH(DonHang.ngayTao)
+    ORDER BY
+        Thang;
+END;
+GO
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[KhachHangTheoDoTuoi]
+AS
+BEGIN
+    DECLARE @Tu18Den30 INT, @Tu30Den50 INT, @Tu50TroLen INT;
+
+    -- Gán giá trị cho biến
+    Set
+        @Tu18Den30 = (select COUNT(*) FROM KhachHang WHERE DATEDIFF(YEAR, ngaySinh, GETDATE()) BETWEEN 18 AND 30);
+
+    Set
+        @Tu30Den50 = (select COUNT(*) FROM KhachHang WHERE DATEDIFF(YEAR, ngaySinh, GETDATE()) BETWEEN 30 AND 50);
+
+    Set
+        @Tu50TroLen = (select COUNT(*) FROM KhachHang WHERE DATEDIFF(YEAR, ngaySinh, GETDATE()) >= 50);
+
+    -- Trả kết quả
+    SELECT
+        tu18den30 = @Tu18Den30,
+        tu30den50 = @Tu30Den50,
+        tu50trolen = @Tu50TroLen;
+END;
+GO
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[KhachHangTheoGioiTinh]
+AS
+BEGIN
+    DECLARE @Nam INT, @Nu INT;
+
+    -- Gán giá trị cho biến
+    Set
+        @Nam = (select COUNT(*) FROM KhachHang WHERE gioiTinh = 1);
+
+    SEt
+        @Nu = (select COUNT(*) FROM KhachHang WHERE gioiTinh = 0);
+
+    -- Trả kết quả
+    SELECT
+        SLNam = @Nam,
+        SLNu = @Nu;
+END;
+GO
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[SanPhamTheoLuotBan]
+    @MaLoaiHang INT = NULL,
+    @MaDongSanPham INT = NULL,
+    @MaThuongHieu INT = NULL,
+    @StartDate DATE = NULL,
+    @EndDate DATE = NULL
+AS
+BEGIN
+    SELECT
+        spct.maSanPhamChiTiet,
+        sp.tenSanPham,
+        dt.tenDonViTinh,
+        spct.trangThai,
+        spct.soLuong,
+        lh.tenLoaiHang,
+        dsp.tenDongSanPham,
+        th.tenThuongHieu,
+        SUM(ISNULL(dhct.soLuong, 0)) AS LuotBan,
+        spct.donGia
+    FROM
+        SanPhamChiTiet spct
+    INNER JOIN
+        SanPham sp ON spct.maSanPham = sp.maSanPham
+    INNER JOIN
+        DonViTinh dt ON spct.maDonViTinh = dt.maDonViTinh
+    INNER JOIN
+        LoaiHang lh ON sp.maLoaiHang = lh.maLoaiHang
+    INNER JOIN
+        DongSanPham dsp ON sp.maDongSanPham = dsp.maDongSanPham
+    INNER JOIN
+        ThuongHieu th ON sp.maThuongHieu = th.maThuongHieu
+    LEFT JOIN
+        DonHangChiTiet dhct ON spct.maSanPhamChiTiet = dhct.maSanPhamChiTiet
+    LEFT JOIN
+        DonHang dh ON dhct.maDonHang = dh.maDonHang
+    WHERE
+        (@MaLoaiHang IS NULL OR sp.maLoaiHang = @MaLoaiHang) AND
+        (@MaDongSanPham IS NULL OR sp.maDongSanPham = @MaDongSanPham) AND
+        (@MaThuongHieu IS NULL OR sp.maThuongHieu = @MaThuongHieu) AND
+        (@StartDate IS NULL OR dh.ngayTao >= @StartDate) AND
+        (@EndDate IS NULL OR dh.ngayTao <= @EndDate)
+    GROUP BY
+        spct.maSanPhamChiTiet,
+        sp.tenSanPham,
+        dt.tenDonViTinh,
+        spct.trangThai,
+        spct.soLuong,
+        lh.tenLoaiHang,
+        dsp.tenDongSanPham,
+        th.tenThuongHieu,
+        spct.donGia
+    ORDER BY
+        LuotBan DESC;
+END;
+GO
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[donHangTheoThang]
+    @Year INT
+AS
+BEGIN
+    SELECT
+        MONTH(ngayTao) AS Thang,
+        SUM(CASE WHEN loaiDonHang = N'Bán tại quầy' AND trangThai = 1 THEN 1 ELSE 0 END) AS TaiQuayThanhCong,
+        SUM(CASE WHEN loaiDonHang = N'Đặt hàng' AND trangThai = 1 THEN 1 ELSE 0 END) AS OnlineThanhCong,
+        SUM(CASE WHEN trangThai = 0 THEN 1 ELSE 0 END) AS BiHuy
+    FROM
+        DonHang
+    WHERE
+        YEAR(ngayTao) = @Year
+    GROUP BY
+        MONTH(ngayTao)
+    ORDER BY
+        Thang;
+END;
+GO
 
 
