@@ -170,6 +170,7 @@ create table DonHang
     ngayTao date null,
     phiKhac float null,
     tongTien float null,
+    tienHang float null,
     loaiDonHang int null,
     dienThoai varchar(50) null,
     diaChi nvarchar(50) null,
@@ -187,7 +188,9 @@ create table DonHangChiTiet
     maSanPhamChiTiet int not null,
     soLuong int not null,
     donGia float not null,
-    giaGiam float not null,
+    giaTriGiam float not null,
+    donViGiam varchar(10),
+    giaGiam float null,
     tongGia float not null,
     trangThai bit  null,
     primary key(maDonHangChiTiet),
@@ -389,22 +392,6 @@ VALUES ('KM01',1 ,1),
 
 insert into HinhThucThanhToan (tenHinhThucThanhToan) values (N'Tiền mặt'),
 															(N'Chuyển khoản')
-
-
-
-insert into DonHang values 
-(1,'NV001',1,1,'','2023/01/03',23000,560000,2,'0123456789',N'TP Hà Nội'),
-(null,'NV001',1,1,'','2023/03/10',0,660000,2,'0132456789',N'Hoài Đức - Hà Nội'),
-(2,'NV002',2,1,'','2023/06/24',10000,980000,4,'0124356789',N'Nam Từ Liêm - Hà Nội'),
-(3,'NV002',1,1,'','2023/11/21',20000,1060000,2,'0321456789',N'TP Hà Nội'),
-(null,'NV002',2,0,'','2023/02/08',20000,820000,4,'0123546789',N'Phúc Thọ - Hà Nội'),
-(6,'NV003',1,1,'','2023/10/05',23000,500000,2,'0123457689',N'Phú Xuyên - Hà Nội'),
-(10,'NV003',1,1,'','2023/09/03',5000,120000,2,'0123456987',N'Hà Đông Hà Nội'),
-(null,'NV004',2,1,'','2023/12/12',33000,620000,4,'0123475689',N'TP Hà Nội'),
-(15,'NV004',2,1,'','2023/05/23',3000,560000,2,'0123456009',N'Cầu Giấy Hà Nội'),
-(18,'NV004',1,0,'','2023/01/30',13000,1260000,4,'0963456789',N'Thường Tín - Hà Nội'),
-(7,'NV004',2,1,'','2023/04/10',25000,900000,2,'0363456789',N'Hoàng Mai - Hà Nội'),
-(4,'NV004',2,1,'','2023/07/25',26000,560000,2,'0366666689',N'TP Hà Nội')
 
 select * from XuatXu
 select * from ThuongHieu
