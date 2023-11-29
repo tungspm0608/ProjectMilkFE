@@ -23,10 +23,10 @@ public class SanPhamService {
     PreparedStatement ps = null;
     ResultSet rs = null;
     
-     public SanPham searchById(int masp) {
+     public SanPham searchById(String masp) {
         String sql = "select * from SanPham where maSanPham = ?";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
-            pstm.setInt(1, masp);
+            pstm.setString(1, masp);
             ResultSet rs = pstm.executeQuery();
             ArrayList<SanPham> list = new ArrayList<>();
             while (rs.next()) {

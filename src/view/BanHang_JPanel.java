@@ -103,6 +103,10 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         qrcode.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 340, 120));
 
         executor.execute((Runnable) this);
+        
+    }
+    public void sclose(){
+        webcam.close();
     }
 
     /**
@@ -165,7 +169,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         qrcode = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         txt_tk = new javax.swing.JTextField();
-        jLabel28 = new javax.swing.JLabel();
+        phanTrang = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
@@ -705,9 +709,9 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
 
         txt_tk.setFont(new java.awt.Font("DialogInput", 0, 10)); // NOI18N
 
-        jLabel28.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel28.setFont(new java.awt.Font("DialogInput", 0, 10)); // NOI18N
-        jLabel28.setText("7/7");
+        phanTrang.setBackground(new java.awt.Color(0, 0, 0));
+        phanTrang.setFont(new java.awt.Font("DialogInput", 0, 10)); // NOI18N
+        phanTrang.setText("1");
 
         jButton5.setFont(new java.awt.Font("DialogInput", 0, 10)); // NOI18N
         jButton5.setText("Tìm kiếm");
@@ -719,9 +723,19 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
 
         jButton6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton6.setText("<<");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton7.setText(">>");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton8.setText("O");
@@ -741,7 +755,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Tên SP", "ĐVT", "Khối lượng", "Đơn giá", "Số lượng", "Khuyến mãi", "Giá giảm"
+                "Ma SPCT", "Tên SP", "ĐVT", "Khối lượng", "Đơn giá", "Số lượng", "Khuyến mãi", "Giá giảm"
             }
         ));
         tbl_sp.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -751,7 +765,8 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         });
         jScrollPane1.setViewportView(tbl_sp);
         if (tbl_sp.getColumnModel().getColumnCount() > 0) {
-            tbl_sp.getColumnModel().getColumn(0).setMaxWidth(40);
+            tbl_sp.getColumnModel().getColumn(0).setMinWidth(60);
+            tbl_sp.getColumnModel().getColumn(0).setMaxWidth(60);
             tbl_sp.getColumnModel().getColumn(1).setMinWidth(100);
         }
 
@@ -774,7 +789,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
                 .addGap(18, 18, 18)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
-                .addComponent(jLabel28)
+                .addComponent(phanTrang)
                 .addGap(18, 18, 18)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -800,7 +815,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
                             .addComponent(jButton7)
                             .addComponent(jButton8)
                             .addComponent(jButton18))
-                        .addComponent(jLabel28, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(phanTrang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -1054,7 +1069,8 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-        ArrayList<KhachHang> khs = khachHangService.paging(1, 1, txt_sdt.getText());
+        sclose();
+        ArrayList<KhachHang> khs = khachHangService.paging(1, 1, txt_sdt.getText(),"");
         if (khs.size() != 0) {
             KhachHang kh = khs.get(0);
             txt_hoten.setText(kh.getTenKhachHang());
@@ -1215,6 +1231,20 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         loadDataToDH();
     }//GEN-LAST:event_cbo_trangThaiActionPerformed
 
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        page++;
+        phanTrang.setText(String.valueOf(page));
+        loadDataToSP();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        if(page>1) page--;
+        phanTrang.setText(String.valueOf(page));
+        loadDataToSP();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane ThanhToan;
@@ -1239,7 +1269,6 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel31;
@@ -1266,6 +1295,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JPanel panelhd;
+    private javax.swing.JLabel phanTrang;
     private javax.swing.JPanel qrcode;
     private javax.swing.JTable tbl_dh;
     private javax.swing.JTable tbl_dhct;
@@ -1291,7 +1321,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         spctlist = sanPhamChiTietService.pagingByTen(page, 10, ten, "1");
         int vitri = 1;
         if (page != 1) {
-            vitri = page * 10;
+            vitri =( page-1) * 10+1;
         }
         for (SanPhamChiTiet spct : spctlist) {
             SanPham sp = sanPhamChiTietService.searchByIdSP(spct.getMaSanPham());
@@ -1472,7 +1502,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
             if (dh.isTrangThai() == 1) {
                 tichDiem += Math.floor(dh.getTongTien() / 1000 * 0.05);
             }
-            KhachHang kh = khachHangService.paging(1, 1, txt_sdt.getText()).get(0);
+            KhachHang kh = khachHangService.paging(1, 1, txt_sdt.getText(),"").get(0);
             kh.setDiem(tichDiem);
             khachHangService.update(kh);
         }

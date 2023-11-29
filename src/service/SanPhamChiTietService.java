@@ -162,6 +162,18 @@ public class SanPhamChiTietService {
         }
         return null;
     }
+    
+    public Integer deleteSPCT(int maspct) {
+        String sql = "delete SanPhamChiTiet where maSanPhamChiTiet = ?";
+        try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
+            pstm.setInt(1, maspct);
+            Integer rs = pstm.executeUpdate();
+            return rs;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public SanPham searchByIdSP(String masp) {
         String sql = "select * from SanPham where maSanPham = ?";
@@ -240,6 +252,22 @@ public class SanPhamChiTietService {
                 x.setNgaySanXuat(XDate.toString(rs.getDate("ngaySanXuat"), "dd-MM-yyyy"));
                 x.setBarcode(rs.getString("barcode"));
                 x.setTrangThai(rs.getInt("trangThai") == 1 ? true : false);
+                return x;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public SanPhamChiTiet checkSPCTinDH(int maspct) {
+        String sql = "select * from DonHangChiTiet where maSanPhamChiTiet = ?";
+        try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
+            pstm.setInt(1, maspct);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                SanPhamChiTiet x = new SanPhamChiTiet();
+                x.setMaSanPhamChiTiet(rs.getInt("maSanPhamChiTiet"));
                 return x;
             }
         } catch (Exception e) {
