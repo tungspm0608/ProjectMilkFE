@@ -607,6 +607,7 @@ public class KhuyenMai_JPanel extends javax.swing.JPanel {
                 KhuyenMaiChiTiet kmct = new KhuyenMaiChiTiet();
                 kmct.setMaSanPhamChiTiet(i);
                 kmct.setMaKhuyenMai(getKM().getMaKhuyenMai());
+                kmct.setTrangThai(1);
                 if (serKM.searchByMaSPCT(kmct.getMaSanPhamChiTiet(), kmct.getMaKhuyenMai()) == null) {
                     chon = serKM.addKMSP(kmct, getKM());
                 }

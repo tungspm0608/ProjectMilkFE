@@ -15,6 +15,8 @@ public class ThemLoaiHang_JFrame extends javax.swing.JFrame {
      */
     public ThemLoaiHang_JFrame() {
         initComponents();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
     }
 
     /**

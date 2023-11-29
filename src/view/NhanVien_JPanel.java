@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import service.Auth;
 
 /**
  *
@@ -35,9 +36,9 @@ public class NhanVien_JPanel extends javax.swing.JPanel {
         initComponents();
         this.setBackground(new Color(37, 108, 205));
         String os = System.getProperty("os.name").toLowerCase();
-        if (os.contains("win")) {
+        if (Auth.HDH==0) {
             path = "src\\utilities\\imageNV\\";
-        } else if (os.contains("mac")) {
+        } else if (Auth.HDH==1) {
             path = "src/utilities/imageNV/";
         }
         model = (DefaultTableModel) tbl_NhanVien.getModel();

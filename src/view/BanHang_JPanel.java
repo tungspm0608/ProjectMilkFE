@@ -103,9 +103,10 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         qrcode.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 340, 120));
 
         executor.execute((Runnable) this);
-        
+
     }
-    public void sclose(){
+
+    public void sclose() {
         webcam.close();
     }
 
@@ -227,13 +228,13 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         tbl_dhct.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
         tbl_dhct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã SP", "Tên SP", "ĐVT", "Khối lượng", "Đơn giá", "Số lượng", "Thành tiền"
+                "Mã SP", "Tên SP", "ĐVT", "Khối lượng", "Đơn giá", "Giá giảm", "Số lượng", "Thành tiền"
             }
         ));
         tbl_dhct.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1018,6 +1019,10 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         index = tbl_sp.getSelectedRow();
         spct = spctlist.get(index);
         km = kmlist.get(index);
+        if(maDH==-1){
+            JOptionPane.showMessageDialog(null, "Mời chọn đơn hàng");
+            return;
+        }
         themSPtoDHCT();
     }//GEN-LAST:event_tbl_spMouseClicked
 
@@ -1070,7 +1075,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
         sclose();
-        ArrayList<KhachHang> khs = khachHangService.paging(1, 1, txt_sdt.getText(),"");
+        ArrayList<KhachHang> khs = khachHangService.paging(1, 1, txt_sdt.getText(), "");
         if (khs.size() != 0) {
             KhachHang kh = khs.get(0);
             txt_hoten.setText(kh.getTenKhachHang());
@@ -1240,7 +1245,9 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        if(page>1) page--;
+        if (page > 1) {
+            page--;
+        }
         phanTrang.setText(String.valueOf(page));
         loadDataToSP();
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -1321,7 +1328,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         spctlist = sanPhamChiTietService.pagingByTen(page, 10, ten, "1");
         int vitri = 1;
         if (page != 1) {
-            vitri =( page-1) * 10+1;
+            vitri = (page - 1) * 10 + 1;
         }
         for (SanPhamChiTiet spct : spctlist) {
             SanPham sp = sanPhamChiTietService.searchByIdSP(spct.getMaSanPham());
@@ -1361,10 +1368,11 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
             SanPhamChiTiet spct = sanPhamChiTietService.searchByIdSPCT(dhct.getMaSanPhamChiTiet());
             SanPham sp = sanPhamChiTietService.searchByIdSP(spct.getMaSanPham());
             String formattedAmount = decimalFormat.format(dhct.getGiaGiam());
+            String formattedAmount2 = decimalFormat.format(dhct.getDonGia());
             String formattedAmount1 = decimalFormat.format(dhct.getTongGia());
             dhctmodel.addRow(new Object[]{
                 vitri, sp.getTenSanPham(), donViTinhService.findByID(spct.getMaDonViTinh()).toString(),
-                spct.getKhoiLuong() + " " + spct.getDonViTinhKhoiLuong(), formattedAmount, dhct.getSoLuong(),
+                spct.getKhoiLuong() + " " + spct.getDonViTinhKhoiLuong(),formattedAmount2,formattedAmount, dhct.getSoLuong(),
                 formattedAmount1
             });
             vitri++;
@@ -1380,7 +1388,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
             String formattedAmount = decimalFormat.format(dh.getTongTien());
             dhmodel.addRow(new Object[]{
                 vitri, dh.getMaNhanVien(), formattedAmount,
-                dh.isLoaiDonHang() == 0 ? "Chờ xác nhận" : dh.isLoaiDonHang() == 1 ? "Đang giao" : "Tại quầy",
+                dh.isLoaiDonHang() == 0 ? "Chờ lấy hàng" : dh.isLoaiDonHang() == 1 ? "Đang giao" : "Tại quầy",
                 dh.isTrangThai() == 1 ? "Đã thanh toán" : "Chờ thanh toán"
             });
             vitri++;
@@ -1445,7 +1453,9 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
                 giaGiam = spct.getDonGia();
             }
         }
-        if(giaGiam==0) giaGiam = dhct.getDonGia();
+        if (giaGiam == 0) {
+            giaGiam = dhct.getDonGia();
+        }
         dhct.setGiaGiam(giaGiam);
         dhct.setTongGia(giaGiam * sl);
         dhct.setTrangThai(true);
@@ -1502,7 +1512,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
             if (dh.isTrangThai() == 1) {
                 tichDiem += Math.floor(dh.getTongTien() / 1000 * 0.05);
             }
-            KhachHang kh = khachHangService.paging(1, 1, txt_sdt.getText(),"").get(0);
+            KhachHang kh = khachHangService.paging(1, 1, txt_sdt.getText(), "").get(0);
             kh.setDiem(tichDiem);
             khachHangService.update(kh);
         }

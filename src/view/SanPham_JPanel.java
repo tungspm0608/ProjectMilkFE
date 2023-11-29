@@ -61,6 +61,7 @@ import javax.swing.table.DefaultTableModel;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import service.Auth;
 import static view.BanHang_JPanel.generateRandomCode;
 
 /**
@@ -102,10 +103,10 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         this.setBackground(new Color(37, 108, 205));
         this.init();
 
-        String os = System.getProperty("os.name").toLowerCase();
-        if (os.contains("win")) {
+       
+        if (Auth.HDH==0) {
             path = "src\\utilities\\imageSP\\";
-        } else if (os.contains("mac")) {
+        } else if (Auth.HDH==1) {
             path = "src/utilities/imageSP/";
         }
         fillCombox();
@@ -2527,8 +2528,7 @@ private void loadDataToTable() {
 
             // Đường dẫn mặc định là ổ C và tên tệp là "QRCode.png"
             String defaultDirectory = "src\\utilities\\imageQRCodeSP\\";
-            String os = System.getProperty("os.name").toLowerCase();
-            if (os.contains("mac")) {
+            if (Auth.HDH==1) {
                 path = "src/utilities/imageSP/";
             }
             String fileName = sp.getTenSanPham() + spct.getKhoiLuong() + spct.getDonViTinhKhoiLuong() + ".png";
