@@ -63,7 +63,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
     SanPhamService spservice = new SanPhamService();
     SanPhamChiTietService spctservice = new SanPhamChiTietService();
 
-    String path = "C:\\Users\\dovan\\OneDrive\\Desktop\\images\\SanPham\\";
+    String path = "";
     String path1 = "";
 
     DefaultTableModel mol = new DefaultTableModel();
@@ -85,6 +85,12 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         initComponents();
         this.setBackground(new Color(37, 108, 205));
         this.init();
+        String os = System.getProperty("os.name").toLowerCase();
+        if (os.contains("win")) {
+            path = "src\\utilities\\imageSP\\";
+        } else if (os.contains("mac")) {
+            path = "src/utilities/imageSP/";
+        }
         fillCombox();
         mol = (DefaultTableModel) tbl_sp.getModel();
         loadDataToTable();
@@ -2125,6 +2131,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         trangThaiString = "";
         newForm();
         setEditter();
+        loadDataToTable();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -2389,8 +2396,10 @@ private void loadDataToTable() {
         x.setAnhSanPham(path1);
         x.setHanSuDung(txt_hansd.getText());
         x.setSoLuong(Integer.valueOf(txt_sl.getText()));
-        x.setGiaNhap(Float.valueOf(txt_gianhap.getText()));
-        x.setDonGia(Float.valueOf(txt_dongia.getText()));
+        String cleanAmount = txt_gianhap.getText().replaceAll("[^\\d.]", "");
+        x.setGiaNhap(Float.valueOf(cleanAmount));
+        cleanAmount = txt_dongia.getText().replaceAll("[^\\d.]", "");
+        x.setDonGia(Float.valueOf(cleanAmount));
         x.setKhoiLuong(Float.valueOf(txt_kl.getText()));
         x.setDonViTinhKhoiLuong(cbo_dvkl.getSelectedItem() + "");
         x.setNgaySanXuat(txt_ngayxk.getText());

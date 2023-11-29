@@ -14,7 +14,11 @@ import javax.swing.JFileChooser;
 public class FileChoose {
     public static String chooseFile(){
         JFileChooser fileChooser = new JFileChooser();
-        File deFile = new File("C:\\Users\\dovan\\OneDrive\\Desktop\\images\\");
+        String os = System.getProperty("os.name").toLowerCase();
+        File deFile = new File("C:\\Users\\dovan\\OneDrive\\Desktop\\ProjectMilkFE\\src\\utilities\\");
+        if (os.contains("mac")) {
+            deFile = new File("src/utilities/");
+        }
         fileChooser.setSelectedFile(deFile);
         int result = fileChooser.showOpenDialog(null);
         if(result == JFileChooser.APPROVE_OPTION){
