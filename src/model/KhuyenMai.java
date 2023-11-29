@@ -105,13 +105,13 @@ public class KhuyenMai {
             return "Ngừng hoạt động";
         }
     }
-    public String getStatusTrangThai(){
-         if (getTrangThai() == 1) {
-            return "Đang hoạt động";
-        } else if(getTrangThai() == 0)  {
-            return "Đã kết thúc";
-        }else{
-            return "Chưa diễn ra";
-        }
-    }
+//    public String getStatusTrangThai(){
+//         if (getTrangThai() == 1) {
+//            return "Đang hoạt động";
+//        } else if(getTrangThai() == 0)  {
+//            return "Đã kết thúc";
+//        }else{
+//            return "Chưa diễn ra";
+//        }
+//    }
 }

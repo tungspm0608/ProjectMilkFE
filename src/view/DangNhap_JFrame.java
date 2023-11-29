@@ -22,7 +22,7 @@ public class DangNhap_JFrame extends javax.swing.JFrame {
         initComponents();
         this.clearError();
         txttaiKhoan.setText("NV001");
-        txtmatKhau.setText("password1");
+        txtmatKhau.setText("123456");
     }
 
     /**

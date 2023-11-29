@@ -61,6 +61,42 @@ public class SanPhamChiTietService {
         }
         return null;
     }
+    public ArrayList<SanPhamChiTiet> searchSPCTByKM(int page, int limit, String ten, String trangThai) {
+        String sql = "select * from SanPhamChiTiet "
+                + "inner join SanPham on SanPham.maSanPham = SanPhamChiTiet.maSanPham "
+                + "where SanPham.tenSanPham like ? and SanPhamChiTiet.trangThai like ?"
+                + " and maSanPhamChiTiet not in (select maSanPhamChiTiet from KhuyenMaiSanPham) order by SanPhamChiTiet.maSanPhamChiTiet "
+                + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY ";
+        try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
+            pstm.setString(1, ten + "%");
+            pstm.setString(2, trangThai + "%");
+            pstm.setInt(3, (page - 1) * limit);
+            pstm.setInt(4, limit);
+            ResultSet rs = pstm.executeQuery();
+            ArrayList<SanPhamChiTiet> list = new ArrayList<>();
+            while (rs.next()) {
+                SanPhamChiTiet x = new SanPhamChiTiet();
+                x.setMaSanPham(rs.getString("maSanPham"));
+                x.setMaSanPhamChiTiet(rs.getInt("maSanPhamChiTiet"));
+                x.setMaDonViTinh(rs.getInt("maDonViTinh"));
+                x.setAnhSanPham(rs.getString("AnhSanPham"));
+                x.setHanSuDung(XDate.toString(rs.getDate("hanSuDung"), "dd-MM-yyyy"));
+                x.setSoLuong(rs.getInt("soLuong"));
+                x.setGiaNhap(rs.getFloat("giaNhap"));
+                x.setDonGia(rs.getFloat("donGia"));
+                x.setKhoiLuong(rs.getFloat("khoiLuong"));
+                x.setDonViTinhKhoiLuong(rs.getString("donViTinhKhoiLuong"));
+                x.setNgaySanXuat(XDate.toString(rs.getDate("ngaySanXuat"), "dd-MM-yyyy"));
+                x.setBarcode(rs.getString("barcode"));
+                x.setTrangThai(rs.getInt("trangThai") == 1 ? true : false);
+                list.add(x);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public Integer insertSP(SanPham x) {
         String sql = "INSERT INTO SanPham (maSanPham,tenSanPham, moTa, trangThai, maThuongHieu, maLoaiHang, maDongSanPham, maXuatXu) \n"
