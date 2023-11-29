@@ -33,7 +33,6 @@ public class Auth {
             Auth.HDH = -1;
             System.out.println("Không xác định được hệ điều hành.");
         }
-        System.out.println(Auth.HDH);
     }
     
     //xóa thông tin của người dung có yêu cầu đăng xuất
