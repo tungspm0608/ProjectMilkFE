@@ -53,15 +53,16 @@ public class KhuyenMaiChiTiet {
         this.trangThai = trangThai;
     }
 
-    public String TrangThai(){
+    public String getStatusTrangThai(){
         if (getTrangThai() == 1) {
             return "Đang hoạt động";
-        } else if (getTrangThai()==0) {
+        } else if (getTrangThai() == 0) {
             return "Đã kết thúc";
         }else{
             return "Chưa bắt đầu";
         }
     }
+
 
    
 

@@ -297,6 +297,7 @@ public class KhuyenMaiService {
         }
         return row;
     }
+    
 
     public KhuyenMai searchKMofSP(int maSanPhamChiTiet) {
         String sql = "select * from KhuyenMai\n"
@@ -327,5 +328,5 @@ public class KhuyenMaiService {
         }
         return null;
     }
-
+    
 }
