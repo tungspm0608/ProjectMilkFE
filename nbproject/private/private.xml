@@ -3,31 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/dovan/Downloads/ProjectMilkFE%20(1)/ProjectMilkFE/src/helper/XDate.java</file>
-            <file>file:/C:/Users/dovan/Downloads/ProjectMilkFE%20(1)/ProjectMilkFE/src/helper/ImportExcell.java</file>
-            <file>file:/C:/Users/dovan/Downloads/ProjectMilkFE%20(1)/ProjectMilkFE/src/service/SanPhamChiTietService.java</file>
-            <file>file:/C:/Users/dovan/Downloads/ProjectMilkFE%20(1)/ProjectMilkFE/src/view/ThemLoaiHang_JFrame.java</file>
-            <file>file:/C:/Users/dovan/Downloads/ProjectMilkFE%20(1)/ProjectMilkFE/src/service/KhuyenMaiService.java</file>
-            <file>file:/C:/Users/dovan/Downloads/ProjectMilkFE%20(1)/ProjectMilkFE/src/view/Welcome.java</file>
-            <file>file:/C:/Users/dovan/Downloads/ProjectMilkFE%20(1)/ProjectMilkFE/src/helper/DBContext.java</file>
-            <file>file:/C:/Users/dovan/Downloads/ProjectMilkFE%20(1)/ProjectMilkFE/src/helper/DialogHelper.java</file>
-            <file>file:/C:/Users/dovan/Downloads/ProjectMilkFE%20(1)/ProjectMilkFE/src/helper/FileChoose.java</file>
-            <file>file:/C:/Users/dovan/Downloads/ProjectMilkFE%20(1)/ProjectMilkFE/src/view/ComboSP_JFrame.java</file>
-            <file>file:/C:/Users/dovan/Downloads/ProjectMilkFE%20(1)/ProjectMilkFE/src/view/DangNhap_JFrame.java</file>
-            <file>file:/C:/Users/dovan/Downloads/ProjectMilkFE%20(1)/ProjectMilkFE/src/view/BanHang_JPanel.java</file>
-            <file>file:/C:/Users/dovan/Downloads/ProjectMilkFE%20(1)/ProjectMilkFE/src/model/DonViTinh.java</file>
-            <file>file:/C:/Users/dovan/Downloads/ProjectMilkFE%20(1)/ProjectMilkFE/src/view/SanPham_JPanel.java</file>
-            <file>file:/C:/Users/dovan/Downloads/ProjectMilkFE%20(1)/ProjectMilkFE/src/view/HoaDon_JPanel.java</file>
-            <file>file:/C:/Users/dovan/Downloads/ProjectMilkFE%20(1)/ProjectMilkFE/src/view/Main_JFrame.java</file>
-            <file>file:/C:/Users/dovan/Downloads/ProjectMilkFE%20(1)/ProjectMilkFE/src/view/ThemXuatXu_JFrame.java</file>
-=======
-            <file>file:/C:/Users/Tung/OneDrive/Máy%20tính/ProjectMilkFE/src/service/DonViTinh_service.java</file>
-            <file>file:/C:/Users/Tung/OneDrive/Máy%20tính/ProjectMilkFE/src/view/Main_JFrame.java</file>
-            <file>file:/C:/Users/Tung/OneDrive/Máy%20tính/ProjectMilkFE/src/view/HoaDon_JPanel.java</file>
-            <file>file:/C:/Users/Tung/OneDrive/Máy%20tính/ProjectMilkFE/src/service/HoaDonService.java</file>
-            <file>file:/C:/Users/Tung/OneDrive/Máy%20tính/ProjectMilkFE/src/view/SanPham_JPanel.java</file>
->>>>>>> a6764305910c590b91b870c2354760371e9616bc
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/utilities/imageNV/avatar_F.jpg</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/view/Main_JFrame.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/view/BanHang_JPanel.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/view/Welcome.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/model/DonHang.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/helper/FileChoose.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/helper/DBContext.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/view/SanPham_JPanel.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/service/DonHangService.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/model/DonHangChiTiet.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/view/NhanVien_JPanel.java</file>
         </group>
     </open-files>
 </project-private>

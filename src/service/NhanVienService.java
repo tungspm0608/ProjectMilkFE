@@ -21,7 +21,7 @@ public class NhanVienService {
                 + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
             pstm.setString(1, sdt + "%");
-            pstm.setString(2, ten + "%");
+            pstm.setString(2,"%" + ten + "%");
             pstm.setInt(3, (page - 1) * limit);
             pstm.setInt(4, limit);
             ResultSet rs = pstm.executeQuery();

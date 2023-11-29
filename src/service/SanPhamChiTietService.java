@@ -29,10 +29,10 @@ public class SanPhamChiTietService {
     public ArrayList<SanPhamChiTiet> pagingByTen(int page, int limit, String ten, String trangThai) {
         String sql = "select * from SanPhamChiTiet "
                 + "inner join SanPham on SanPham.maSanPham = SanPhamChiTiet.maSanPham "
-                + "where SanPham.tenSanPham like ? and SanPhamChiTiet.trangThai like ? order by SanPhamChiTiet.maSanPhamChiTiet "
+                + "where SanPham.tenSanPham like ? and SanPhamChiTiet.trangThai like ? order by SanPhamChiTiet.maSanPham "
                 + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY ";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
-            pstm.setString(1, ten + "%");
+            pstm.setString(1,"%"+ ten + "%");
             pstm.setString(2, trangThai + "%");
             pstm.setInt(3, (page - 1) * limit);
             pstm.setInt(4, limit);
