@@ -223,8 +223,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         dvt.setTenDonViTinh(txtTenDVT.getText());
         dvt.setGhiChu(txtGhiChuDVT.getText());
         dvt.setTrangThai(true);
-        boolean trangThai = (boolean) tblDonViTinh.getValueAt(row, 3);
-        dvt.setTrangThai(trangThai);
+        
         return dvt;
     }
 
@@ -239,9 +238,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         DongSanPham dsp = new DongSanPham();
         dsp.setTenDongSanPham(txtTenDSP.getText());
         dsp.setGhiChu(txtGhiChuDSP.getText());
-        dsp.setTrangThai(true);
-        boolean trangThai = (boolean) tblDongSP.getValueAt(row, 3);
-        dsp.setTrangThai(trangThai);
+        dsp.setTrangThai(true);      
         return dsp;
     }
 
@@ -276,6 +273,8 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         ThuongHieu th = thsv.getAll().get(row);
         txtTenTH.setText(th.getTenThuongHieu());
         txtGhiChuTH.setText(th.getGhiChu());
+        if(th.getTrangThai()==true) rdoDangHT.setSelected(true);
+        else rdoNgungHT.setSelected(true);
     }
 
     ThuongHieu readformTH() {
@@ -957,7 +956,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
                                     .addComponent(cboThuongHieu, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txt_gianhap, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txt_barcode))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
                                     .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1701,6 +1700,11 @@ public class SanPham_JPanel extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
+        tblThuongHieu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblThuongHieuMouseClicked(evt);
+            }
+        });
         jScrollPane6.setViewportView(tblThuongHieu);
 
         jButton24.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -1861,7 +1865,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1177, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1177, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1992,13 +1996,16 @@ public class SanPham_JPanel extends javax.swing.JPanel {
 
     private void btnSua1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSua1ActionPerformed
         // TODO add your handling code here:      
+        if(checkDVT() == true){
         row = tblDonViTinh.getSelectedRow();
         int MaDVT = (int) tblDonViTinh.getValueAt(row, 0);
         DonViTinh dvt = this.readformDVT();
+        boolean trangThai = (boolean) tblDonViTinh.getValueAt(row, 3);
+        dvt.setTrangThai(trangThai);
         dvtsv.update(dvt, MaDVT);
         fillDonViTinh();
         JOptionPane.showMessageDialog(this, "Sửa thành công");
-        fillCombox();
+        }
     }//GEN-LAST:event_btnSua1ActionPerformed
 
     private void btnXoa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa1ActionPerformed
@@ -2027,24 +2034,20 @@ public class SanPham_JPanel extends javax.swing.JPanel {
 
     private void btnSuaDSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaDSPActionPerformed
         // TODO add your handling code here:
+        if(checkDSP()==true){
         row = tblDongSP.getSelectedRow();
         int MaDSP = (int) tblDongSP.getValueAt(row, 0);
         DongSanPham dsp = this.readformDSP();
+        boolean trangThai = (boolean) tblDongSP.getValueAt(row, 3);
+        dsp.setTrangThai(trangThai);
         dspsv.update(dsp, MaDSP);
         fillDongSanPham();
         JOptionPane.showMessageDialog(this, "Sửa thành công");
+        }
     }//GEN-LAST:event_btnSuaDSPActionPerformed
 
     private void btnXoaDSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaDSPActionPerformed
         // TODO add your handling code here:
-        row = tblDongSP.getSelectedRow();
-        int MaDSP = (int) tblDongSP.getValueAt(row, 0);
-        dspsv.delete(MaDSP);
-        this.fillDongSanPham();
-        JOptionPane.showConfirmDialog(this, "Xóa thành công");
-    }//GEN-LAST:event_btnXoaDSPActionPerformed
-
-    private void btnMoiDSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiDSPActionPerformed
         row = tblDongSP.getSelectedRow();
         int MaDSP = (int) tblDongSP.getValueAt(row, 0);
         if (dspsv.CheckXoa(MaDSP) == null) {
@@ -2055,6 +2058,11 @@ public class SanPham_JPanel extends javax.swing.JPanel {
             txtTenDSP.setText(null);
         } else
             JOptionPane.showMessageDialog(this, "Chỉ được xóa mềm dòng này!!!");
+    }//GEN-LAST:event_btnXoaDSPActionPerformed
+
+    private void btnMoiDSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiDSPActionPerformed
+        txtTenDSP.setText(null);
+        txtGhiChuDSP.setText(null);
     }//GEN-LAST:event_btnMoiDSPActionPerformed
 
     private void tblDongSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDongSPMouseClicked
@@ -2304,6 +2312,12 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         fillCombox();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void tblThuongHieuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblThuongHieuMouseClicked
+        // TODO add your handling code here:
+        row = tblThuongHieu.getSelectedRow();
+        this.showformTH();
+    }//GEN-LAST:event_tblThuongHieuMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
