@@ -13,7 +13,7 @@ public class DBContext {
     public final static String USERNAME = "sa";
     public final static String PASSWORD = "12345678";
     public final static String URL = "jdbc:sqlserver://localhost:1433;"
-            + "databaseName=DuAnBanSua_MilkFE;encrypt=false;";
+            + "databaseName=DuAnBanSua_MilkFE1;encrypt=false;";
 
     static {
         try {
