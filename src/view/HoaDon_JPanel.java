@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.DonHang;
 import model.DonHangChiTiet;
@@ -34,6 +35,7 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
 
     DonHangChiTiet dhct;
     DonHang dh;
+    Date dauDate,cuoiDate;
     ArrayList<DonHang> hDList = new ArrayList<>();
     ArrayList<DonHangChiTiet> dHCTList = new ArrayList<>();
     int row = -1, page = 1;
@@ -44,12 +46,13 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
         this.setBackground(new Color(37, 108, 205));
         mol = (DefaultTableModel) tblHoaDon.getModel();
         mol1 = (DefaultTableModel) tbl_dhct.getModel();
-        this.fillTableDH();
+        hDList = hdsv.getAllHD(page, 10);
+        this.fillTableDH(hdsv.getAllHD(page, 10));
     }
 
-    void fillTableDH() {
+    void fillTableDH(ArrayList<DonHang> hDList) {
         mol.setRowCount(0);
-        hDList = hdsv.getAllHD(page, 10);
+        
         int viti = 1;
         if (page != 1) {
             viti = page * 10;
@@ -69,7 +72,7 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
         System.out.println(d1);
         Date date2 = dateCuoi.getDate();
         String d2 = sdf.format(date2);
-
+        fillTableDH(hdsv.getByDate(d1,d2));
     }
 
     /**
@@ -95,6 +98,7 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         vitri = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 204, 204));
 
@@ -201,14 +205,14 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
         });
         jScrollPane6.setViewportView(tbl_dhct);
 
-        jButton2.setText("Prev");
+        jButton2.setText("<<");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Next");
+        jButton3.setText(">>");
         jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton3MouseClicked(evt);
@@ -219,6 +223,13 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
         vitri.setForeground(new java.awt.Color(255, 255, 255));
         vitri.setText("1");
 
+        jButton4.setText("Trả hàng");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -226,6 +237,9 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton4)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton2)
                         .addGap(9, 9, 9)
@@ -254,18 +268,22 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
                     .addComponent(vitri))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(128, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButton4)
+                .addContainerGap(87, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocActionPerformed
         // TODO add your handling code here:
         this.Loc();
+     
     }//GEN-LAST:event_btnLocActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        this.fillTableDH();
+        hDList =hdsv.getAllHD(page, 10);
+        fillTableDH(hdsv.getAllHD(page, 10));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tbl_dhctMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_dhctMouseClicked
@@ -278,7 +296,7 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         page++;
         vitri.setText(String.valueOf(page));
-        fillTableDH();
+        fillTableDH(hDList);
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -287,7 +305,7 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
             page--;
         }
         vitri.setText(String.valueOf(page));
-        fillTableDH();
+        fillTableDH(hDList);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
@@ -297,6 +315,11 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
         fillTableDHCT();
     }//GEN-LAST:event_tblHoaDonMouseClicked
 
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        traHang();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLoc;
@@ -305,6 +328,7 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
@@ -333,6 +357,29 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
                 formattedAmount1, dhct.getTraHang()
             });
             vitri++;
+        }
+    }
+
+    private void traHang() {
+        String sls = JOptionPane.showInputDialog(null, "Nhập số lượng tar hàng");
+        if(sls==null){
+            return;
+        }else if(!sls.matches("\\d+")){
+            JOptionPane.showMessageDialog(null, "sai kiểu dữ liệu");
+            return;
+        }
+        int sl = Integer.valueOf(sls);
+        if(sl>dhct.getSoLuong()){
+            JOptionPane.showMessageDialog(null, "Quá số lượng sản phẩm");
+            return;
+        }
+        dhct.setTraHang(sl);
+        Integer rs = hdsv.updateDHCT(dhct);
+        if(rs!=null){
+            JOptionPane.showMessageDialog(null, "trả hàng thành công");
+            fillTableDHCT();
+            hdsv.updateDH(dh);
+            fillTableDH(hDList);
         }
     }
 }

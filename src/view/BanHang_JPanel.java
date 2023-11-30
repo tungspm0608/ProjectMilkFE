@@ -24,7 +24,9 @@ import java.awt.Color;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.TimerTask;
 import javax.swing.JOptionPane;
+import java.util.Timer;
 import javax.swing.table.DefaultTableModel;
 import model.DonHang;
 import model.DonHangChiTiet;
@@ -82,6 +84,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
     public BanHang_JPanel() {
         initComponents();
         initWebcam();
+        dongHo();
         this.setBackground(new Color(37, 108, 205));
         spctmodel = (DefaultTableModel) tbl_sp.getModel();
         dhmodel = (DefaultTableModel) tbl_dh.getModel();
@@ -154,7 +157,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         jLabel43 = new javax.swing.JLabel();
         txt_tralai = new javax.swing.JLabel();
         jLabel50 = new javax.swing.JLabel();
-        jLabel55 = new javax.swing.JLabel();
+        lbldongho = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
         txt_giaGiam = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
@@ -472,9 +475,9 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         jLabel50.setFont(new java.awt.Font("DialogInput", 1, 12)); // NOI18N
         jLabel50.setText("Thời gian");
 
-        jLabel55.setFont(new java.awt.Font("DialogInput", 1, 12)); // NOI18N
-        jLabel55.setForeground(new java.awt.Color(204, 0, 0));
-        jLabel55.setText("32:01:34 A 32/3/2343");
+        lbldongho.setFont(new java.awt.Font("DialogInput", 1, 12)); // NOI18N
+        lbldongho.setForeground(new java.awt.Color(204, 0, 0));
+        lbldongho.setText("32:01:34 A 32/3/2343");
 
         jLabel37.setFont(new java.awt.Font("DialogInput", 1, 12)); // NOI18N
         jLabel37.setText("Tiền giảm");
@@ -523,7 +526,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txt_tienhang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel14Layout.createSequentialGroup()
-                        .addComponent(jLabel55, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbldongho, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addComponent(txt_phiship)
@@ -559,7 +562,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel50)
-                    .addComponent(jLabel55))
+                    .addComponent(lbldongho))
                 .addGap(5, 5, 5)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel36)
@@ -1290,7 +1293,6 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel50;
-    private javax.swing.JLabel jLabel55;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel2;
@@ -1301,6 +1303,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JLabel lbldongho;
     private javax.swing.JPanel panelhd;
     private javax.swing.JLabel phanTrang;
     private javax.swing.JPanel qrcode;
@@ -1418,7 +1421,6 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
             rs = insertDHCT(sl);
         }
         if (rs != null) {
-            JOptionPane.showMessageDialog(null, "Thêm thành công");
             loadDataToDHCT(maDH);
             spct.setSoLuong(spct.getSoLuong() - sl);
             SanPham sp = new SanPham();
@@ -1520,7 +1522,6 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
 
     @Override
     public void run() {
-        String randomCode = generateRandomCode(12);
         do {
             try {
                 Thread.sleep(100);
@@ -1547,6 +1548,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
             }
 
             if (result != null) {
+                System.out.println(result.getText());
                 spct = sanPhamChiTietService.searchByIdBarcode(result.getText());
                 if (!spct.getTrangThai()) {
                     JOptionPane.showMessageDialog(null, "Sản phẩm đã ngừng kinh doanh");
@@ -1564,16 +1566,16 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         t.setDaemon(true);
         return t;
     }
-
-    public static String generateRandomCode(int length) {
-        Random random = new Random();
-        StringBuilder codeBuilder = new StringBuilder();
-
-        for (int i = 0; i < length; i++) {
-            int randomNumber = random.nextInt(10); // Sinh số ngẫu nhiên từ 0 đến 9
-            codeBuilder.append(randomNumber);
-        }
-
-        return codeBuilder.toString();
+    
+    private void dongHo() {
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                lbldongho.setText(XDate.toString(XDate.now(),"dd MMM yyyy HH:mm:ss"));
+            }
+        };
+        int period = 1000;
+        Timer timer = new Timer("Dong ho");
+        timer.schedule(timerTask, 0, period);
     }
 }

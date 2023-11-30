@@ -42,14 +42,14 @@ public class Main_JFrame extends javax.swing.JFrame {
         setLocation(0, 0);
         setLocationRelativeTo(null);
         
-        //Hien thi du lieu nhan vien
-//        lblTenNhanVien.setText(Auth.user.getTenNhanVien());
-//        lblVaiTro.setText(Auth.user.getVaiTro());
+        
+        lblTenNhanVien.setText(Auth.user.getTenNhanVien());
+        lblVaiTro.setText(Auth.user.getVaiTro());
         lblThoiGianVao.setText(XDate.toString(XDate.now(), "HH:mm dd/MM/yyyy"));
-//        if (Auth.user.getVaiTro().equalsIgnoreCase("Nhân Viên")) {
-//            jButton15.setEnabled(false);
-//            jButton15.setBackground(Color.LIGHT_GRAY);
-//        }
+        if (Auth.user.getVaiTro().equalsIgnoreCase("Nhân Viên")) {
+            jButton15.setEnabled(false);
+            jButton15.setBackground(Color.LIGHT_GRAY);
+        }
         
         //dong ho
         this.dongHo();

@@ -3,26 +3,36 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/helper/DBContext.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/view/KhuyenMai_JPanel.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/service/KhachHangService.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/service/SanPhamChiTietService.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/view/NhanVien_JPanel.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/view/BanHang_JPanel.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/view/KhachHangThanThiet_JPanel.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/helper/FileChoose.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/model/DonHangChiTiet.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/view/ThongKe_JPanel.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/view/SanPham_JPanel.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/model/NhanVien.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/view/Welcome.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/model/DonHang.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/view/Main_JFrame.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/service/NhanVienService.java</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/service/DonHangService.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/view/ThemDonViTinh_JFrame.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/view/ThongKe_JPanel.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/view/ThemKhoiLuong_JFrame.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/model/DonHangChiTiet.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/service/HoaDonService.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/service/KhachHangService.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/view/ThemDongSp_JFrame.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/utilities/imageNV/avatar_F.jpg</file>
-            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/service/SanPhamService.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/view/KhuyenMai_JPanel.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/view/ComboSP_JFrame.java</file>
             <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/view/HoaDon_JPanel.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/view/Welcome.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/view/KhachHangThanThiet_JPanel.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/service/Auth.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/view/ThemLoaiHang_JFrame.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/model/DonHang.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/service/DonViTinh_service.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/view/NhanVien_JPanel.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/model/NhanVien.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/service/NhanVienService.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/service/SanPhamService.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/view/BanHang_JPanel.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/service/KhuyenMaiService.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/helper/FileChoose.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/helper/DBContext.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/service/SanPhamChiTietService.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/view/ThemXuatXu_JFrame.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/view/SanPham_JPanel.java</file>
+            <file>file:/C:/Users/dovan/OneDrive/Desktop/ProjectMilkFE/src/service/DonHangService.java</file>
         </group>
     </open-files>
 </project-private>

@@ -4,6 +4,7 @@
  */
 package service;
 
+import com.barcodelib.barcode.a.f.c;
 import helper.DBContext;
 import helper.XDate;
 import java.sql.Connection;
@@ -76,6 +77,7 @@ public class DonHangService {
                 x.setGiaGiam(rs.getFloat("giaGiam"));
                 x.setTongGia(rs.getFloat("tongGia"));
                 x.setTrangThai(rs.getInt("trangThai") == 1 ? true : false);
+                x.setTraHang(rs.getInt("traHang"));
                 list.add(x);
             }
             return list;
@@ -154,12 +156,13 @@ public class DonHangService {
     }
 
     public Integer updateDHCT(DonHangChiTiet dhct) {
-        String sql = "update DonHangChiTiet set soLuong=?,tongGia=?,trangThai=? where maDonHangChiTiet=?";
+        String sql = "update DonHangChiTiet set soLuong=?,tongGia=?,trangThai=?,traHang=? where maDonHangChiTiet=?";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
             pstm.setInt(1, dhct.getSoLuong());
-            pstm.setFloat(2, dhct.getSoLuong() * dhct.getGiaGiam());
+            pstm.setFloat(2, (dhct.getSoLuong() - dhct.getTraHang()) * dhct.getGiaGiam());
             pstm.setInt(3, dhct.isTrangThai() ? 1 : 0);
-            pstm.setInt(4, dhct.getMaDonHangChiTiet());
+            pstm.setInt(4, dhct.getTraHang());
+            pstm.setInt(5, dhct.getMaDonHangChiTiet());
             Integer rs = pstm.executeUpdate();
             return rs;
         } catch (Exception e) {
@@ -236,8 +239,41 @@ public class DonHangService {
             pstm.setInt(2, 2);
             pstm.setInt(3, 3);
             pstm.setInt(4, 4);
-             pstm.setInt(5, (page - 1) * limit);
+            pstm.setInt(5, (page - 1) * limit);
             pstm.setInt(6, limit);
+            ResultSet rs = pstm.executeQuery();
+            ArrayList<DonHang> list = new ArrayList<>();
+            while (rs.next()) {
+                DonHang x = new DonHang();
+                x.setMaDonHang(rs.getInt("maDonHang"));
+                x.setMaKhachHang(rs.getInt("maKhachHang"));
+                x.setMaNhanVien(rs.getString("maNhanVien"));
+                x.setMaHHTT(rs.getInt("maHinhThucThanhToan"));
+                x.setTrangThai(rs.getInt("trangThai"));
+                x.setGhiChu(rs.getString("ghiChu"));
+                x.setNgayTao(XDate.toString(rs.getDate("ngayTao"), "dd-MM-yyyy"));
+                x.setPhiKhac(rs.getFloat("phiKhac"));
+                x.setTienHang(rs.getFloat("tienHang"));
+                x.setLoaiDonHang(rs.getInt("loaiDonHang"));
+                x.setDienThoai(rs.getString("dienThoai"));
+                x.setDiaChi(rs.getString("diaChi"));
+                x.setTienGiam(rs.getFloat("tienGiam"));
+                x.setTongTien(rs.getFloat("tongTien"));
+                
+                list.add(x);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public ArrayList<DonHang> getByDate(String d1, String d2) {
+        String sql = "select * from DonHang where ngayTao between ? and ? ";
+        try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
+            pstm.setObject(1, d1);
+            pstm.setObject(2, d2);
             ResultSet rs = pstm.executeQuery();
             ArrayList<DonHang> list = new ArrayList<>();
             while (rs.next()) {
@@ -265,4 +301,5 @@ public class DonHangService {
         }
         return null;
     }
+
 }

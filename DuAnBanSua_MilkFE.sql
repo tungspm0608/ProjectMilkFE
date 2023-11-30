@@ -194,6 +194,7 @@ create table DonHangChiTiet
     giaGiam float null,
     tongGia float not null,
     trangThai bit  null,
+    traHang int null,
     primary key(maDonHangChiTiet),
     foreign key (maDonHang) references DonHang(maDonHang),
     foreign key (maSanPhamChiTiet) references SanPhamChiTiet(maSanPhamChiTiet)
@@ -354,26 +355,26 @@ go
 
 INSERT INTO KhachHang (hoTen, gioiTinh, ngaySinh, soDienThoai, email, diem, ghiChu, ngayDangKy)
 VALUES
-    (N'Nguyễn Thị A', 0, '1992-03-12', '0123456789', 'thiA@gmail.com', 100, N'Ghi chú cho Khách hàng A', '2022-01-05'),
-    (N'Trần Văn B', 1, '1985-05-20', '0987654321', 'vanB@gmail.com', 150, N'Ghi chú cho Khách hàng B', '2022-02-10'),
-    (N'Lê Thị C', 0, '1990-08-15', '0345678901', 'thiC@gmail.com', 120, N'Ghi chú cho Khách hàng C', '2022-03-18'),
-    (N'Phạm Văn D', 1, '1988-11-02', '0765432109', 'vanD@gmail.com', 90, N'Ghi chú cho Khách hàng D', '2022-04-25'),
-    (N'Trần Thị E', 0, '1995-02-25', '0123456780', 'thiE@gmail.com', 80, N'Ghi chú cho Khách hàng E', '2022-05-30'),
-    (N'Nguyễn Văn F', 1, '1983-07-10', '0987654321', 'vanF@gmail.com', 110, N'Ghi chú cho Khách hàng F', '2022-06-12'),
-    (N'Lê Văn G', 1, '1998-09-28', '0345678901', 'vanG@gmail.com', 130, N'Ghi chú cho Khách hàng G', '2022-07-20'),
-    (N'Phạm Thị H', 0, '1991-12-05', '0765432109', 'thiH@gmail.com', 95, N'Ghi chú cho Khách hàng H', '2022-08-15'),
-    (N'Nguyễn Văn I', 1, '1987-04-18', '0123456789', 'vanI@gmail.com', 140, N'Ghi chú cho Khách hàng I', '2022-09-22'),
-    (N'Trần Thị K', 0, '1994-06-30', '0987654321', 'thiK@gmail.com', 75, N'Ghi chú cho Khách hàng K', '2022-10-05'),
-    (N'Lê Văn L', 1, '1986-08-22', '0345678901', 'vanL@gmail.com', 160, N'Ghi chú cho Khách hàng L', '2022-11-12'),
-    (N'Phạm Thị M', 0, '1993-10-15', '0765432109', 'thiM@gmail.com', 105, N'Ghi chú cho Khách hàng M', '2022-12-18'),
-    (N'Nguyễn Văn N', 1, '1984-01-28', '0123456780', 'vanN@gmail.com', 125, N'Ghi chú cho Khách hàng N', '2023-01-25'),
-    (N'Trần Văn P', 1, '1999-03-03', '0987654321', 'vanP@gmail.com', 88, N'Ghi chú cho Khách hàng P', '2023-02-28'),
-    (N'Lê Thị Q', 0, '1990-05-18', '0345678901', 'thiQ@gmail.com', 115, N'Ghi chú cho Khách hàng Q', '2023-03-15'),
-    (N'Phạm Văn R', 1, '1988-08-01', '0765432109', 'vanR@gmail.com', 135, N'Ghi chú cho Khách hàng R', '2023-04-22'),
-    (N'Trần Thị S', 0, '1995-09-15', '0123456789', 'thiS@gmail.com', 99, N'Ghi chú cho Khách hàng S', '2023-05-10'),
-	(N'Nguyễn Văn T', 1, '1983-11-28', '0987654321', 'vanT@gmail.com', 120, N'Ghi chú cho Khách hàng T', '2023-06-18'),
-    (N'Lê Thị U', 0, '1998-02-10', '0345678901', 'thiU@gmail.com', 80, N'Ghi chú cho Khách hàng U', '2023-07-25'),
-    (N'Phạm Văn V', 1, '1987-04-25', '0765432109', 'vanV@gmail.com', 155, N'Ghi chú cho Khách hàng V', '2023-08-30')
+( N'Nguyễn Thị Anh', 0, '1992-03-12', '0123456789', 'thiAnh@gmail.com', 100, N'Ghi chú cho Khách hàng A', '2022-01-05'),
+( N'Trần Văn Bình', 1, '1985-05-20', '0987654321', 'vanBinh@gmail.com', 150, N'Ghi chú cho Khách hàng B', '2022-02-10'),
+( N'Lê Thị Cam', 0, '1990-08-15', '0345678901', 'thiCam@gmail.com', 120, N'Ghi chú cho Khách hàng C', '2022-03-18'),
+( N'Phạm Văn Dương', 1, '1988-11-02', '0765432109', 'vanDuong@gmail.com', 90, N'Ghi chú cho Khách hàng D', '2022-04-25'),
+( N'Trần Thị Em', 0, '1995-02-25', '0123456780', 'thiEm@gmail.com', 80, N'Ghi chú cho Khách hàng E', '2022-05-30'),
+( N'Nguyễn Văn Khanh', 1, '1983-07-10', '0987654321', 'vanKhanh@gmail.com', 110, N'Ghi chú cho Khách hàng F', '2022-06-12'),
+( N'Lê Văn Giang', 1, '1998-09-28', '0345678901', 'vanGiang@gmail.com', 130, N'Ghi chú cho Khách hàng G', '2022-07-20'),
+( N'Phạm Thị Hòa', 0, '1991-12-05', '0765432109', 'thiHoa@gmail.com', 95, N'Ghi chú cho Khách hàng H', '2022-08-15'),
+( N'Nguyễn Văn Linh', 1, '1987-04-18', '0123456789', 'vanIinh@gmail.com', 140, N'Ghi chú cho Khách hàng I', '2022-09-22'),
+( N'Trần Thị Kiều', 0, '1994-06-30', '0987654321', 'thiKieu@gmail.com', 75, N'Ghi chú cho Khách hàng K', '2022-10-05'),
+( N'Lê Văn Lương', 1, '1986-08-22', '0345678901', 'vanLuong@gmail.com', 160, N'Ghi chú cho Khách hàng L', '2022-11-12'),
+( N'Phạm Thị Minh', 0, '1993-10-15', '0765432109', 'thiMinh@gmail.com', 105, N'Ghi chú cho Khách hàng M', '2022-12-18'),
+( N'Nguyễn Văn Ngọc', 1, '1984-01-28', '0123456780', 'vanNgoc@gmail.com', 125, N'Ghi chú cho Khách hàng N', '2023-01-25'),
+( N'Trần Văn Phong', 1, '1999-03-03', '0987654321', 'vanPhong@gmail.com', 88, N'Ghi chú cho Khách hàng P', '2023-02-28'),
+( N'Lê Thị Qúy', 0, '1990-05-18', '0345678901', 'thiQuy@gmail.com', 115, N'Ghi chú cho Khách hàng Q', '2023-03-15'),
+( N'Phạm Văn Rong', 1, '1988-08-01', '0765432109', 'vanRong@gmail.com', 135, N'Ghi chú cho Khách hàng R', '2023-04-22'),
+( N'Trần Thị Sắn', 0, '1995-09-15', '0123456789', 'thiSan@gmail.com', 99, N'Ghi chú cho Khách hàng S', '2023-05-10'),
+( N'Nguyễn Văn Tuấn', 1, '1983-11-28', '0987654321', 'vanTuan@gmail.com', 120, N'Ghi chú cho Khách hàng T', '2023-06-18'),
+( N'Lê Thị Uông', 0, '1998-02-10', '0345678901', 'thiUong@gmail.com', 80, N'Ghi chú cho Khách hàng U', '2023-07-25'),
+( N'Phạm Văn Viên', 1, '1987-04-25', '0765432109', 'vanVien@gmail.com', 155, N'Ghi chú cho Khách hàng V', '2023-08-30');
 go
 
 INSERT INTO KhuyenMai (maKhuyenMai,tenChuongTrinh, ngayBatDau, ngayKetThuc, moTa, trangThai, giaTriGiam, donViGiam)
