@@ -190,7 +190,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         cbo_loaiDH = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(37, 108, 205));
-        setPreferredSize(new java.awt.Dimension(1169, 820));
+        setPreferredSize(new java.awt.Dimension(1500, 820));
 
         jPanel2.setBackground(new java.awt.Color(172, 214, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Giỏ hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 1, 14))); // NOI18N
