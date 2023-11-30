@@ -1,7 +1,7 @@
-﻿create database DuAnBanSua_MilkFE
+﻿create database DuAnBanSua_MilkFE1
 go
 
-use DuAnBanSua_MilkFE
+use DuAnBanSua_MilkFE1
 go
 
 create table XuatXu
@@ -408,6 +408,7 @@ select * from SanPham
 select * from SanPhamChiTiet
 select * from DonHang
 select * from DonHangChiTiet
+select * from DonHang where trangThai like '1' and (loaiDonHang like 2 or loaiDonHang=3 or loaiDonHang=4)
 
 SET ANSI_NULLS ON
 GO
@@ -639,13 +640,13 @@ AS
 BEGIN
     SELECT
         MONTH(ngayTao) AS Thang,
-        SUM(CASE WHEN loaiDonHang = N'Bán tại quầy' AND trangThai = 1 THEN 1 ELSE 0 END) AS TaiQuayThanhCong,
-        SUM(CASE WHEN loaiDonHang = N'Đặt hàng' AND trangThai = 1 THEN 1 ELSE 0 END) AS OnlineThanhCong,
+        SUM(CASE WHEN loaiDonHang = 4 AND trangThai = 1 THEN 1 ELSE 0 END) AS TaiQuayThanhCong,
+        SUM(CASE WHEN loaiDonHang = 2 AND trangThai = 1 THEN 1 ELSE 0 END) AS OnlineThanhCong,
         SUM(CASE WHEN trangThai = 0 THEN 1 ELSE 0 END) AS BiHuy
     FROM
         DonHang
     WHERE
-        YEAR(ngayTao) = @Year
+        YEAR(ngayTao) = 2023
     GROUP BY
         MONTH(ngayTao)
     ORDER BY
