@@ -4,6 +4,7 @@
  */
 package view;
 
+import helper.setUp;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
@@ -21,6 +22,7 @@ public class Welcome extends javax.swing.JFrame {
     public Welcome() {
         initComponents();
         this.init();
+        setUp.setUp();
     }
 
     void init() {

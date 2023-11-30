@@ -10,10 +10,9 @@ import java.sql.*;
  */
 public class DBContext {
 
-    public final static String USERNAME = "sa";
-    public final static String PASSWORD = "12345678";
-    public final static String URL = "jdbc:sqlserver://localhost:1433;"
-            + "databaseName=DuAnBanSua_MilkFE1;encrypt=false;";
+    public static String USERNAME = "";
+    public static String PASSWORD = "";
+    public static String DATABASENAME = "";
 
     static {
         try {
@@ -26,6 +25,8 @@ public class DBContext {
     public static Connection getConnection() {
         Connection cn = null;
         try {
+            String URL = "jdbc:sqlserver://localhost:1433;"
+            + "databaseName=" + DATABASENAME +";encrypt=false;";
             cn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
