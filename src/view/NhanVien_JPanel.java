@@ -483,7 +483,8 @@ public class NhanVien_JPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_MoiActionPerformed
 
     private void btn_CapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CapNhatActionPerformed
-        // TODO add your handling code here:
+        // Cập nhật nhân viên
+        if(!checkForm()) return;
         NhanVien x = readForm();
         if (x.getAnhNhanVien().equalsIgnoreCase("")) {
             x.setAnhNhanVien(list.get(index).getAnhNhanVien());
@@ -497,7 +498,8 @@ public class NhanVien_JPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_CapNhatActionPerformed
 
     private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
-        // TODO add your handling code here:
+        // Thêm sản phẩm
+        if(!checkForm()) return;
         Integer chon = service.insert(readForm());
         if (chon != null) {
             JOptionPane.showMessageDialog(null, "Thêm thành công");
@@ -507,7 +509,7 @@ public class NhanVien_JPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_ThemActionPerformed
 
     private void tbl_NhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_NhanVienMouseClicked
-        // TODO add your handling code here:
+        // click table nhân viên
         index = tbl_NhanVien.getSelectedRow();
         showdetail();
     }//GEN-LAST:event_tbl_NhanVienMouseClicked
@@ -626,5 +628,49 @@ public class NhanVien_JPanel extends javax.swing.JPanel {
         x.setTrangThai(cbo_tt.getSelectedItem() + "");
         x.setGhiChu(txt_GhiChu.getText());
         return x;
+    }
+    
+    private boolean checkForm() {
+        String maNv = txt_MaNV.getText().trim();
+        if (maNv.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Mã nhân viên không được để trống");
+            return false;
+        }
+        String tenNV = txt_HoTen.getText().trim();
+        if (tenNV.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tên nhân viên không được để trống");
+            return false;
+        }
+        String matKhau=txt_MatKhau.getText().trim();
+        if (matKhau.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Mật khẩu không được để trống");
+            return false;
+        }
+        String xacNhanMK=txt_XacNhanMK.getText().trim();
+        if (xacNhanMK.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Xác nhận mật khẩu không được để trống");
+            return false;
+        }
+        if (!matKhau.equals(xacNhanMK)) {
+            JOptionPane.showMessageDialog(this, "Mật khẩu và xác nhân mật khẩu không đúng");
+            return false;
+            
+        }
+        String soDienThoai=txt_SoDT.getText().trim();
+        if (soDienThoai.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Số điện thoại không được để trống");
+            return false;
+        }
+        String ngaySinh=txt_NgaySinh.getText().trim();
+        if (ngaySinh.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ngày sinh không được để trống");
+            return false;
+        }
+        String email=txt_Email.getText().trim();
+        if (email.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Email không được để trống");
+            return false;
+        }
+        return true;
     }
 }

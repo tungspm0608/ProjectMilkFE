@@ -40,7 +40,8 @@ public class setUp {
             String line;
             int lineNumber = 1; // Biến đếm số thứ tự dòng
 
-            while ((line = reader.readLine()) != null) {
+            while (lineNumber == 4) {
+                line = reader.readLine();
                 System.out.println(lineNumber);
                 System.out.println(line);
                 switch (lineNumber) {

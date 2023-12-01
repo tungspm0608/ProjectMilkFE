@@ -57,11 +57,6 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
     /**
      * Creates new form BanHang_JPanel
      */
-    private WebcamPanel panel = null;
-    private Webcam webcam = null;
-    private static final long serialVersionUID = 6441489157408381878L;
-    private Executor executor = Executors.newSingleThreadExecutor(this);
-
     SanPhamChiTietService sanPhamChiTietService = new SanPhamChiTietService();
     DonViTinh_service donViTinhService = new DonViTinh_service();
     DonHangService donHangService = new DonHangService();
@@ -87,10 +82,16 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
     SanPhamChiTiet spct;
     DonHang dh;
     KhuyenMai km;
+    
+    private WebcamPanel panel = null;
+    private Webcam webcam = null;
+    private static final long serialVersionUID = 6441489157408381878L;
+    private Executor executor = Executors.newSingleThreadExecutor(this);
+
 
     public BanHang_JPanel() {
         initComponents();
-        initWebcam();
+        
         dongHo();
         this.setBackground(new Color(37, 108, 205));
         spctmodel = (DefaultTableModel) tbl_sp.getModel();
@@ -99,6 +100,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         loadDataToSP();
         loadDataToDH();
         txt_diem.setEnabled(false);
+        initWebcam();
     }
 
     private void initWebcam() {
@@ -185,7 +187,6 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_sp = new javax.swing.JTable();
         jButton18 = new javax.swing.JButton();
@@ -761,9 +762,6 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
             }
         });
 
-        jButton8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton8.setText("O");
-
         jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jScrollPane1MouseClicked(evt);
@@ -817,8 +815,6 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
                 .addGap(18, 18, 18)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton18)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel4Layout.createSequentialGroup()
@@ -837,7 +833,6 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton7)
-                            .addComponent(jButton8)
                             .addComponent(jButton18))
                         .addComponent(phanTrang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -1316,7 +1311,6 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel29;
@@ -1596,7 +1590,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
                 }
                 km = khuyenMaiService.searchKMofSP(spct.getMaSanPhamChiTiet());
                 themSPtoDHCT();
-            }
+            }else return;
         } while (true);
     }
 

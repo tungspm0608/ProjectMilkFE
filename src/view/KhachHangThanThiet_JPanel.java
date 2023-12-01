@@ -15,7 +15,7 @@ public class KhachHangThanThiet_JPanel extends javax.swing.JPanel {
     DefaultTableModel model = new DefaultTableModel();
     ArrayList<KhachHang> list = new ArrayList<>();
     KhachHangService service = new KhachHangService();
-    String sdt = "",ten="";
+    String sdt = "", ten = "";
     int page = 1, index = -1;
 
     public KhachHangThanThiet_JPanel() {
@@ -345,34 +345,44 @@ public class KhachHangThanThiet_JPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
-        // TODO add your handling code here:
+        // Thêm khách hàng
+        if (!checkForm()) {
+            return;
+        }
         KhachHang kh = readForm();
         kh.setDiem(0);
-        kh.setNgayTao(XDate.toString(new Date(),"dd-MM-yyyy"));
+        kh.setNgayTao(XDate.toString(new Date(), "dd-MM-yyyy"));
         Integer x = service.insert(kh);
-        if(x!=null){
+        if (x != null) {
             JOptionPane.showMessageDialog(null, "Thêm thành công");
             loadDataToTable();
-        }else JOptionPane.showMessageDialog(null, "Thêm thất bại");
+        } else {
+            JOptionPane.showMessageDialog(null, "Thêm thất bại");
+        }
 
     }//GEN-LAST:event_btn_ThemActionPerformed
 
     private void btn_CapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CapNhatActionPerformed
-        // TODO add your handling code here:
+        // cập nhật nhân viên
+        if (!checkForm()) {
+            return;
+        }
         KhachHang y = readForm();
         y.setMaKhachHang(list.get(index).getMaKhachHang());
         Integer x = service.update(y);
-        if(x!=null){
+        if (x != null) {
             JOptionPane.showMessageDialog(null, "Sửa thành công");
             loadDataToTable();
-        }else JOptionPane.showMessageDialog(null, "Sửa thất bại");
+        } else {
+            JOptionPane.showMessageDialog(null, "Sửa thất bại");
+        }
 
     }//GEN-LAST:event_btn_CapNhatActionPerformed
 
     private void btn_MoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_MoiActionPerformed
         // TODO add your handling code here:
         sdt = "";
-        ten="";
+        ten = "";
         newForm();
         loadDataToTable();
     }//GEN-LAST:event_btn_MoiActionPerformed
@@ -390,7 +400,7 @@ public class KhachHangThanThiet_JPanel extends javax.swing.JPanel {
     private void btn_TimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKiemActionPerformed
         // TODO add your handling code here:
         ten = txt_tk.getText();
-        sdt="";
+        sdt = "";
         loadDataToTable();
     }//GEN-LAST:event_btn_TimKiemActionPerformed
 
@@ -417,7 +427,7 @@ public class KhachHangThanThiet_JPanel extends javax.swing.JPanel {
     private void btn_TimKiem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimKiem1ActionPerformed
         // TODO add your handling code here:
         sdt = txt_tk.getText();
-        ten="";
+        ten = "";
         loadDataToTable();
     }//GEN-LAST:event_btn_TimKiem1ActionPerformed
 
@@ -458,7 +468,7 @@ public class KhachHangThanThiet_JPanel extends javax.swing.JPanel {
 
     private void loadDataToTable() {
         model.setRowCount(0);
-        list = service.paging(page, 10, sdt,ten);
+        list = service.paging(page, 10, sdt, ten);
         for (KhachHang x : list) {
             model.addRow(new Object[]{x.getMaKhachHang(),
                 x.getTenKhachHang(), x.getGioiTinh(), x.getNgaySinh(),
@@ -498,9 +508,38 @@ public class KhachHangThanThiet_JPanel extends javax.swing.JPanel {
         x.setSoDienThoai(txt_SoDienThoai.getText());
         x.setNgaySinh(txt_NgaySinh.getText());
         x.setEmail(txt_Email.getText());
-        x.setGioiTinh(rdo_nam.isSelected()?"Nam" : "Nữ");
+        x.setGioiTinh(rdo_nam.isSelected() ? "Nam" : "Nữ");
         x.setNgayTao(txt_NgayDangKy.getText());
         x.setGhiChu(txt_GhiChu.getText());
-        return  x;
+        return x;
+    }
+
+    private boolean checkForm() {
+        String tenNV = txt_HotenKhachHang.getText().trim();
+        if (tenNV.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Tên nhân viên không được để trống");
+            return false;
+        }
+        String ngaySinh = txt_NgaySinh.getText().trim();
+        if (ngaySinh.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ngày sinh không được để trống");
+            return false;
+        }
+        String email = txt_Email.getText().trim();
+        if (email.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Email không được để trống");
+            return false;
+        }
+        String soDienThoai = txt_SoDienThoai.getText().trim();
+        if (soDienThoai.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Số điện thoại không được để trống");
+            return false;
+        }
+        String ngayDK = txt_NgayDangKy.getText().trim();
+        if (ngayDK.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ngày đăng ký không được để trống");
+            return false;
+        }
+        return true;
     }
 }
