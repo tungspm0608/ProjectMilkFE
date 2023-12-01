@@ -8,6 +8,7 @@ import helper.DialogHelper;
 import helper.XDate;
 import java.awt.Color;
 import java.io.FileOutputStream;
+import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -45,6 +46,7 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
     LoaiHangService lhsv = new LoaiHangService();
     ChartPanel chartPanel2;
     ChartPanel chartPanel4;
+    boolean jp1TrangThaiLoc;
 
     /**
      * Creates new form ThongKe_JPanel
@@ -79,10 +81,17 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
         jp1DongSanPham.setSelectedIndex(jp1DongSanPham.getItemCount() - 1);
         jp1LoaiSanPham.setSelectedIndex(jp1LoaiSanPham.getItemCount() - 1);
         jp1ThuongHieu.setSelectedIndex(jp1ThuongHieu.getItemCount() - 1);
-
+        
+        jp1NgayBatDau.setDate(XDate.toDate("2022-1-1", "yyyy-MM-dd"));
+        jp1NgayKetThuc.setDate(XDate.now());
+        String ngayBatDau = XDate.toString(jp1NgayBatDau.getDate(), "yyyy-MM-dd");
+        String ngayKetThuc = XDate.toString(jp1NgayKetThuc.getDate(), "yyyy-MM-dd");
+        
+        jp1TrangThaiLoc = true;
+        
         mol = (DefaultTableModel) jp1SanPhamTheoLuotBan.getModel();
         mol.setRowCount(0);
-        for (Object[] objects : tksv.sanPhamTheoLuotBan(null, null, null, null, null)) {
+        for (Object[] objects : tksv.sanPhamTheoLuotBan(null, null, null, ngayBatDau, ngayKetThuc)) {
             mol.addRow(objects);
         }
     }
@@ -150,8 +159,6 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jp1SanPhamTheoLuotBan = new javax.swing.JTable();
         jpdoanhThu = new javax.swing.JPanel();
@@ -220,10 +227,51 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
         });
 
         jp1LoaiSanPham.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jp1LoaiSanPham.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jp1LoaiSanPhamItemStateChanged(evt);
+            }
+        });
 
         jp1DongSanPham.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jp1DongSanPham.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jp1DongSanPhamItemStateChanged(evt);
+            }
+        });
 
         jp1ThuongHieu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jp1ThuongHieu.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jp1ThuongHieuItemStateChanged(evt);
+            }
+        });
+
+        jp1NgayBatDau.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jp1NgayBatDauInputMethodTextChanged(evt);
+            }
+        });
+        jp1NgayBatDau.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jp1NgayBatDauPropertyChange(evt);
+            }
+        });
+
+        jp1NgayKetThuc.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jp1NgayKetThucInputMethodTextChanged(evt);
+            }
+        });
+        jp1NgayKetThuc.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jp1NgayKetThucPropertyChange(evt);
+            }
+        });
 
         jLabel8.setText("Loại hàng");
 
@@ -234,20 +282,6 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
         jLabel14.setText("Ngày bắt đầu");
 
         jLabel15.setText("Ngày kết thúc");
-
-        jButton5.setText("Bỏ chọn");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        jButton6.setText("Bỏ chọn");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -269,18 +303,12 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jp1NgayBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5)))
-                .addGap(6, 6, 6)
+                    .addComponent(jLabel14))
+                .addGap(12, 12, 12)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6))
+                    .addComponent(jLabel15)
                     .addComponent(jp1NgayKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton3)
                     .addGroup(jPanel9Layout.createSequentialGroup()
@@ -295,9 +323,7 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
                     .addComponent(jLabel9)
                     .addComponent(jLabel11)
                     .addComponent(jLabel14)
-                    .addComponent(jButton5)
                     .addComponent(jLabel15)
-                    .addComponent(jButton6)
                     .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -739,8 +765,7 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         // Doi nam o trong bang doanh thu
         int year = jp2YearChooser.getYear();
-        if (year > XDate.now().getYear() || year < 2022) {
-            DialogHelper.alert(this, "Số liệu vượt quá thời gian dự tính");
+        if (XDate.checkDataYear(year)) {
             return;
         }
         mol = (DefaultTableModel) jp2doanhThutheoThangChiTiet.getModel();
@@ -763,8 +788,7 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         // Lọc bảng đơn hàng
         int year = jp4YearChooser.getYear();
-        if (year > XDate.now().getYear() || year < 2022) {
-            DialogHelper.alert(this, "Số liệu vượt quá thời gian dự tính");
+        if (XDate.checkDataYear(year)) {
             return;
         }
         if (jp4nutHienThiNgang.isSelected()) {
@@ -785,6 +809,7 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         // bấm bút lọc sản phẩm ở jp1
+        jp1TrangThaiLoc = true;
         int chonLoaiHang = jp1LoaiSanPham.getSelectedIndex();
         Integer loaiHang = chonLoaiHang == jp1LoaiSanPham.getItemCount() - 1 ? null : lhsv.getAll().get(chonLoaiHang).getMaLoaiHang();
 
@@ -794,22 +819,14 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
         int chonThuongHieu = jp1ThuongHieu.getSelectedIndex();
         Integer thuongHieu = chonThuongHieu == jp1ThuongHieu.getItemCount() - 1 ? null : thsv.getAll().get(chonThuongHieu).getMaThuongHieu();
 
-        String ngayBatDau = "";
-        if (jp1NgayBatDau.getDate() != null) {
-            ngayBatDau = XDate.toString(jp1NgayBatDau.getDate(), "yyyy-MM-dd");
-        } else {
-            ngayBatDau = null;
+       if (jp1NgayBatDau.getDate() == null || !XDate.checkDataDay(jp1NgayBatDau.getDate())) {
+            jp1NgayBatDau.setDate(new Date(2022 - 1900, 0, 1));
         }
-        
-        String ngayKetThuc = "";
-        if (jp1NgayKetThuc.getDate() != null) {
-            ngayKetThuc = XDate.toString(jp1NgayKetThuc.getDate(), "yyyy-MM-dd");
-        } else {
-            ngayKetThuc = null;
-        }
-        System.out.println(ngayBatDau);
-        System.out.println(ngayKetThuc);
-
+        String ngayBatDau = XDate.toString(jp1NgayBatDau.getDate(), "yyyy-MM-dd");
+        if (jp1NgayKetThuc.getDate() == null || !XDate.checkDataDay(jp1NgayKetThuc.getDate())) {
+            jp1NgayKetThuc.setDate(XDate.now());
+        } 
+        String ngayKetThuc = XDate.toString(jp1NgayKetThuc.getDate(), "yyyy-MM-dd");
         mol = (DefaultTableModel) jp1SanPhamTheoLuotBan.getModel();
         mol.setRowCount(0);
         for (Object[] objects : tksv.sanPhamTheoLuotBan(loaiHang, dongSanPham, thuongHieu, ngayBatDau, ngayKetThuc)) {
@@ -827,32 +844,30 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         // export excel bảng sản phẩm theo filter đã chọn
-
+        if (!jp1TrangThaiLoc) {
+            DialogHelper.alert(this, "Bạn vừa thay đổi giá trị ở ô lọc\n Vui lòng bấm lọc lại trước khi xuất");
+            return;
+        }
         //Kiêrm tra xem có dùng filer lọc sản phẩm không bang cách check vị trí có trùng với chỗ tất cả không 
         int chonLoaiHang = jp1LoaiSanPham.getSelectedIndex();
-        String loaiHang = chonLoaiHang == jp1LoaiSanPham.getItemCount() - 1 ? "" : "Loai hang : " + String.valueOf(jp1LoaiSanPham.getSelectedItem());
+        String loaiHang = chonLoaiHang == jp1LoaiSanPham.getItemCount() - 1 ? "" : "Loại hàng : " + String.valueOf(jp1LoaiSanPham.getSelectedItem());
 
         int chonDongSanPham = jp1DongSanPham.getSelectedIndex();
-        String dongSanPham = chonDongSanPham == jp1DongSanPham.getItemCount() - 1 ? "" : "Dong san pham : " + String.valueOf(jp1DongSanPham.getSelectedItem());
+        String dongSanPham = chonDongSanPham == jp1DongSanPham.getItemCount() - 1 ? "" : "Dòng sản phẩm : " + String.valueOf(jp1DongSanPham.getSelectedItem());
 
         int chonThuongHieu = jp1ThuongHieu.getSelectedIndex();
-        String thuongHieu = chonThuongHieu == jp1ThuongHieu.getItemCount() - 1 ? "" : "Thuong hieu : " + String.valueOf(jp1ThuongHieu.getSelectedItem());
-
-        String ngayBatDau = "";
-        if (jp1NgayBatDau.getDate() != null) {
-            ngayBatDau = "tu ngay " + XDate.toString(jp1NgayBatDau.getDate(), "");
-        } else {
-            ngayBatDau = "";
+        String thuongHieu = chonThuongHieu == jp1ThuongHieu.getItemCount() - 1 ? "" : "Thương hiệu : " + String.valueOf(jp1ThuongHieu.getSelectedItem());
+        
+        if (jp1NgayBatDau.getDate() == null) {
+            jp1NgayBatDau.setDate(new Date(2022 - 1900, 0, 1));
         }
-        String ngayKetThuc = "";
-        if (jp1NgayKetThuc.getDate() != null) {
-            ngayKetThuc = " den ngay " + XDate.toString(jp1NgayKetThuc.getDate(), "");
-        } else {
-            ngayKetThuc = "";
-        }
-
+        String ngayBatDau = "từ ngày " + XDate.toString(jp1NgayBatDau.getDate(), "");
+        if (jp1NgayKetThuc.getDate() == null) {
+            jp1NgayKetThuc.setDate(XDate.now());
+        } 
+        String ngayKetThuc = " đến ngày " + XDate.toString(jp1NgayKetThuc.getDate(), "");
+        
         mol = (DefaultTableModel) jp1SanPhamTheoLuotBan.getModel();
-
         //Bat dau tao file excel
         try {
             Workbook workbook = new XSSFWorkbook();
@@ -869,19 +884,19 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
             if (!loaiHang.isEmpty()) {
                 titleRowIndex++;
                 Row filterRow1 = sheet.createRow(titleRowIndex);
-                Cell cellFilter1 = titleRow.createCell(titleRowIndex);
+                Cell cellFilter1 = titleRow.createCell(0);
                 cellFilter1.setCellValue(loaiHang);
             }
             if (!dongSanPham.isEmpty()) {
                 titleRowIndex++;
                 Row filterRow1 = sheet.createRow(titleRowIndex);
-                Cell cellFilter1 = titleRow.createCell(titleRowIndex);
+                Cell cellFilter1 = titleRow.createCell(0);
                 cellFilter1.setCellValue(dongSanPham);
             }
             if (!thuongHieu.isEmpty()) {
                 titleRowIndex++;
                 Row filterRow1 = sheet.createRow(titleRowIndex);
-                Cell cellFilter1 = titleRow.createCell(titleRowIndex);
+                Cell cellFilter1 = titleRow.createCell(0);
                 cellFilter1.setCellValue(thuongHieu);
             }
 
@@ -919,7 +934,7 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
             String filePath = Auth.HDH == 1 ? "src/utilities/ThongKeSanPham/" : "src\\utilities\\ThongKeSanPham\\";
             try (FileOutputStream fileOut = new FileOutputStream(filePath + "ThongKeSanPhamNgay" + today)) {
                 workbook.write(fileOut);
-                System.out.println("Xuất Excel thành công!");
+                DialogHelper.alert(this, "Xuất Excel thành công!");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -932,15 +947,41 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jp1LoaiSanPhamItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jp1LoaiSanPhamItemStateChanged
         // TODO add your handling code here:
-        jp1NgayBatDau.setDate(null);
-    }//GEN-LAST:event_jButton5ActionPerformed
+        jp1TrangThaiLoc = false;
+    }//GEN-LAST:event_jp1LoaiSanPhamItemStateChanged
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void jp1DongSanPhamItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jp1DongSanPhamItemStateChanged
         // TODO add your handling code here:
-        jp1NgayKetThuc.setDate(null);
-    }//GEN-LAST:event_jButton6ActionPerformed
+        jp1TrangThaiLoc = false;
+    }//GEN-LAST:event_jp1DongSanPhamItemStateChanged
+
+    private void jp1ThuongHieuItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jp1ThuongHieuItemStateChanged
+        // TODO add your handling code here:
+        jp1TrangThaiLoc = false;
+    }//GEN-LAST:event_jp1ThuongHieuItemStateChanged
+
+    private void jp1NgayBatDauInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jp1NgayBatDauInputMethodTextChanged
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jp1NgayBatDauInputMethodTextChanged
+
+    private void jp1NgayKetThucInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jp1NgayKetThucInputMethodTextChanged
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jp1NgayKetThucInputMethodTextChanged
+
+    private void jp1NgayBatDauPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jp1NgayBatDauPropertyChange
+        // TODO add your handling code here:
+        System.out.println("Here");
+        jp1TrangThaiLoc = false;
+    }//GEN-LAST:event_jp1NgayBatDauPropertyChange
+
+    private void jp1NgayKetThucPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jp1NgayKetThucPropertyChange
+        // TODO add your handling code here:
+        jp1TrangThaiLoc = false;
+    }//GEN-LAST:event_jp1NgayKetThucPropertyChange
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -950,8 +991,6 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

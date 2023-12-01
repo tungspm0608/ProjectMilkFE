@@ -4,12 +4,11 @@ import helper.XDate;
 import java.awt.Color;
 import java.text.DecimalFormat;
 import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import model.DonHang;
 import model.DonHangChiTiet;
@@ -44,6 +43,8 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
     public HoaDon_JPanel() {
         initComponents();
         this.setBackground(new Color(37, 108, 205));
+        dateDau.setDate(XDate.toDate("2022-1-1", "yyyy-MM-dd"));
+        dateCuoi.setDate(XDate.now());
         mol = (DefaultTableModel) tblHoaDon.getModel();
         mol1 = (DefaultTableModel) tbl_dhct.getModel();
         hDList = hdsv.getAllHD(page, 10);
@@ -65,13 +66,14 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
     }
 
     void Loc() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//        String d1 = XDate.toString(dateDau.getDate(), "");
-        Date date1 = dateDau.getDate();
-        String d1 = sdf.format(date1);
-        System.out.println(d1);
-        Date date2 = dateCuoi.getDate();
-        String d2 = sdf.format(date2);
+        if (dateDau.getDate() == null || !XDate.checkDataDay(dateDau.getDate())) {
+            dateDau.setDate(new Date(2022 - 1900, 0, 1));
+        }
+        String d1 = XDate.toString(dateDau.getDate(), "yyyy-MM-dd");
+        if (dateCuoi.getDate() == null || !XDate.checkDataDay(dateCuoi.getDate())) {
+            dateCuoi.setDate(XDate.now());
+        } 
+        String d2 = XDate.toString(dateCuoi.getDate(), "yyyy-MM-dd");
         fillTableDH(hdsv.getByDate(d1,d2));
     }
 
@@ -99,6 +101,7 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         vitri = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 204, 204));
 
@@ -142,7 +145,7 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
                 .addComponent(dateCuoi, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(114, 114, 114)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -150,9 +153,9 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(btnLoc))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLoc)
+                    .addComponent(jButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -230,6 +233,9 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Trang số :");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -242,9 +248,11 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton2)
-                        .addGap(9, 9, 9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
+                        .addGap(13, 13, 13)
                         .addComponent(vitri)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -265,7 +273,8 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
-                    .addComponent(vitri))
+                    .addComponent(vitri)
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -282,7 +291,7 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        hDList =hdsv.getAllHD(page, 10);
+        hDList = hdsv.getAllHD(page, 10);
         fillTableDH(hdsv.getAllHD(page, 10));
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -329,6 +338,7 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
