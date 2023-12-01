@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.util.Timer;
 import java.util.TimerTask;
+import javax.swing.JButton;
 
 /**
  *
@@ -710,6 +711,10 @@ public class Main_JFrame extends javax.swing.JFrame {
         int period = 1000;
         Timer timer = new Timer("Dong ho");
         timer.schedule(timerTask, 0, period);
+    }
+    
+    public JButton getBTNdangXuat() {
+        return jButton1;
     }
 
     /**
