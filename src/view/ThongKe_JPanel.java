@@ -739,8 +739,8 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         // Doi nam o trong bang doanh thu
         int year = jp2YearChooser.getYear();
-        if (year > XDate.now().getYear()) {
-            DialogHelper.alert(this, "Số liệu không tính được tương lai");
+        if (year > XDate.now().getYear() || year < 2022) {
+            DialogHelper.alert(this, "Số liệu vượt quá thời gian dự tính");
             return;
         }
         mol = (DefaultTableModel) jp2doanhThutheoThangChiTiet.getModel();
@@ -763,8 +763,8 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         // Lọc bảng đơn hàng
         int year = jp4YearChooser.getYear();
-        if (year > XDate.now().getYear()) {
-            DialogHelper.alert(this, "Số liệu không tính được tương lai");
+        if (year > XDate.now().getYear() || year < 2022) {
+            DialogHelper.alert(this, "Số liệu vượt quá thời gian dự tính");
             return;
         }
         if (jp4nutHienThiNgang.isSelected()) {
@@ -800,6 +800,7 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
         } else {
             ngayBatDau = null;
         }
+        
         String ngayKetThuc = "";
         if (jp1NgayKetThuc.getDate() != null) {
             ngayKetThuc = XDate.toString(jp1NgayKetThuc.getDate(), "yyyy-MM-dd");
