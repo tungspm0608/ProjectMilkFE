@@ -38,10 +38,13 @@ public class Main_JFrame extends javax.swing.JFrame {
         JPFeature.setBackground(new Color(37, 108, 205));
         JPPanelContainer.setBackground(new Color(37, 108, 205));
         
-        this.setSize((int) width, (int) height);
+        if (Auth.HDH == 1) {
+            this.setSize((int) width, (int) height);
+        } else {
+            this.setSize((int) width-480, (int) height-170);
+        }
         setLocation(0, 0);
         setLocationRelativeTo(null);
-        
         
         lblTenNhanVien.setText(Auth.user.getTenNhanVien());
         lblVaiTro.setText(Auth.user.getVaiTro());
