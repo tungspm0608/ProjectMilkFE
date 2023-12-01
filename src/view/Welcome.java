@@ -37,8 +37,8 @@ public class Welcome extends javax.swing.JFrame {
                 } else {
                     t.stop();
                     Welcome.this.dispose();
-//                    DangNhap_JFrame newFrame = new DangNhap_JFrame();
-//                    newFrame.setVisible(true);
+                    DangNhap_JFrame newFrame = new DangNhap_JFrame();
+                    newFrame.setVisible(true);
                 }
             }
         };

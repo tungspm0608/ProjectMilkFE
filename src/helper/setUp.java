@@ -4,7 +4,8 @@
  */
 package helper;
 
-import java.io.FileInputStream;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import service.Auth;
 
@@ -31,52 +32,40 @@ public class setUp {
             System.out.println("Không xác định được hệ điều hành.");
         }
 
-        FileInputStream fin = null;
+        BufferedReader reader = null;
         try {
             String filePath = "setUpVariable.txt";
-            fin = new FileInputStream(filePath);
-            int data = fin.read();
-            StringBuilder line = new StringBuilder();
+            reader = new BufferedReader(new FileReader(filePath));
+
+            String line;
             int lineNumber = 1; // Biến đếm số thứ tự dòng
 
-            while (data != -1) {
-                if ((char) data == '\n' || (char) data == '\r' || (char) data == ' ') {
-                    System.out.println(lineNumber);
-                    System.out.println(line.toString());
-                    switch (lineNumber) {
-                        case 1:
-                            DBContext.USERNAME = line.toString();
-                            System.out.println(-1);
-                            break;
-                        case 2:
-                            DBContext.PASSWORD = line.toString();
-                            System.out.println(-2);
-                            break;
-                        case 3:
-                            DBContext.DATABASENAME = line.toString();
-                            System.out.println(-3);
-                            break;
-                        case 4:
-                            System.out.println(-4);
-                            break;
-                        default:
-                            throw new AssertionError();
-                    }
-                    line.delete(0, line.length());
-                    lineNumber++;
-                } else {
-                    line.append((char) data);
-
+            while (lineNumber == 4) {
+                line = reader.readLine();
+                System.out.println(lineNumber);
+                System.out.println(line);
+                switch (lineNumber) {
+                    case 1:
+                        DBContext.USERNAME = line;
+                        break;
+                    case 2:
+                        DBContext.PASSWORD = line;
+                        break;
+                    case 3:
+                        DBContext.DATABASENAME = line;
+                        break;
+                    default:
+                        throw new AssertionError();
                 }
 
-                data = fin.read();
+                lineNumber++;
             }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {
-                if (fin != null) {
-                    fin.close();
+                if (reader != null) {
+                    reader.close();
                 }
             } catch (IOException e) {
                 e.printStackTrace();

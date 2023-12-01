@@ -57,11 +57,6 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
     /**
      * Creates new form BanHang_JPanel
      */
-    private WebcamPanel panel = null;
-    private Webcam webcam = null;
-    private static final long serialVersionUID = 6441489157408381878L;
-    private Executor executor = Executors.newSingleThreadExecutor(this);
-
     SanPhamChiTietService sanPhamChiTietService = new SanPhamChiTietService();
     DonViTinh_service donViTinhService = new DonViTinh_service();
     DonHangService donHangService = new DonHangService();
@@ -87,10 +82,16 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
     SanPhamChiTiet spct;
     DonHang dh;
     KhuyenMai km;
+    
+    private WebcamPanel panel = null;
+    private Webcam webcam = null;
+    private static final long serialVersionUID = 6441489157408381878L;
+    private Executor executor = Executors.newSingleThreadExecutor(this);
+
 
     public BanHang_JPanel() {
         initComponents();
-        initWebcam();
+        
         dongHo();
         this.setBackground(new Color(37, 108, 205));
         spctmodel = (DefaultTableModel) tbl_sp.getModel();
@@ -99,6 +100,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         loadDataToSP();
         loadDataToDH();
         txt_diem.setEnabled(false);
+        initWebcam();
     }
 
     private void initWebcam() {
@@ -1588,7 +1590,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
                 }
                 km = khuyenMaiService.searchKMofSP(spct.getMaSanPhamChiTiet());
                 themSPtoDHCT();
-            }
+            }else return;
         } while (true);
     }
 
