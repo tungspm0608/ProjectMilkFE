@@ -8,10 +8,11 @@ import service.NhanVienService;
 
 
 public class DoiMatKhau_JDialog extends javax.swing.JDialog {
-
+    private Main_JFrame mainFrame;
    
-    public DoiMatKhau_JDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public DoiMatKhau_JDialog(javax.swing.JFrame parent, boolean modal) {
+        super(parent,"Đổi mật khẩu", modal);
+        mainFrame = (Main_JFrame) parent;
         initComponents();
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         txttenDangNhap.setText(Auth.user.getMaNhanVien());
@@ -180,7 +181,11 @@ public class DoiMatKhau_JDialog extends javax.swing.JDialog {
         NhanVienService sv = new NhanVienService();
         int check = sv.doiMatKhau(Auth.user.getMaNhanVien(), matKhauMoi);
         if (check > 0) {
-            DialogHelper.alert(this,"Đổi mật khẩu thành công");
+            DialogHelper.alert(this,"Đổi mật khẩu thành công\n Vui lòng đăng nhập lại !");
+            this.dispose();
+            mainFrame.dispose();
+            DangNhap_JFrame newFrame = new DangNhap_JFrame();
+            newFrame.setVisible(true);
         } else {
             DialogHelper.alert(this,"Đổi mật khẩu không thành công do lỗi hệ thống");
         }
