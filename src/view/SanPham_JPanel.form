@@ -208,7 +208,7 @@
                                           <Component id="txt_gianhap" alignment="0" max="32767" attributes="0"/>
                                           <Component id="txt_barcode" max="32767" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="9" max="32767" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="jButton12" alignment="0" pref="78" max="32767" attributes="0"/>
                                           <Component id="jButton15" alignment="0" max="32767" attributes="0"/>
@@ -2463,6 +2463,9 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblThuongHieuMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

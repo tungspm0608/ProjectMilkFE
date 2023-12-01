@@ -223,8 +223,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         dvt.setTenDonViTinh(txtTenDVT.getText());
         dvt.setGhiChu(txtGhiChuDVT.getText());
         dvt.setTrangThai(true);
-        boolean trangThai = (boolean) tblDonViTinh.getValueAt(row, 3);
-        dvt.setTrangThai(trangThai);
+        
         return dvt;
     }
 
@@ -239,9 +238,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         DongSanPham dsp = new DongSanPham();
         dsp.setTenDongSanPham(txtTenDSP.getText());
         dsp.setGhiChu(txtGhiChuDSP.getText());
-        dsp.setTrangThai(true);
-        boolean trangThai = (boolean) tblDongSP.getValueAt(row, 3);
-        dsp.setTrangThai(trangThai);
+        dsp.setTrangThai(true);      
         return dsp;
     }
 
@@ -272,6 +269,73 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         this.fillXuatXu(xxsv.getByName(Name));
     }
 
+    void showformTH() {
+        ThuongHieu th = thsv.getAll().get(row);
+        txtTenTH.setText(th.getTenThuongHieu());
+        txtGhiChuTH.setText(th.getGhiChu());
+        if(th.getTrangThai()==true) rdoDangHT.setSelected(true);
+        else rdoNgungHT.setSelected(true);
+    }
+
+    ThuongHieu readformTH() {
+        ThuongHieu th = new ThuongHieu();
+        th.setTenThuongHieu(txtTenTH.getText());
+        th.setGhiChu(txtGhiChuTH.getText());
+        th.setTrangThai(true);
+        return th;
+    }
+    
+    boolean checkDVT() {
+        if (txtTenDVT.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Cần nhập tên đơn vị tính");
+            txtTenDVT.requestFocus();
+            return false;
+        } else if (txtGhiChuDVT.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Cần nhập ghi chú cho don vi tinh");
+            txtGhiChuDVT.requestFocus();
+            return false;
+        }
+        return true;
+    }
+
+    boolean checkTH() {
+        if (txtTenTH.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Cần nhập tên thương hiệu");
+            txtTenTH.requestFocus();
+            return false;
+        } else if (txtGhiChuTH.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Cần nhập ghi chú cho thương hiệu");
+            txtGhiChuTH.requestFocus();
+            return false;
+        }
+        return true;
+    }
+    
+     boolean checkDSP() {
+        if (txtTenDSP.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Cần nhập tên dòng sản phẩm");
+            txtTenDSP.requestFocus();
+            return false;
+        } else if (txtGhiChuDSP.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Cần nhập ghi chú cho dòng sản phẩm");
+            txtGhiChuDSP.requestFocus();
+            return false;
+        }
+        return true;
+    }
+     
+     boolean checkLH() {
+        if (txtTenLH.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Cần nhập tên loại hàng");
+            txtTenLH.requestFocus();
+            return false;
+        } else if (txtGhiChuLH.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Cần nhập ghi chú cho loại hàng");
+            txtGhiChuLH.requestFocus();
+            return false;
+        }
+        return true;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -892,7 +956,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
                                     .addComponent(cboThuongHieu, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txt_gianhap, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txt_barcode))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
                                     .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1636,6 +1700,11 @@ public class SanPham_JPanel extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
+        tblThuongHieu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblThuongHieuMouseClicked(evt);
+            }
+        });
         jScrollPane6.setViewportView(tblThuongHieu);
 
         jButton24.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -1796,7 +1865,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1177, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1177, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1910,10 +1979,12 @@ public class SanPham_JPanel extends javax.swing.JPanel {
 
     private void btnThem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThem1ActionPerformed
         // TODO add your handling code here:
+        if(this.checkDVT() == true){
         DonViTinh dvt = this.readformDVT();
         dvtsv.add(dvt);
         this.fillDonViTinh();
         JOptionPane.showMessageDialog(this, "Them thanh cong");
+        }
     }//GEN-LAST:event_btnThem1ActionPerformed
 
     private void btnMoi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoi1ActionPerformed
@@ -1925,13 +1996,16 @@ public class SanPham_JPanel extends javax.swing.JPanel {
 
     private void btnSua1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSua1ActionPerformed
         // TODO add your handling code here:      
+        if(checkDVT() == true){
         row = tblDonViTinh.getSelectedRow();
         int MaDVT = (int) tblDonViTinh.getValueAt(row, 0);
         DonViTinh dvt = this.readformDVT();
+        boolean trangThai = (boolean) tblDonViTinh.getValueAt(row, 3);
+        dvt.setTrangThai(trangThai);
         dvtsv.update(dvt, MaDVT);
         fillDonViTinh();
         JOptionPane.showMessageDialog(this, "Sửa thành công");
-        fillCombox();
+        }
     }//GEN-LAST:event_btnSua1ActionPerformed
 
     private void btnXoa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoa1ActionPerformed
@@ -1950,32 +2024,30 @@ public class SanPham_JPanel extends javax.swing.JPanel {
 
     private void btnThemDSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDSPActionPerformed
         // TODO add your handling code here:
+        if(this.checkDSP() == true){
         DongSanPham dsp = this.readformDSP();
         dspsv.add(dsp);
         this.fillDongSanPham();
         JOptionPane.showMessageDialog(this, "Them thanh cong");
+        }
     }//GEN-LAST:event_btnThemDSPActionPerformed
 
     private void btnSuaDSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaDSPActionPerformed
         // TODO add your handling code here:
+        if(checkDSP()==true){
         row = tblDongSP.getSelectedRow();
         int MaDSP = (int) tblDongSP.getValueAt(row, 0);
         DongSanPham dsp = this.readformDSP();
+        boolean trangThai = (boolean) tblDongSP.getValueAt(row, 3);
+        dsp.setTrangThai(trangThai);
         dspsv.update(dsp, MaDSP);
         fillDongSanPham();
         JOptionPane.showMessageDialog(this, "Sửa thành công");
+        }
     }//GEN-LAST:event_btnSuaDSPActionPerformed
 
     private void btnXoaDSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaDSPActionPerformed
         // TODO add your handling code here:
-        row = tblDongSP.getSelectedRow();
-        int MaDSP = (int) tblDongSP.getValueAt(row, 0);
-        dspsv.delete(MaDSP);
-        this.fillDongSanPham();
-        JOptionPane.showConfirmDialog(this, "Xóa thành công");
-    }//GEN-LAST:event_btnXoaDSPActionPerformed
-
-    private void btnMoiDSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiDSPActionPerformed
         row = tblDongSP.getSelectedRow();
         int MaDSP = (int) tblDongSP.getValueAt(row, 0);
         if (dspsv.CheckXoa(MaDSP) == null) {
@@ -1986,6 +2058,11 @@ public class SanPham_JPanel extends javax.swing.JPanel {
             txtTenDSP.setText(null);
         } else
             JOptionPane.showMessageDialog(this, "Chỉ được xóa mềm dòng này!!!");
+    }//GEN-LAST:event_btnXoaDSPActionPerformed
+
+    private void btnMoiDSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiDSPActionPerformed
+        txtTenDSP.setText(null);
+        txtGhiChuDSP.setText(null);
     }//GEN-LAST:event_btnMoiDSPActionPerformed
 
     private void tblDongSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDongSPMouseClicked
@@ -1996,10 +2073,12 @@ public class SanPham_JPanel extends javax.swing.JPanel {
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
         // TODO add your handling code here:
+        if(this.checkLH() == true){
         LoaiHang lh = this.readformLH();
         lhsv.add(lh);
         this.fillLoaiHang();
         JOptionPane.showMessageDialog(this, "Them thanh cong");
+        }
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
@@ -2049,10 +2128,26 @@ public class SanPham_JPanel extends javax.swing.JPanel {
 
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
         // TODO add your handling code here:
+        if(checkTH()==true){
+        ThuongHieu th = this.readformTH();
+        thsv.add(th);
+        this.fillThuongHieu(thsv.getAll());
+        JOptionPane.showMessageDialog(this, "Them thanh cong");
+        }
     }//GEN-LAST:event_jButton24ActionPerformed
 
     private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
         // TODO add your handling code here:
+         if(checkTH()==true){
+        row = tblThuongHieu.getSelectedRow();
+        int MaTH = (int) tblThuongHieu.getValueAt(row, 0);
+        ThuongHieu th = this.readformTH();
+        boolean trangThai = (boolean) tblThuongHieu.getValueAt(row, 2);
+        th.setTrangThai(trangThai);
+        thsv.update(th, MaTH);
+        fillThuongHieu(thsv.getAll());
+        JOptionPane.showMessageDialog(this, "Sửa thành công");
+        }
     }//GEN-LAST:event_jButton25ActionPerformed
 
     private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
@@ -2071,6 +2166,8 @@ public class SanPham_JPanel extends javax.swing.JPanel {
 
     private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
         // TODO add your handling code here:
+        txtGhiChuTH.setText(null);
+        txtTenTH.setText(null);
     }//GEN-LAST:event_jButton27ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
@@ -2215,6 +2312,12 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         fillCombox();
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void tblThuongHieuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblThuongHieuMouseClicked
+        // TODO add your handling code here:
+        row = tblThuongHieu.getSelectedRow();
+        this.showformTH();
+    }//GEN-LAST:event_tblThuongHieuMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
