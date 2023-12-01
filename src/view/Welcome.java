@@ -17,7 +17,7 @@ public class Welcome extends javax.swing.JFrame {
     private Timer t;
     private ActionListener al;
     /**
-     * Creates new form welcome
+     * Creates new form welcome 
      */
     public Welcome() {
         initComponents();
