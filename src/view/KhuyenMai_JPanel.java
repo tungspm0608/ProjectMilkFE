@@ -38,10 +38,11 @@ public class KhuyenMai_JPanel extends javax.swing.JPanel {
     public KhuyenMai_JPanel() {
         initComponents();
         this.setBackground(new Color(37, 108, 205));
-
+        txt_NgayBatDauTimKiem.setDate(new Date(2022 - 1900, 0, 1));
+        txt_NgayKetThucTimKiem.setDate(XDate.now());
         modelSP = (DefaultTableModel) tbl_SanPham.getModel();
         modelKM = (DefaultTableModel) tbl_KhuyenMai.getModel();
-        loadDataToTableKhuyenMai();
+        Loc();
         listKMCT = serKM.getAllKMCT();
         listSP = serSPCT.pagingByTen(page, 1000, ten, "");
         loadDataToSP(false);
@@ -105,6 +106,8 @@ public class KhuyenMai_JPanel extends javax.swing.JPanel {
         rdo_choPhep = new javax.swing.JRadioButton();
         rdo_stop = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         btn_CapNhat = new javax.swing.JButton();
 
         jLabel5.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
@@ -417,6 +420,10 @@ public class KhuyenMai_JPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Phân loại: ");
 
+        jButton1.setText("<<");
+
+        jButton2.setText(">>");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -428,18 +435,27 @@ public class KhuyenMai_JPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         btn_CapNhat.setFont(new java.awt.Font("DialogInput", 0, 14)); // NOI18N
@@ -579,7 +595,7 @@ public class KhuyenMai_JPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -632,7 +648,7 @@ public class KhuyenMai_JPanel extends javax.swing.JPanel {
 
             if (chon != null) {
                 JOptionPane.showMessageDialog(this, "Thêm thành công");
-                loadDataToTableKhuyenMai();
+                Loc();
             } else {
                 JOptionPane.showMessageDialog(this, "Thêm thất bại");
             }
@@ -651,14 +667,20 @@ public class KhuyenMai_JPanel extends javax.swing.JPanel {
     private void btn_TimTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TimTenActionPerformed
         // TODO add your handling code here:
         ten = txt_TimKiem.getText();
-        loadDataToTableKhuyenMai();
+        Loc();
     }//GEN-LAST:event_btn_TimTenActionPerformed
 
     private void btn_LocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LocActionPerformed
         // TODO add your handling code here:
-        String ngayBD = XDate.toString(txt_NgayBatDauTimKiem.getDate(), "yyyy-MM-dd");
-        String ngayKT = XDate.toString(txt_NgayKetThucTimKiem.getDate(), "yyyy-MM-dd");
-        list = serKM.seachByDate(ngayBD, ngayKT);
+        if (txt_NgayBatDauTimKiem.getDate() == null || !XDate.checkDataDay(txt_NgayBatDauTimKiem.getDate())) {
+            txt_NgayBatDauTimKiem.setDate(new Date(2022 - 1900, 0, 1));
+        }
+        String d1 = XDate.toString(txt_NgayBatDauTimKiem.getDate(), "yyyy-MM-dd");
+        if (txt_NgayKetThucTimKiem.getDate() == null || !XDate.checkDataDay(txt_NgayKetThucTimKiem.getDate())) {
+            txt_NgayKetThucTimKiem.setDate(XDate.now());
+        } 
+        String d2 = XDate.toString(txt_NgayKetThucTimKiem.getDate(), "yyyy-MM-dd");
+        list = serKM.seachByDate(d1, d2);
         modelKM.setRowCount(0);
         for (KhuyenMai km : list) {
 
@@ -682,7 +704,7 @@ public class KhuyenMai_JPanel extends javax.swing.JPanel {
         txt_TimKiem.setText("");
         ten = "";
         trangThai = "";
-        loadDataToTableKhuyenMai();
+        Loc();
     }//GEN-LAST:event_btn_ResetBangKMActionPerformed
 
     private void btn_CapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_CapNhatActionPerformed
@@ -700,7 +722,7 @@ public class KhuyenMai_JPanel extends javax.swing.JPanel {
             Integer kq = serKM.updateKMCT(kmct, km);
             if (kq != null) {
                 JOptionPane.showMessageDialog(this, "Cập nhật thành công");
-                loadDataToTableKhuyenMai();
+                Loc();
             } else {
                 JOptionPane.showMessageDialog(this, "Cập nhật thất bại");
             }
@@ -711,14 +733,14 @@ public class KhuyenMai_JPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
          ten = "";
         trangThai = rdo_stop.isSelected() ? "0" : "1";
-        loadDataToTableKhuyenMai();
+        Loc();
     }//GEN-LAST:event_rdo_stopActionPerformed
 
     private void rdo_choPhepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdo_choPhepActionPerformed
         // TODO add your handling code here:
          ten = "";
         trangThai = rdo_stop.isSelected() ? "0" : "1";
-        loadDataToTableKhuyenMai();
+        Loc();
     }//GEN-LAST:event_rdo_choPhepActionPerformed
 
 
@@ -733,6 +755,8 @@ public class KhuyenMai_JPanel extends javax.swing.JPanel {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JComboBox<String> cbo_DonViGiam;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -775,9 +799,9 @@ public class KhuyenMai_JPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txt_TimKiem;
     // End of variables declaration//GEN-END:variables
 
-    private void loadDataToTableKhuyenMai() {
+    private void loadDataToTableKhuyenMai(String ngayBatDau,String ngayKetThuc) {
         modelKM.setRowCount(0);
-        list = serKM.paging(page, 1000, ten, trangThai);
+        list = serKM.paging(page, 10, ten, trangThai,ngayBatDau,ngayKetThuc);
         for (KhuyenMai km : list) {
             modelKM.addRow(new Object[]{
                 km.getMaKhuyenMai(),
@@ -793,12 +817,12 @@ public class KhuyenMai_JPanel extends javax.swing.JPanel {
     }
 
     private void showKhuyenMai() {
-        KhuyenMai kmct = serKM.paging(page, 10, ten, trangThai).get(index);
+        KhuyenMai kmct = list.get(index);
         txt_MaKhuyenMai.setText(tbl_KhuyenMai.getValueAt(index, 0).toString());
         txt_TenChuongTrinh.setText(tbl_KhuyenMai.getValueAt(index, 1).toString());
         txt_GiatriGiam.setText(tbl_KhuyenMai.getValueAt(index, 2).toString());
         txt_MoTa.setText(tbl_KhuyenMai.getValueAt(index, 7).toString());
-        cbo_DonViGiam.setSelectedItem(String.valueOf(serKM.paging(page, 10, ten, trangThai).get(index).getDonViGiam()));
+        cbo_DonViGiam.setSelectedItem(kmct.getDonViGiam());
         txt_NgayBatDau.setDate(XDate.toDate(kmct.getNgayBatDau(), ""));
         txt_NgayKetThuc.setDate(XDate.toDate(kmct.getNgayKetThuc(), ""));
         if (kmct.getTrangThai() == 1) {
@@ -931,6 +955,18 @@ public class KhuyenMai_JPanel extends javax.swing.JPanel {
         } else {
             return "Chưa diễn ra";
         }
+    }
+    
+    void Loc() {
+        if (txt_NgayBatDauTimKiem.getDate() == null || !XDate.checkDataDay(txt_NgayBatDauTimKiem.getDate())) {
+            txt_NgayBatDauTimKiem.setDate(new Date(2022 - 1900, 0, 1));
+        }
+        String d1 = XDate.toString(txt_NgayBatDauTimKiem.getDate(), "yyyy-MM-dd");
+        if (txt_NgayKetThucTimKiem.getDate() == null || !XDate.checkDataDay(txt_NgayKetThucTimKiem.getDate())) {
+            txt_NgayKetThucTimKiem.setDate(XDate.now());
+        } 
+        String d2 = XDate.toString(txt_NgayKetThucTimKiem.getDate(), "yyyy-MM-dd");
+        loadDataToTableKhuyenMai(d1,d2);
     }
 
 }

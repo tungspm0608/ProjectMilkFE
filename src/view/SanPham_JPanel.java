@@ -59,10 +59,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.KhuyenMai;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import service.Auth;
+import service.KhuyenMaiService;
 
 /**
  *
@@ -78,6 +80,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
 
     SanPhamService spservice = new SanPhamService();
     SanPhamChiTietService spctservice = new SanPhamChiTietService();
+    KhuyenMaiService khuyenMaiService = new KhuyenMaiService();
 
     String path = "";
     String path1 = "";
@@ -1952,7 +1955,8 @@ public class SanPham_JPanel extends javax.swing.JPanel {
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
         // TODO add your handling code here:
-
+        ThemDonViTinh_JFrame jFrame = new ThemDonViTinh_JFrame();
+        jFrame.setVisible(true);
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -1970,7 +1974,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         // TODO add your handling code here:
-        ThemThuongHieu_JFrame newFrame = new ThemThuongHieu_JFrame();
+        ThemXuatXu_JFrame newFrame = new ThemXuatXu_JFrame();
         newFrame.setVisible(true);
     }//GEN-LAST:event_jButton16ActionPerformed
 
@@ -2295,8 +2299,9 @@ public class SanPham_JPanel extends javax.swing.JPanel {
             return;
         }
         SanPhamChiTiet spct1 = spctservice.checkSPCTinDH(spct.getMaSanPhamChiTiet());
-        if (spct1 != null) {
-            JOptionPane.showMessageDialog(null, "Sản phẩm đã trong đơn hàng");
+        KhuyenMai km1 = khuyenMaiService.searchKMofAllSP(spct.getMaSanPhamChiTiet());
+        if (spct1 != null || km1 != null) {
+            JOptionPane.showMessageDialog(null, "Sản phẩm đã trong đơn hàng hoặc khuyến mãi");
             SanPham sp = new SanPham();
             spct.setTrangThai(false);
             spctservice.updateSPCT(sp, spct);

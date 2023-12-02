@@ -7,7 +7,6 @@ package service;
 import helper.DBContext;
 import model.SanPham;
 import model.ThuongHieu;
-import model.XuatXu;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -47,6 +46,22 @@ public class ThuongHieuService {
             return null;
         }
     } 
+    
+    public int insert (String t, String g) {
+        sql = "Insert into ThuongHieu values (?,?,1)";
+        
+        try {
+            con = DBContext.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, t);
+            ps.setObject(2, g);
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    
     public SanPham CheckXoa(int MaTH) {
         sql = "select * from SanPham where maThuongHieu = ?";
         List<SanPham> list = new ArrayList<>();
@@ -156,4 +171,5 @@ public class ThuongHieuService {
             return null;
         }
     } 
+    
 }
