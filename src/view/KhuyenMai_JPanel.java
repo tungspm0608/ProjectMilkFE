@@ -635,7 +635,10 @@ public class KhuyenMai_JPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (checkForm()) {
             Integer chon = null;
-
+            if(list1.size()==0){
+                JOptionPane.showMessageDialog(null, "Mời chọn sản phẩm");
+                return;
+            }
             for (Integer i : list1) {
                 KhuyenMaiChiTiet kmct = new KhuyenMaiChiTiet();
                 kmct.setMaSanPhamChiTiet(i);
@@ -904,7 +907,16 @@ public class KhuyenMai_JPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Mo ta khonh duoc de trong");
             return false;
         }
-
+        if(!XDate.checkDataDay(txt_NgayBatDau.getDate())){
+            return false;
+        }
+        if(!XDate.checkDataDay(txt_NgayKetThuc.getDate())){
+            return false;
+        }
+        if(txt_NgayBatDau.getDate().after(txt_NgayKetThuc.getDate())){
+            JOptionPane.showMessageDialog(null, "Ngày bắt đầu phải sau ngày kết thúc");
+            return false;
+        }
         return true;
     }
 
