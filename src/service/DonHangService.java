@@ -155,7 +155,7 @@ public class DonHangService {
         return null;
     }
 
-    public Integer updateDHCT(DonHangChiTiet dhct) {
+    public Integer updateDHCT(DonHangChiTiet dhct){
         String sql = "update DonHangChiTiet set soLuong=?,tongGia=?,trangThai=?,traHang=? where maDonHangChiTiet=?";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
             pstm.setInt(1, dhct.getSoLuong());
@@ -231,16 +231,18 @@ public class DonHangService {
         return null;
     }
 
-    public ArrayList<DonHang> getAllHD(int page, int limit) {
-        String sql = "select * from DonHang where trangThai like ? and (loaiDonHang like ? or loaiDonHang=? or loaiDonHang=?) order by maDonHang "
+    public ArrayList<DonHang> getListHD(int page, int limit,String d1, String d2) {
+        String sql = "select * from DonHang where trangThai like ? and (loaiDonHang like ? or loaiDonHang=? or loaiDonHang=?) and (ngayTao between ? and ?) order by maDonHang "
                 + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
             pstm.setInt(1, 1);
             pstm.setInt(2, 2);
             pstm.setInt(3, 3);
             pstm.setInt(4, 4);
-            pstm.setInt(5, (page - 1) * limit);
-            pstm.setInt(6, limit);
+            pstm.setObject(5, d1);
+            pstm.setObject(6, d2);
+            pstm.setInt(7, (page - 1) * limit);
+            pstm.setInt(8, limit);
             ResultSet rs = pstm.executeQuery();
             ArrayList<DonHang> list = new ArrayList<>();
             while (rs.next()) {
@@ -268,37 +270,4 @@ public class DonHangService {
         }
         return null;
     }
-
-    public ArrayList<DonHang> getByDate(String d1, String d2) {
-        String sql = "select * from DonHang where ngayTao between ? and ? ";
-        try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
-            pstm.setObject(1, d1);
-            pstm.setObject(2, d2);
-            ResultSet rs = pstm.executeQuery();
-            ArrayList<DonHang> list = new ArrayList<>();
-            while (rs.next()) {
-                DonHang x = new DonHang();
-                x.setMaDonHang(rs.getInt("maDonHang"));
-                x.setMaKhachHang(rs.getInt("maKhachHang"));
-                x.setMaNhanVien(rs.getString("maNhanVien"));
-                x.setMaHHTT(rs.getInt("maHinhThucThanhToan"));
-                x.setTrangThai(rs.getInt("trangThai"));
-                x.setGhiChu(rs.getString("ghiChu"));
-                x.setNgayTao(XDate.toString(rs.getDate("ngayTao"), "dd-MM-yyyy"));
-                x.setPhiKhac(rs.getFloat("phiKhac"));
-                x.setTienHang(rs.getFloat("tienHang"));
-                x.setLoaiDonHang(rs.getInt("loaiDonHang"));
-                x.setDienThoai(rs.getString("dienThoai"));
-                x.setDiaChi(rs.getString("diaChi"));
-                x.setTienGiam(rs.getFloat("tienGiam"));
-                x.setTongTien(rs.getFloat("tongTien"));
-                list.add(x);
-            }
-            return list;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
 }

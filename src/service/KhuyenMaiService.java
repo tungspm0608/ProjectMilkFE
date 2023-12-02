@@ -13,15 +13,17 @@ import java.util.logging.Logger;
 
 public class KhuyenMaiService {
 
-    public ArrayList<KhuyenMai> paging(int page, int limit, String ten,String trangThai) {
+    public ArrayList<KhuyenMai> paging(int page, int limit, String ten,String trangThai,String ngayBatDau,String ngayKetThuc) {
         String sql = "select * from KhuyenMai \n"
-                + "where tenChuongTrinh like ? and trangThai like ? order by maKhuyenMai "
+                + "where tenChuongTrinh like ? and trangThai like ? and ngayBatDau >= ? and ngayKetThuc<= ?  order by maKhuyenMai "
                 + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
         try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
             pstm.setString(1, '%' + ten + "%");
             pstm.setString(2, trangThai + "%" );
-            pstm.setInt(3, (page - 1) * limit);
-            pstm.setInt(4, limit);
+            pstm.setObject(3, ngayBatDau);
+            pstm.setObject(4, ngayKetThuc);
+            pstm.setInt(5, (page - 1) * limit);
+            pstm.setInt(6, limit);
             ResultSet rs = pstm.executeQuery();
             ArrayList<KhuyenMai> list = new ArrayList<>();
             while (rs.next()) {
@@ -328,5 +330,29 @@ public class KhuyenMaiService {
         }
         return null;
     }
-    
+    public KhuyenMai searchKMofAllSP(int maSanPhamChiTiet) {
+        String sql = "select * from KhuyenMai\n"
+                + "inner join KhuyenMaiSanPham on KhuyenMaiSanPham.maKhuyenMai = KhuyenMai.maKhuyenMai\n"
+                + " where maSanPhamChiTiet = ?\n";
+        try (Connection con = DBContext.getConnection(); PreparedStatement pstm = con.prepareStatement(sql)) {
+            pstm.setInt(1, maSanPhamChiTiet);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                KhuyenMai km = new KhuyenMai();
+                km.setMaKhuyenMai(rs.getString("maKhuyenMai"));
+                km.setTenChuongTrinh(rs.getString("tenChuongTrinh"));
+                km.setNgayBatDau(XDate.toString(rs.getDate("ngayBatDau"), "dd-MM-yyyy"));
+                km.setNgayKetThuc(XDate.toString(rs.getDate("ngayKetThuc"), "dd-MM-yyyy"));
+                km.setMoTa(rs.getString("moTa"));
+                km.setTrangThai(rs.getInt("trangThai"));
+                km.setGiatriGiam(rs.getInt("giaTriGiam"));
+                km.setDonViGiam(rs.getString("donViGiam"));
+                return km;
+            }
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

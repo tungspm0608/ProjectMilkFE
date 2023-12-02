@@ -11,13 +11,13 @@ package helper;
 public class StringFormat {
 
     public static boolean isValidMoneyFormat(String str) {
-        // Biểu thức chính quy để kiểm tra định dạng tiền
-        String moneyRegex = "\\d{1,3}(,?\\d{3})*( VND)?";
-
+        // Biểu thức chính quy để kiểm tra định dạng tiền   
+        String moneyRegex = "\\d{1,3}([.,]?\\d{3})*(\\.\\d{1,2})?( VND)?";
+     
         // Sử dụng phương thức matches với biểu thức chính quy
         return str.matches(moneyRegex);
     }
-
+    
     public static boolean isValidNumberFormat(String str) {
         // Sử dụng phương thức matches với biểu thức chính quy "\\d+\\.\\d+"
         return str.matches("\\d+(\\.\\d+)?");

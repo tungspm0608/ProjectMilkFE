@@ -306,6 +306,7 @@ public class SanPhamChiTietService {
                 x.setMaSanPhamChiTiet(rs.getInt("maSanPhamChiTiet"));
                 return x;
             }
+            return null;
         } catch (Exception e) {
             e.printStackTrace();
         }

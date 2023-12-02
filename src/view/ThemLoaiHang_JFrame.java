@@ -27,11 +27,11 @@ public class ThemLoaiHang_JFrame extends javax.swing.JFrame {
         String t = txt_TenLoaiHang.getText();
         String g = txt_GhiChu.getText();
         
-        if (!t.matches("^[a-zA-Z\\s]+$")) {
+        if (!t.matches("[\\\\p{L}\\\\s\\\\d]+$")) {
             DialogHelper.alert(this, "Nhập không đúng định dạng");
             return;
         }
-        if (!g.matches("[a-zA-Z\\s]*")) {
+        if (!g.matches("[\\\\p{L}\\\\s\\\\d]+$")) {
             DialogHelper.alert(this, "Không được ghi chú kí tự đặc biệt");
             return;
         }
