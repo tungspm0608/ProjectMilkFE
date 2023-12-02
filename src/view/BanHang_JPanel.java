@@ -112,7 +112,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         panel.setPreferredSize(size);
         panel.setFPSDisplayed(true);
 
-        qrcode.add(panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 340, 120));
+        qrcode.add(panel,new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 340, 120));
 
         executor.execute((Runnable) this);
 
@@ -670,8 +670,8 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
                 .addGroup(panelhdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelhdLayout.createSequentialGroup()
                         .addGroup(panelhdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 339, Short.MAX_VALUE)
-                            .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 339, Short.MAX_VALUE)
+                            .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
+                            .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
                             .addGroup(panelhdLayout.createSequentialGroup()
                                 .addGroup(panelhdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(btn_hoanThanh, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -717,7 +717,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ThanhToan, javax.swing.GroupLayout.PREFERRED_SIZE, 342, Short.MAX_VALUE)
+            .addComponent(ThanhToan, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
             .addComponent(qrcode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(

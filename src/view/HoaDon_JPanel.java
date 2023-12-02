@@ -47,13 +47,12 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
         dateCuoi.setDate(XDate.now());
         mol = (DefaultTableModel) tblHoaDon.getModel();
         mol1 = (DefaultTableModel) tbl_dhct.getModel();
-        hDList = hdsv.getAllHD(page, 10);
-        this.fillTableDH(hdsv.getAllHD(page, 10));
+        Loc();
     }
 
-    void fillTableDH(ArrayList<DonHang> hDList) {
+    void fillTableDH(String d1,String d2) {
         mol.setRowCount(0);
-        
+        hDList = hdsv.getListHD(page,10, d1, d2);
         int viti = 1;
         if (page != 1) {
             viti = (page-1) * 10+1;
@@ -74,7 +73,7 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
             dateCuoi.setDate(XDate.now());
         } 
         String d2 = XDate.toString(dateCuoi.getDate(), "yyyy-MM-dd");
-        fillTableDH(hdsv.getByDate(d1,d2));
+        fillTableDH(d1,d2);
     }
 
     /**
@@ -221,6 +220,11 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
                 jButton3MouseClicked(evt);
             }
         });
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         vitri.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         vitri.setForeground(new java.awt.Color(255, 255, 255));
@@ -286,13 +290,10 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
     private void btnLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocActionPerformed
         // TODO add your handling code here:
         this.Loc();
-     
     }//GEN-LAST:event_btnLocActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        hDList = hdsv.getAllHD(page, 10);
-        fillTableDH(hdsv.getAllHD(page, 10));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tbl_dhctMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_dhctMouseClicked
@@ -303,9 +304,6 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         // TODO add your handling code here:
-        page++;
-        vitri.setText(String.valueOf(page));
-        fillTableDH(hDList);
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -314,7 +312,7 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
             page--;
         }
         vitri.setText(String.valueOf(page));
-        fillTableDH(hDList);
+        Loc();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
@@ -325,9 +323,16 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_tblHoaDonMouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        // trả hàng
         traHang();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        page+=1;
+        vitri.setText(String.valueOf(page));
+        Loc();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -371,7 +376,7 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
     }
 
     private void traHang() {
-        String sls = JOptionPane.showInputDialog(null, "Nhập số lượng tar hàng");
+        String sls = JOptionPane.showInputDialog(null, "Nhập số lượng trả hàng");
         if(sls==null){
             return;
         }else if(!sls.matches("\\d+")){
@@ -389,7 +394,7 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "trả hàng thành công");
             fillTableDHCT();
             hdsv.updateDH(dh);
-            fillTableDH(hDList);
+            Loc();
         }
     }
 }

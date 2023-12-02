@@ -931,7 +931,6 @@ public class KhuyenMai_JPanel extends javax.swing.JPanel {
         } else {
             return "Chưa diễn ra";
         }
-
     }
 
 }

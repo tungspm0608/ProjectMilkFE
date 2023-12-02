@@ -17,7 +17,7 @@ public class StringFormat {
         // Sử dụng phương thức matches với biểu thức chính quy
         return str.matches(moneyRegex);
     }
-
+    
     public static boolean isValidNumberFormat(String str) {
         // Sử dụng phương thức matches với biểu thức chính quy "\\d+\\.\\d+"
         return str.matches("\\d+(\\.\\d+)?");
