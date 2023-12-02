@@ -292,7 +292,6 @@ public class DonHangService {
                 x.setDiaChi(rs.getString("diaChi"));
                 x.setTienGiam(rs.getFloat("tienGiam"));
                 x.setTongTien(rs.getFloat("tongTien"));
-
                 list.add(x);
             }
             return list;

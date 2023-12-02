@@ -404,7 +404,7 @@ select * from KhachHang
 select * from HinhThucThanhToan
 select * from KhuyenMai
 select * from KhuyenMaiSanPham
-select * from SanPham
+select * from SanPham order by maSanPham
 select * from SanPhamChiTiet
 select * from DonHang
 select * from DonHangChiTiet
@@ -651,6 +651,57 @@ BEGIN
         MONTH(ngayTao)
     ORDER BY
         Thang;
+END;
+GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[SanPhamTheoLuotBan]
+    @MaLoaiHang INT = NULL,
+    @MaDongSanPham INT = NULL,
+    @MaThuongHieu INT = NULL,
+    @StartDate DATE = NULL,
+    @EndDate DATE = NULL
+AS
+BEGIN
+    SELECT
+        spct.maSanPhamChiTiet,
+        sp.tenSanPham,
+        dt.tenDonViTinh,
+        spct.trangThai,
+        spct.soLuong,
+        lh.tenLoaiHang,
+        dsp.tenDongSanPham,
+        th.tenThuongHieu,
+        LuotBan = (
+            SELECT SUM(ISNULL(dhct.soLuong, 0))
+            FROM DonHangChiTiet dhct
+            LEFT JOIN DonHang dh ON dhct.maDonHang = dh.maDonHang
+            WHERE spct.maSanPhamChiTiet = dhct.maSanPhamChiTiet
+                AND (@StartDate IS NULL OR dh.ngayTao >= @StartDate)
+                AND (@EndDate IS NULL OR dh.ngayTao <= @EndDate)
+        ),
+        spct.donGia
+    FROM
+        SanPhamChiTiet spct
+    INNER JOIN
+        SanPham sp ON spct.maSanPham = sp.maSanPham
+    INNER JOIN
+        DonViTinh dt ON spct.maDonViTinh = dt.maDonViTinh
+    INNER JOIN
+        LoaiHang lh ON sp.maLoaiHang = lh.maLoaiHang
+    INNER JOIN
+        DongSanPham dsp ON sp.maDongSanPham = dsp.maDongSanPham
+    INNER JOIN
+        ThuongHieu th ON sp.maThuongHieu = th.maThuongHieu
+    WHERE
+        (@MaLoaiHang IS NULL OR sp.maLoaiHang = @MaLoaiHang) AND
+        (@MaDongSanPham IS NULL OR sp.maDongSanPham = @MaDongSanPham) AND
+        (@MaThuongHieu IS NULL OR sp.maThuongHieu = @MaThuongHieu)
+    ORDER BY
+        LuotBan DESC;
 END;
 GO
 
