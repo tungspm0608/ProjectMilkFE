@@ -55,7 +55,7 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
         
         int viti = 1;
         if (page != 1) {
-            viti = page * 10;
+            viti = (page-1) * 10+1;
         }
         for (DonHang h : hDList) {
             mol.addRow(new Object[]{viti, h.getMaNhanVien(), h.getMaKhachHang(), h.getTienGiam(), h.getTongTien(), h.getNgayTao(),

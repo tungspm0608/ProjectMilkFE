@@ -1,5 +1,6 @@
 package view;
 
+import helper.StringFormat;
 import model.KhachHang;
 import service.KhachHangService;
 import helper.XDate;
@@ -369,6 +370,7 @@ public class KhachHangThanThiet_JPanel extends javax.swing.JPanel {
         }
         KhachHang y = readForm();
         y.setMaKhachHang(list.get(index).getMaKhachHang());
+        y.setDiem(list.get(index).getDiem());
         Integer x = service.update(y);
         if (x != null) {
             JOptionPane.showMessageDialog(null, "Sửa thành công");
@@ -520,6 +522,10 @@ public class KhachHangThanThiet_JPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Tên nhân viên không được để trống");
             return false;
         }
+        if (StringFormat.containsDigit(tenNV)) {
+            JOptionPane.showMessageDialog(this, "Tên nhân viên sai định dạng");
+            return false;
+        }
         String ngaySinh = txt_NgaySinh.getText().trim();
         if (ngaySinh.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Ngày sinh không được để trống");
@@ -530,9 +536,17 @@ public class KhachHangThanThiet_JPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Email không được để trống");
             return false;
         }
+        if (!StringFormat.isValidEmail(email)) {
+            JOptionPane.showMessageDialog(this, "Email sai định dạng");
+            return false;
+        }
         String soDienThoai = txt_SoDienThoai.getText().trim();
         if (soDienThoai.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Số điện thoại không được để trống");
+            return false;
+        }
+        if (!StringFormat.isValidNumberFormat(soDienThoai)) {
+            JOptionPane.showMessageDialog(this, "Số điện thoại aai định dạng");
             return false;
         }
         String ngayDK = txt_NgayDangKy.getText().trim();
@@ -542,4 +556,6 @@ public class KhachHangThanThiet_JPanel extends javax.swing.JPanel {
         }
         return true;
     }
+    
+    
 }

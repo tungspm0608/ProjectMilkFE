@@ -7,6 +7,7 @@ package view;
 import model.NhanVien;
 import service.NhanVienService;
 import helper.FileChoose;
+import helper.StringFormat;
 import helper.XDate;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class NhanVien_JPanel extends javax.swing.JPanel {
     int page = 1, index = -1;
     String sdt = "", ten = "";
     ArrayList<NhanVien> list = new ArrayList<>();
-    String path = "src\\utilities\\imageNV\\";
+    String path = ".\\image\\imageNV\\";
     String path1 = "";
 
     public NhanVien_JPanel() {
@@ -37,9 +38,9 @@ public class NhanVien_JPanel extends javax.swing.JPanel {
         this.setBackground(new Color(37, 108, 205));
         String os = System.getProperty("os.name").toLowerCase();
         if (Auth.HDH==0) {
-            path = "src\\utilities\\imageNV\\";
+            path = ".\\image\\imageNV\\";
         } else if (Auth.HDH==1) {
-            path = "src/utilities/imageNV/";
+            path = "./image/imageNV/";
         }
         model = (DefaultTableModel) tbl_NhanVien.getModel();
         loadDataToTable();
@@ -500,6 +501,11 @@ public class NhanVien_JPanel extends javax.swing.JPanel {
     private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
         // Thêm sản phẩm
         if(!checkForm()) return;
+        NhanVien nv = service.searchNVByMaNV(readForm().getMaNhanVien());
+        if(nv!=null){
+            JOptionPane.showMessageDialog(null, "Mã nhân viên đã tồn tại");
+            return;
+        }
         Integer chon = service.insert(readForm());
         if (chon != null) {
             JOptionPane.showMessageDialog(null, "Thêm thành công");
@@ -641,6 +647,10 @@ public class NhanVien_JPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Tên nhân viên không được để trống");
             return false;
         }
+        if (StringFormat.containsDigit(tenNV)) {
+            JOptionPane.showMessageDialog(this, "Tên nhân viên sai định dạng");
+            return false;
+        }
         String matKhau=txt_MatKhau.getText().trim();
         if (matKhau.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Mật khẩu không được để trống");
@@ -661,6 +671,10 @@ public class NhanVien_JPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Số điện thoại không được để trống");
             return false;
         }
+        if (!StringFormat.isValidNumberFormat(soDienThoai)) {
+            JOptionPane.showMessageDialog(this, "Số điện thoại sai định dạng");
+            return false;
+        }
         String ngaySinh=txt_NgaySinh.getText().trim();
         if (ngaySinh.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Ngày sinh không được để trống");
@@ -669,6 +683,10 @@ public class NhanVien_JPanel extends javax.swing.JPanel {
         String email=txt_Email.getText().trim();
         if (email.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Email không được để trống");
+            return false;
+        }
+        if (!StringFormat.isValidEmail(email)){
+            JOptionPane.showMessageDialog(this, "Email sai định dạng");
             return false;
         }
         return true;

@@ -4,22 +4,21 @@
  */
 package helper;
 
+import java.awt.Image;
 import model.SanPham;
 import model.SanPhamChiTiet;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.ClientAnchor;
-import org.apache.poi.ss.usermodel.Drawing;
-import org.apache.poi.ss.usermodel.Picture;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Workbook;
+import javax.swing.ImageIcon;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
@@ -69,7 +68,8 @@ public class ImportExcell {
             if (rowIterator.hasNext()) {
                 rowIterator.next();
             }
-
+            int hang =0;
+            
             while (rowIterator.hasNext()) {
                 Row row = rowIterator.next();
                 SanPhamChiTiet x = new SanPhamChiTiet();
@@ -86,8 +86,12 @@ public class ImportExcell {
                 x.setNgaySanXuat(XDate.toString(convertExcelDateToJavaDate(exceldate), "dd-MM-yyyy"));
                 x.setBarcode(getStringCellValue(row.getCell(16)));
                 x.setTrangThai((int) row.getCell(17).getNumericCellValue() == 1 ? true : false);
-                x.setAnhSanPham(getStringCellValue(row.getCell(8)));
+                Cell cell = row.getCell(8);
+                String name = x.getMaSanPham() + "x" + x.getMaSanPhamChiTiet();
+                getImageIconFromCell(hang,cell, name);
+                x.setAnhSanPham(name +  ".jpg");
                 data.add(x);
+                hang++;
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -130,5 +134,25 @@ public class ImportExcell {
             return number;
         }
         return 1;
+    }
+
+    private static Image loadImageFromBytes(byte[] imageBytes) {
+        ImageIcon imageIcon = new ImageIcon(imageBytes);
+        return imageIcon.getImage();
+    }
+
+    private static void saveImageToDirectory(byte[] imageBytes, String destinationPath) {
+        try (FileOutputStream fileOutputStream = new FileOutputStream(destinationPath)) {
+            fileOutputStream.write(imageBytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static ImageIcon getImageIconFromCell(int hang,Cell cell, String name) {
+        System.out.println(((Workbook) cell.getSheet().getWorkbook()).getAllPictures().get(hang).getData());
+        byte[] pictureData = ((Workbook) cell.getSheet().getWorkbook()).getAllPictures().get(hang).getData();
+        saveImageToDirectory(pictureData, ".\\image\\imageSP\\" + name + ".jpg");
+        return new ImageIcon(pictureData);
     }
 }

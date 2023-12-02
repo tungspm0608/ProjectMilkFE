@@ -1,7 +1,7 @@
-﻿create database DuAnBanSua_MilkFE1
+﻿create database DuAnBanSua_MilkFE
 go
 
-use DuAnBanSua_MilkFE1
+use DuAnBanSua_MilkFE
 go
 
 create table XuatXu
