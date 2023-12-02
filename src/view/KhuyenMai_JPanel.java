@@ -38,7 +38,8 @@ public class KhuyenMai_JPanel extends javax.swing.JPanel {
     public KhuyenMai_JPanel() {
         initComponents();
         this.setBackground(new Color(37, 108, 205));
-
+        txt_NgayBatDauTimKiem.setDate(new Date(2022 - 1900, 0, 1));
+        txt_NgayKetThucTimKiem.setDate(XDate.now());
         modelSP = (DefaultTableModel) tbl_SanPham.getModel();
         modelKM = (DefaultTableModel) tbl_KhuyenMai.getModel();
         loadDataToTableKhuyenMai();
@@ -656,9 +657,15 @@ public class KhuyenMai_JPanel extends javax.swing.JPanel {
 
     private void btn_LocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LocActionPerformed
         // TODO add your handling code here:
-        String ngayBD = XDate.toString(txt_NgayBatDauTimKiem.getDate(), "yyyy-MM-dd");
-        String ngayKT = XDate.toString(txt_NgayKetThucTimKiem.getDate(), "yyyy-MM-dd");
-        list = serKM.seachByDate(ngayBD, ngayKT);
+        if (txt_NgayBatDauTimKiem.getDate() == null || !XDate.checkDataDay(txt_NgayBatDauTimKiem.getDate())) {
+            txt_NgayBatDauTimKiem.setDate(new Date(2022 - 1900, 0, 1));
+        }
+        String d1 = XDate.toString(txt_NgayBatDauTimKiem.getDate(), "yyyy-MM-dd");
+        if (txt_NgayKetThucTimKiem.getDate() == null || !XDate.checkDataDay(txt_NgayKetThucTimKiem.getDate())) {
+            txt_NgayKetThucTimKiem.setDate(XDate.now());
+        } 
+        String d2 = XDate.toString(txt_NgayKetThucTimKiem.getDate(), "yyyy-MM-dd");
+        list = serKM.seachByDate(d1, d2);
         modelKM.setRowCount(0);
         for (KhuyenMai km : list) {
 
