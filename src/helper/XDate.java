@@ -59,7 +59,11 @@ public class XDate {
     }
     
     public static boolean checkDataYear (int year) {
-        if (year > XDate.now().getYear() || year < 2022) {
+        // Lấy ngày hiện tại
+        LocalDate currentDate = LocalDate.now();
+        // Lấy năm hiện tại từ đối tượng LocalDate
+        int currentYear = currentDate.getYear();
+        if (year > currentYear || year < 2022) {
             DialogHelper.alert(null, "Thời gian vượt ngoài khoảng thời gian hoạt động");
             return false;
         }

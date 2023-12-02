@@ -5,6 +5,7 @@
 package service;
 
 import helper.DBContext;
+import helper.XDate;
 import java.io.File;
 import java.io.IOException;
 import java.sql.*;
@@ -49,7 +50,7 @@ public class ThongKeService {
                 doanhThu, donHangThanhCong, donHangThatBai
             };
         } catch (Exception e) {
-            System.out.println("loi");
+            System.out.println("loi thong ke theo ngay");
             return null;
         }
     }
@@ -72,7 +73,7 @@ public class ThongKeService {
                 doanhThu, donHangThanhCong, donHangThatBai
             };
         } catch (Exception e) {
-            System.out.println("loi");
+            System.out.println("loi thong ke theo thang");
             return null;
         }
     }
@@ -99,7 +100,7 @@ public class ThongKeService {
             }
             return list;
         } catch (Exception e) {
-            System.out.println("loi");
+            System.out.println("loi thong ke theo thang chi tiet");
             return null;
         }
     }
@@ -128,7 +129,6 @@ public class ThongKeService {
         try {
             CallableStatement statement = con.prepareCall("{call donHangTheoThang(?)}");
             statement.setInt(1, year);
-
             // Thực thi stored procedure
             statement.execute();
             ResultSet resultSet = statement.getResultSet();
@@ -144,7 +144,7 @@ public class ThongKeService {
             }
             return list;
         } catch (Exception e) {
-            System.out.println("loi");
+            System.out.println("loi don hang theo thang");
             return null;
         }
     }
@@ -174,7 +174,10 @@ public class ThongKeService {
         /* Width of the image */
         int height = 700;
         /* Height of the image */
-        File Chart = new File(chart.getTitle() + ".jpeg");
+        String today = XDate.toString(XDate.now(), "HH'h'-mm'm'-ss's' dd-MM-yyyy");
+        String filePath = Auth.HDH == 1 ? "image/ThongKeDonHang/" : "image\\ThongKeDonHang\\";
+        String title = chart.getTitle().getText() +" "+today;
+        File Chart = new File(filePath + title + ".jpeg");
         try {
             ChartUtilities.saveChartAsJPEG(Chart, chart, width, height);
         } catch (IOException ex) {
@@ -220,7 +223,7 @@ public class ThongKeService {
                 };
                 list.add(o);
             }
-            System.out.println(list.size());
+            System.out.println("Số sản phẩm có trong bảng : " + list.size());
             return list;
         } catch (Exception e) {
             e.printStackTrace();
@@ -232,6 +235,7 @@ public class ThongKeService {
                     con.close();
                 }
             } catch (SQLException e) {
+                System.out.println("loi thong ke san pham theo luot ban");
                 e.printStackTrace();
             }
         }
@@ -263,6 +267,7 @@ public class ThongKeService {
                 tu18Den30, tu30Den50, tu50TroLen
             };
         } catch (Exception e) {
+            System.out.println("loi thong ke theo khach hang theo do tuoi");
             e.printStackTrace();
             return null;
         }
@@ -308,6 +313,7 @@ public class ThongKeService {
                 slNam, slNu
             };
         } catch (Exception e) {
+            System.out.println("loi thong ke theo khach hang theo gioi tinh");
             e.printStackTrace();
             return null;
         }

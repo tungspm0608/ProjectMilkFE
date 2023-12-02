@@ -8,6 +8,7 @@ import helper.DialogHelper;
 import helper.XDate;
 import java.awt.Color;
 import java.io.FileOutputStream;
+import java.time.LocalDate;
 import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -83,17 +84,17 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
         jp1ThuongHieu.setSelectedIndex(jp1ThuongHieu.getItemCount() - 1);
         
         jp1NgayBatDau.setDate(XDate.toDate("2022-1-1", "yyyy-MM-dd"));
-        jp1NgayKetThuc.setDate(XDate.now());
+        LocalDate currentDate = LocalDate.now();
+        jp1NgayKetThuc.setDate(new Date(currentDate.getYear() - 1900, currentDate.getMonthValue() - 1, currentDate.getDayOfMonth()));
         String ngayBatDau = XDate.toString(jp1NgayBatDau.getDate(), "yyyy-MM-dd");
         String ngayKetThuc = XDate.toString(jp1NgayKetThuc.getDate(), "yyyy-MM-dd");
-        
-        jp1TrangThaiLoc = true;
         
         mol = (DefaultTableModel) jp1SanPhamTheoLuotBan.getModel();
         mol.setRowCount(0);
         for (Object[] objects : tksv.sanPhamTheoLuotBan(null, null, null, ngayBatDau, ngayKetThuc)) {
             mol.addRow(objects);
         }
+        jp1TrangThaiLoc = true;
     }
 
     private void setUpjpdoanhThu() {
@@ -763,9 +764,9 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        // Doi nam o trong bang doanh thu
+        // Doi nam o trong bang doanh thu và lọc bảng doanh thu
         int year = jp2YearChooser.getYear();
-        if (XDate.checkDataYear(year)) {
+        if (!XDate.checkDataYear(year)) {
             return;
         }
         mol = (DefaultTableModel) jp2doanhThutheoThangChiTiet.getModel();
@@ -774,6 +775,7 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
             mol.addRow(objects);
         }
         chartPanel2.setChart(tksv.createDoanhThuChiTietChart(year));
+        DialogHelper.alert(this, "Đã hoàn tất lọc");
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
@@ -788,14 +790,15 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         // Lọc bảng đơn hàng
         int year = jp4YearChooser.getYear();
-        if (XDate.checkDataYear(year)) {
+        if (!XDate.checkDataYear(year)) {
             return;
         }
         if (jp4nutHienThiNgang.isSelected()) {
-            chartPanel4.setChart(tksv.createDonHangTheoThangChart(year, 0));
-        } else {
             chartPanel4.setChart(tksv.createDonHangTheoThangChart(year, 1));
+        } else {
+            chartPanel4.setChart(tksv.createDonHangTheoThangChart(year, 0));
         }
+        DialogHelper.alert(this, "Đã hoàn tất lọc");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jp4nutHienThiDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jp4nutHienThiDocActionPerformed
@@ -832,6 +835,7 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
         for (Object[] objects : tksv.sanPhamTheoLuotBan(loaiHang, dongSanPham, thuongHieu, ngayBatDau, ngayKetThuc)) {
             mol.addRow(objects);
         }
+        DialogHelper.alert(this, "Đã hoàn tất lọc");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -930,9 +934,9 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
             }
 
             // Ghi Workbook xuống tệp
-            String today = XDate.toString(XDate.now(), "HH'h'-mm'm'-ss's'dd-MM-yyyy");
-            String filePath = Auth.HDH == 1 ? "src/utilities/ThongKeSanPham/" : "src\\utilities\\ThongKeSanPham\\";
-            try (FileOutputStream fileOut = new FileOutputStream(filePath + "ThongKeSanPhamNgay" + today)) {
+            String today = XDate.toString(XDate.now(), "HH'h'-mm'm'-ss's' dd-MM-yyyy");
+            String filePath = Auth.HDH == 1 ? "image/ThongKeSanPham/" : "image\\ThongKeSanPham\\";
+            try (FileOutputStream fileOut = new FileOutputStream(filePath + "Thống kê sản phẩm " + today + ".xlsx")) {
                 workbook.write(fileOut);
                 DialogHelper.alert(this, "Xuất Excel thành công!");
             } catch (Exception e) {
@@ -974,13 +978,17 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
 
     private void jp1NgayBatDauPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jp1NgayBatDauPropertyChange
         // TODO add your handling code here:
-        System.out.println("Here");
-        jp1TrangThaiLoc = false;
+        if (jp1NgayBatDau.getDate().compareTo(new Date(2022 - 1900, 0, 1)) != 0) {
+            jp1TrangThaiLoc = false;
+        }
     }//GEN-LAST:event_jp1NgayBatDauPropertyChange
 
     private void jp1NgayKetThucPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jp1NgayKetThucPropertyChange
         // TODO add your handling code here:
-        jp1TrangThaiLoc = false;
+        LocalDate currentDate = LocalDate.now();
+        if (jp1NgayKetThuc.getDate().compareTo(new Date(currentDate.getYear() - 1900, currentDate.getMonthValue() - 1, currentDate.getDayOfMonth())) != 0) {
+            jp1TrangThaiLoc = false;
+        }
     }//GEN-LAST:event_jp1NgayKetThucPropertyChange
 
 
