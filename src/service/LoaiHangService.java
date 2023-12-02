@@ -44,6 +44,22 @@ public class LoaiHangService {
             return null;
         }
     } 
+    
+    public int insert (String t, String g) {
+        sql = "Insert into LoaiHang values (?,?,1)";
+        
+        try {
+            con = DBContext.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, t);
+            ps.setObject(2, g);
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    
      public SanPham CheckXoa(int MaLH) {
         sql = "select * from SanPham where maLoaiHang = ?";
         List<SanPham> list = new ArrayList<>();

@@ -48,6 +48,21 @@ public class DonViTinh_service {
         }
     }
     
+    public int insert (String t, String g) {
+        sql = "Insert into DonViTinh values (?,?,1)";
+        
+        try {
+            con = DBContext.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setObject(1, t);
+            ps.setObject(2, g);
+            return ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+    
     public SanPham CheckXoa(int MaDVT) {
         sql = "select * from SanPham \n"
                 + "join SanPhamChiTiet on SanPham.maSanPham = SanPhamChiTiet.maSanPham\n"
