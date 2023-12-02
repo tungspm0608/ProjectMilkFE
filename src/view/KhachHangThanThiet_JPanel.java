@@ -1,5 +1,6 @@
 package view;
 
+import helper.DialogHelper;
 import helper.StringFormat;
 import model.KhachHang;
 import service.KhachHangService;
@@ -355,10 +356,10 @@ public class KhachHangThanThiet_JPanel extends javax.swing.JPanel {
         kh.setNgayTao(XDate.toString(new Date(), "dd-MM-yyyy"));
         Integer x = service.insert(kh);
         if (x != null) {
-            JOptionPane.showMessageDialog(null, "Thêm thành công");
+            DialogHelper.alert(null, "Thêm thành công");
             loadDataToTable();
         } else {
-            JOptionPane.showMessageDialog(null, "Thêm thất bại");
+            DialogHelper.alert(null, "Thêm thất bại");
         }
 
     }//GEN-LAST:event_btn_ThemActionPerformed
@@ -373,10 +374,10 @@ public class KhachHangThanThiet_JPanel extends javax.swing.JPanel {
         y.setDiem(list.get(index).getDiem());
         Integer x = service.update(y);
         if (x != null) {
-            JOptionPane.showMessageDialog(null, "Sửa thành công");
+            DialogHelper.alert(null, "Sửa thành công");
             loadDataToTable();
         } else {
-            JOptionPane.showMessageDialog(null, "Sửa thất bại");
+            DialogHelper.alert(null, "Sửa thất bại");
         }
 
     }//GEN-LAST:event_btn_CapNhatActionPerformed
@@ -519,39 +520,39 @@ public class KhachHangThanThiet_JPanel extends javax.swing.JPanel {
     private boolean checkForm() {
         String tenNV = txt_HotenKhachHang.getText().trim();
         if (tenNV.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Tên nhân viên không được để trống");
+            DialogHelper.alert(this, "Tên nhân viên không được để trống");
             return false;
         }
         if (StringFormat.containsDigit(tenNV)) {
-            JOptionPane.showMessageDialog(this, "Tên nhân viên sai định dạng");
+            DialogHelper.alert(this, "Tên nhân viên sai định dạng");
             return false;
         }
         String ngaySinh = txt_NgaySinh.getText().trim();
         if (ngaySinh.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ngày sinh không được để trống");
+            DialogHelper.alert(this, "Ngày sinh không được để trống");
             return false;
         }
         String email = txt_Email.getText().trim();
         if (email.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Email không được để trống");
+            DialogHelper.alert(this, "Email không được để trống");
             return false;
         }
         if (!StringFormat.isValidEmail(email)) {
-            JOptionPane.showMessageDialog(this, "Email sai định dạng");
+            DialogHelper.alert(this, "Email sai định dạng");
             return false;
         }
         String soDienThoai = txt_SoDienThoai.getText().trim();
         if (soDienThoai.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Số điện thoại không được để trống");
+            DialogHelper.alert(this, "Số điện thoại không được để trống");
             return false;
         }
         if (!StringFormat.isValidNumberFormat(soDienThoai)) {
-            JOptionPane.showMessageDialog(this, "Số điện thoại aai định dạng");
+            DialogHelper.alert(this, "Số điện thoại aai định dạng");
             return false;
         }
         String ngayDK = txt_NgayDangKy.getText().trim();
         if (ngayDK.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ngày đăng ký không được để trống");
+            DialogHelper.alert(this, "Ngày đăng ký không được để trống");
             return false;
         }
         return true;

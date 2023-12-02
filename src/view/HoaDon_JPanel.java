@@ -1,5 +1,6 @@
 package view;
 
+import helper.DialogHelper;
 import helper.XDate;
 import java.awt.Color;
 import java.text.DecimalFormat;
@@ -65,6 +66,10 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
     }
 
     void Loc() {
+        if (dateDau.getDate().after(dateCuoi.getDate())) {
+            DialogHelper.alert(this,"Ngày bắt đầu không được nhỏ hơn ngày kết thúc");
+            return;
+        }
         if (dateDau.getDate() == null || !XDate.checkDataDay(dateDau.getDate())) {
             dateDau.setDate(new Date(2022 - 1900, 0, 1));
         }

@@ -813,6 +813,10 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         // bấm bút lọc sản phẩm ở jp1
         jp1TrangThaiLoc = true;
+        if (jp1NgayBatDau.getDate().after(jp1NgayKetThuc.getDate())) {
+            DialogHelper.alert(this,"Ngày bắt đầu không được nhỏ hơn ngày kết thúc");
+            return;
+        }
         int chonLoaiHang = jp1LoaiSanPham.getSelectedIndex();
         Integer loaiHang = chonLoaiHang == jp1LoaiSanPham.getItemCount() - 1 ? null : lhsv.getAll().get(chonLoaiHang).getMaLoaiHang();
 

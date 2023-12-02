@@ -37,6 +37,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeWriter;
 import helper.StringFormat;
+import helper.DialogHelper;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
@@ -293,11 +294,11 @@ public class SanPham_JPanel extends javax.swing.JPanel {
 
     boolean checkDVT() {
         if (txtTenDVT.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Cần nhập tên đơn vị tính");
+            DialogHelper.alert(this, "Cần nhập tên đơn vị tính");
             txtTenDVT.requestFocus();
             return false;
         } else if (txtGhiChuDVT.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Cần nhập ghi chú cho don vi tinh");
+            DialogHelper.alert(this, "Cần nhập ghi chú cho don vi tinh");
             txtGhiChuDVT.requestFocus();
             return false;
         }
@@ -306,11 +307,11 @@ public class SanPham_JPanel extends javax.swing.JPanel {
 
     boolean checkTH() {
         if (txtTenTH.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Cần nhập tên thương hiệu");
+            DialogHelper.alert(this, "Cần nhập tên thương hiệu");
             txtTenTH.requestFocus();
             return false;
         } else if (txtGhiChuTH.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Cần nhập ghi chú cho thương hiệu");
+            DialogHelper.alert(this, "Cần nhập ghi chú cho thương hiệu");
             txtGhiChuTH.requestFocus();
             return false;
         }
@@ -319,11 +320,11 @@ public class SanPham_JPanel extends javax.swing.JPanel {
 
     boolean checkDSP() {
         if (txtTenDSP.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Cần nhập tên dòng sản phẩm");
+            DialogHelper.alert(this, "Cần nhập tên dòng sản phẩm");
             txtTenDSP.requestFocus();
             return false;
         } else if (txtGhiChuDSP.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Cần nhập ghi chú cho dòng sản phẩm");
+            DialogHelper.alert(this, "Cần nhập ghi chú cho dòng sản phẩm");
             txtGhiChuDSP.requestFocus();
             return false;
         }
@@ -332,11 +333,11 @@ public class SanPham_JPanel extends javax.swing.JPanel {
 
     boolean checkLH() {
         if (txtTenLH.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Cần nhập tên loại hàng");
+            DialogHelper.alert(this, "Cần nhập tên loại hàng");
             txtTenLH.requestFocus();
             return false;
         } else if (txtGhiChuLH.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Cần nhập ghi chú cho loại hàng");
+            DialogHelper.alert(this, "Cần nhập ghi chú cho loại hàng");
             txtGhiChuLH.requestFocus();
             return false;
         }
@@ -1912,7 +1913,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         if (index == -1) {
-            JOptionPane.showMessageDialog(null, "Mời chọn sản phẩm muốn cập nhật");
+            DialogHelper.alert(null, "Mời chọn sản phẩm muốn cập nhật");
             return;
         }
         if (!checkForm()) {
@@ -1931,10 +1932,10 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         }
         Integer kq = spctservice.updateSPCT(sp, spct1);
         if (kq != null) {
-            JOptionPane.showMessageDialog(null, "Cập nhật thành công");
+            DialogHelper.alert(null, "Cập nhật thành công");
             loadDataToTable();
         } else
-            JOptionPane.showMessageDialog(null, "Cập nhật thất bại");
+            DialogHelper.alert(null, "Cập nhật thất bại");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void txt_barcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_barcodeActionPerformed
@@ -1992,7 +1993,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
             DonViTinh dvt = this.readformDVT();
             dvtsv.add(dvt);
             this.fillDonViTinh();
-            JOptionPane.showMessageDialog(this, "Them thanh cong");
+            DialogHelper.alert(this, "Them thanh cong");
         }
     }//GEN-LAST:event_btnThem1ActionPerformed
 
@@ -2013,7 +2014,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
             dvt.setTrangThai(trangThai);
             dvtsv.update(dvt, MaDVT);
             fillDonViTinh();
-            JOptionPane.showMessageDialog(this, "Sửa thành công");
+            DialogHelper.alert(this, "Sửa thành công");
         }
     }//GEN-LAST:event_btnSua1ActionPerformed
 
@@ -2024,11 +2025,11 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         if (dvtsv.CheckXoa(MaDVT) == null) {
             dvtsv.delete(MaDVT);
             this.fillDonViTinh();
-            JOptionPane.showMessageDialog(this, "Xóa thành công");
+            DialogHelper.alert(this, "Xóa thành công");
             txtGhiChuDVT.setText(null);
             txtTenDVT.setText(null);
         } else
-            JOptionPane.showMessageDialog(this, "Chỉ được xóa mềm dòng này!!!");
+            DialogHelper.alert(this, "Chỉ được xóa mềm dòng này!!!");
     }//GEN-LAST:event_btnXoa1ActionPerformed
 
     private void btnThemDSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDSPActionPerformed
@@ -2037,7 +2038,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
             DongSanPham dsp = this.readformDSP();
             dspsv.add(dsp);
             this.fillDongSanPham();
-            JOptionPane.showMessageDialog(this, "Them thanh cong");
+            DialogHelper.alert(this, "Them thanh cong");
         }
     }//GEN-LAST:event_btnThemDSPActionPerformed
 
@@ -2051,7 +2052,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
             dsp.setTrangThai(trangThai);
             dspsv.update(dsp, MaDSP);
             fillDongSanPham();
-            JOptionPane.showMessageDialog(this, "Sửa thành công");
+            DialogHelper.alert(this, "Sửa thành công");
         }
     }//GEN-LAST:event_btnSuaDSPActionPerformed
 
@@ -2062,11 +2063,11 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         if (dspsv.CheckXoa(MaDSP) == null) {
             dspsv.delete(MaDSP);
             this.fillDongSanPham();
-            JOptionPane.showMessageDialog(this, "Xóa thành công");
+            DialogHelper.alert(this, "Xóa thành công");
             txtGhiChuDSP.setText(null);
             txtTenDSP.setText(null);
         } else
-            JOptionPane.showMessageDialog(this, "Chỉ được xóa mềm dòng này!!!");
+            DialogHelper.alert(this, "Chỉ được xóa mềm dòng này!!!");
     }//GEN-LAST:event_btnXoaDSPActionPerformed
 
     private void btnMoiDSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiDSPActionPerformed
@@ -2086,7 +2087,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
             LoaiHang lh = this.readformLH();
             lhsv.add(lh);
             this.fillLoaiHang();
-            JOptionPane.showMessageDialog(this, "Them thanh cong");
+            DialogHelper.alert(this, "Them thanh cong");
         }
     }//GEN-LAST:event_jButton20ActionPerformed
 
@@ -2097,7 +2098,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         LoaiHang lh = this.readformLH();
         lhsv.update(lh, MaLH);
         fillLoaiHang();
-        JOptionPane.showMessageDialog(this, "Sửa thành công");
+        DialogHelper.alert(this, "Sửa thành công");
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void tblLoaiHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblLoaiHangMouseClicked
@@ -2112,11 +2113,11 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         if (lhsv.CheckXoa(MaLH) == null) {
             lhsv.delete(MaLH);
             this.fillLoaiHang();
-            JOptionPane.showMessageDialog(this, "Xóa thành công");
+            DialogHelper.alert(this, "Xóa thành công");
             txtGhiChuLH.setText(null);
             txtTenLH.setText(null);
         } else
-            JOptionPane.showMessageDialog(this, "Chỉ được xóa mềm dòng này!!!");
+            DialogHelper.alert(this, "Chỉ được xóa mềm dòng này!!!");
     }//GEN-LAST:event_jButton22ActionPerformed
 
     private void jButton30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton30ActionPerformed
@@ -2126,7 +2127,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         XuatXu xx = this.readformXX();
         xxsv.update(xx, MaXX);
         fillXuatXu(xxsv.getAll());
-        JOptionPane.showMessageDialog(this, "Sửa thành công");
+        DialogHelper.alert(this, "Sửa thành công");
         fillCombox();
     }//GEN-LAST:event_jButton30ActionPerformed
 
@@ -2141,7 +2142,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
             ThuongHieu th = this.readformTH();
             thsv.add(th);
             this.fillThuongHieu(thsv.getAll());
-            JOptionPane.showMessageDialog(this, "Them thanh cong");
+            DialogHelper.alert(this, "Them thanh cong");
         }
     }//GEN-LAST:event_jButton24ActionPerformed
 
@@ -2155,7 +2156,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
             th.setTrangThai(trangThai);
             thsv.update(th, MaTH);
             fillThuongHieu(thsv.getAll());
-            JOptionPane.showMessageDialog(this, "Sửa thành công");
+            DialogHelper.alert(this, "Sửa thành công");
         }
     }//GEN-LAST:event_jButton25ActionPerformed
 
@@ -2166,11 +2167,11 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         if (thsv.CheckXoa(MaTH) == null) {
             thsv.delete(MaTH);
             this.fillThuongHieu(thsv.getAll());
-            JOptionPane.showMessageDialog(this, "Xóa thành công");
+            DialogHelper.alert(this, "Xóa thành công");
             txtGhiChuTH.setText(null);
             txtTenTH.setText(null);
         } else
-            JOptionPane.showMessageDialog(this, "Chỉ được xóa mềm dòng này!!!");
+            DialogHelper.alert(this, "Chỉ được xóa mềm dòng này!!!");
     }//GEN-LAST:event_jButton26ActionPerformed
 
     private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
@@ -2207,11 +2208,11 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         SanPhamChiTiet spct = readFormSPCT();
         Integer rs = spctservice.insertSPCT(sp, spct);
         if (rs != null) {
-            JOptionPane.showMessageDialog(null, "Thêm thành công");
+            DialogHelper.alert(null, "Thêm thành công");
             qrcode(sp, spct);
             loadDataToTable();
         } else
-            JOptionPane.showMessageDialog(null, "Thêm thất bại");
+            DialogHelper.alert(null, "Thêm thất bại");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -2268,10 +2269,10 @@ public class SanPham_JPanel extends javax.swing.JPanel {
                     ind++;
                 }
                 if (rs != null) {
-                    JOptionPane.showMessageDialog(null, "Thêm thành công");
+                    DialogHelper.alert(null, "Thêm thành công");
                     loadDataToTable();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Thêm thất bại");
+                    DialogHelper.alert(null, "Thêm thất bại");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -2291,18 +2292,18 @@ public class SanPham_JPanel extends javax.swing.JPanel {
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         // TODO add your handling code here:
         if (index == -1) {
-            JOptionPane.showMessageDialog(null, "Mời chọn sản phẩm muốn xóa");
+            DialogHelper.alert(null, "Mời chọn sản phẩm muốn xóa");
             return;
         }
         SanPhamChiTiet spct1 = spctservice.checkSPCTinDH(spct.getMaSanPhamChiTiet());
         KhuyenMai km1 = khuyenMaiService.searchKMofAllSP(spct.getMaSanPhamChiTiet());
         if (spct1 != null || km1 != null) {
-            JOptionPane.showMessageDialog(null, "Sản phẩm đã trong đơn hàng hoặc khuyến mãi");
+            DialogHelper.alert(null, "Sản phẩm đã trong đơn hàng hoặc khuyến mãi");
             SanPham sp = new SanPham();
             spct.setTrangThai(false);
             spctservice.updateSPCT(sp, spct);
             loadDataToTable();
-            JOptionPane.showMessageDialog(null, "Đã chuyển trạng thái sản phẩm");
+            DialogHelper.alert(null, "Đã chuyển trạng thái sản phẩm");
         } else {
             Integer chon = JOptionPane.showConfirmDialog(null, "Bạn chắc chắn muốn xóa chứ");
             if (chon != 0) {
@@ -2310,7 +2311,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
             }
             Integer rs = spctservice.deleteSPCT(spct.getMaSanPhamChiTiet());
             if (rs != null) {
-                JOptionPane.showMessageDialog(null, "Xóa thành công");
+                DialogHelper.alert(null, "Xóa thành công");
                 loadDataToTable();
             }
         }
@@ -2564,7 +2565,7 @@ private void loadDataToTable() {
         try {
             x.setSoLuong(Integer.valueOf(txt_sl.getText()));
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Số lượng sai định dạng");
+            DialogHelper.alert(null, "Số lượng sai định dạng");
             return null;
         }
         String cleanAmount = txt_gianhap.getText().replaceAll("[^\\d.]", "");
@@ -2648,62 +2649,62 @@ private void loadDataToTable() {
     private boolean checkForm() {
         String maSp = txt_ma.getText().trim();
         if (maSp.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Mã sản phẩm không được để trống");
+            DialogHelper.alert(this, "Mã sản phẩm không được để trống");
             return false;
         }
         if(!maSp.matches("^SP0\\d+$")){
-             JOptionPane.showMessageDialog(this, "Mã sản phẩm sai định dạng");
+             DialogHelper.alert(this, "Mã sản phẩm sai định dạng");
             return false;
         }
         String tenSp = txt_ten.getText().trim();
         if (tenSp.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Tên sản phẩm không được để trống");
+            DialogHelper.alert(this, "Tên sản phẩm không được để trống");
             return false;
         }
         String ngayXk = txt_ngayxk.getText().trim();
         if (ngayXk.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ngày sản xuất không được để trống");
+            DialogHelper.alert(this, "Ngày sản xuất không được để trống");
             return false;
         }
         String hanSd = txt_hansd.getText().trim();
         if (hanSd.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Hạn sử dụng không được để trống");
+            DialogHelper.alert(this, "Hạn sử dụng không được để trống");
             return false;
         }
         String sl = txt_sl.getText().trim();
         if (sl.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Số lượng không được để trống");
+            DialogHelper.alert(this, "Số lượng không được để trống");
             return false;
         }
         if (!StringFormat.isValidNumberFormat(sl)) {
-            JOptionPane.showMessageDialog(null, "Số lượng sai định dạng");
+            DialogHelper.alert(null, "Số lượng sai định dạng");
             return false;
         }
         String donGia = txt_dongia.getText().trim();
         if (donGia.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Đơn giá không được để trống");
+            DialogHelper.alert(this, "Đơn giá không được để trống");
             return false;
         }
         if (!StringFormat.isValidMoneyFormat(donGia) && !StringFormat.isValidNumberFormat(donGia)) {
-            JOptionPane.showMessageDialog(null, "Đơn giá sai định dạng");
+            DialogHelper.alert(null, "Đơn giá sai định dạng");
             return false;
         }
         String giaNhap = txt_gianhap.getText().trim();
         if (giaNhap.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Giá nhập không được để trống");
+            DialogHelper.alert(this, "Giá nhập không được để trống");
             return false;
         }
         if (!StringFormat.isValidMoneyFormat(giaNhap) && !StringFormat.isValidNumberFormat(giaNhap)) {
-            JOptionPane.showMessageDialog(null, "Giá nhập sai định dạng");
+            DialogHelper.alert(null, "Giá nhập sai định dạng");
             return false;
         }
         String kl = txt_kl.getText().trim();
         if (kl.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Khối lượng không được để trống");
+            DialogHelper.alert(this, "Khối lượng không được để trống");
             return false;
         }
         if (!StringFormat.isValidNumberFormat(kl)) {
-            JOptionPane.showMessageDialog(null, "Khối lượng sai định dạng");
+            DialogHelper.alert(null, "Khối lượng sai định dạng");
             return false;
         }
         
