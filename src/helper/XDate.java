@@ -7,17 +7,23 @@ package helper;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
  * @author dovan
  */
 public class XDate {
+
     static SimpleDateFormat formater = new SimpleDateFormat();
-    public static Date toDate(String date,String pattern){
+
+    public static Date toDate(String date, String pattern) {
         if (pattern.isEmpty()) {
-            pattern="dd-MM-yyyy";
+            pattern = "dd-MM-yyyy";
         }
         try {
             formater.applyPattern(pattern);
@@ -31,25 +37,28 @@ public class XDate {
     //pattern là định dạng thời gian
     //return date kết quả
 
-    public static String toString(Date date,String pattern){
+    public static String toString(Date date, String pattern) {
         if (pattern.isEmpty()) {
-            pattern="dd-MM-yyyy";
+            pattern = "dd-MM-yyyy";
         }
         formater.applyPattern(pattern);
         return formater.format(date);
     }
-    public static Date now(){
+
+    public static Date now() {
         return new Date();
     }
-     // chuyển đổi string sang date
+    // chuyển đổi string sang date
     //date thời gian hiện có
     //days số ngày cần bổ sung vào date
     //return Date kết quả
-    public static Date addDays(Date date,Long days){
-        date.setTime(date.getTime()+days*24*60*60*1000);
+
+    public static Date addDays(Date date, Long days) {
+        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
         return date;
     }
-    public static boolean checkDataDay (Date date) {
+
+    public static boolean checkDataDay(Date date) {
         Date ngayBatDau = new Date(2022 - 1900, 0, 1);
         if (date.after(XDate.now()) || ngayBatDau.after(date)) {
             DialogHelper.alert(null, "Thời gian vượt ngoài khoảng thời gian hoạt động");
@@ -57,8 +66,8 @@ public class XDate {
         }
         return true;
     }
-    
-    public static boolean checkDataYear (int year) {
+
+    public static boolean checkDataYear(int year) {
         // Lấy ngày hiện tại
         LocalDate currentDate = LocalDate.now();
         // Lấy năm hiện tại từ đối tượng LocalDate
@@ -68,5 +77,20 @@ public class XDate {
             return false;
         }
         return true;
+    }
+
+    public static boolean isDateAfter1900(String input) {
+        // Định dạng ngày cần kiểm tra
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+        try {
+            // Parse chuỗi thành LocalDate
+            LocalDate date = LocalDate.parse(input, dateFormatter);
+
+            // Kiểm tra xem năm của ngày có lớn hơn 1900 hay không
+            return date.getYear() > 1900;
+        } catch (DateTimeParseException e) {
+            return false; // Nếu có lỗi, ngày không hợp lệ
+        }
     }
 }

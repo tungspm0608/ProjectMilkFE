@@ -518,6 +518,7 @@ public class KhachHangThanThiet_JPanel extends javax.swing.JPanel {
     }
 
     private boolean checkForm() {
+       
         String tenNV = txt_HotenKhachHang.getText().trim();
         if (tenNV.isEmpty()) {
             DialogHelper.alert(this, "Tên nhân viên không được để trống");

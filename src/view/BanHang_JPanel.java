@@ -1725,9 +1725,9 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         String today = XDate.toString(XDate.now(), " HH'h'-mm'm'-ss's' dd-MM-yyyy");
         String newFilePath = "HoaDon" + today + ".xlsx";
 
-        try (   FileInputStream sourceStream = new FileInputStream(originalFilePath);
+        try (   FileInputStream sourceStream = new FileInputStream(defaultFilePath + originalFilePath);
                 Workbook sourceWorkbook = new XSSFWorkbook(sourceStream);
-                FileOutputStream destinationStream = new FileOutputStream(newFilePath)) 
+                FileOutputStream destinationStream = new FileOutputStream(defaultFilePath + newFilePath)) 
         {
             Workbook workbook = new XSSFWorkbook((XSSFFactory) sourceWorkbook);
 

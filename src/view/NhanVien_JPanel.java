@@ -506,6 +506,10 @@ public class NhanVien_JPanel extends javax.swing.JPanel {
             DialogHelper.alert(null, "Mã nhân viên đã tồn tại");
             return;
         }
+        if(readForm().getAnhNhanVien()==null){
+            JOptionPane.showMessageDialog(null, "Mời chọn ảnh");
+            return;
+        }
         Integer chon = service.insert(readForm());
         if (chon != null) {
             DialogHelper.alert(null, "Thêm thành công");
@@ -642,6 +646,10 @@ public class NhanVien_JPanel extends javax.swing.JPanel {
             DialogHelper.alert(this, "Mã nhân viên không được để trống");
             return false;
         }
+        if(!maNv.matches("^NV00\\d+$")){
+             DialogHelper.alert(this, "Mã nhân viên sai định dạng");
+            return false;
+        }
         String tenNV = txt_HoTen.getText().trim();
         if (tenNV.isEmpty()) {
             DialogHelper.alert(this, "Tên nhân viên không được để trống");
@@ -678,6 +686,11 @@ public class NhanVien_JPanel extends javax.swing.JPanel {
         String ngaySinh=txt_NgaySinh.getText().trim();
         if (ngaySinh.isEmpty()) {
             DialogHelper.alert(this, "Ngày sinh không được để trống");
+            return false;
+        }
+    
+        if(!XDate.isValidDateRange(ngaySinh)){
+            JOptionPane.showMessageDialog(null,"Ngày sinh sai định dạng");
             return false;
         }
         String email=txt_Email.getText().trim();
