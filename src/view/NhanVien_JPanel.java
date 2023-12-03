@@ -4,6 +4,7 @@
  */
 package view;
 
+import helper.DialogHelper;
 import model.NhanVien;
 import service.NhanVienService;
 import helper.FileChoose;
@@ -30,17 +31,16 @@ public class NhanVien_JPanel extends javax.swing.JPanel {
     int page = 1, index = -1;
     String sdt = "", ten = "";
     ArrayList<NhanVien> list = new ArrayList<>();
-    String path = ".\\image\\imageNV\\";
+    String path = "";
     String path1 = "";
 
     public NhanVien_JPanel() {
         initComponents();
         this.setBackground(new Color(37, 108, 205));
-        String os = System.getProperty("os.name").toLowerCase();
-        if (Auth.HDH==0) {
-            path = ".\\image\\imageNV\\";
-        } else if (Auth.HDH==1) {
-            path = "./image/imageNV/";
+        if (Auth.HDH==1) {
+            path = "./asset/AnhNhanVien/";
+        } else {
+            path = ".\\asset\\AnhNhanVien\\";
         }
         model = (DefaultTableModel) tbl_NhanVien.getModel();
         loadDataToTable();
@@ -492,10 +492,10 @@ public class NhanVien_JPanel extends javax.swing.JPanel {
         }
         Integer chon = service.update(x);
         if (chon != null) {
-            JOptionPane.showMessageDialog(null, "Sửa thành công");
+            DialogHelper.alert(null, "Sửa thành công");
             loadDataToTable();
         } else
-            JOptionPane.showMessageDialog(null, "Sửa thất bại");
+            DialogHelper.alert(null, "Sửa thất bại");
     }//GEN-LAST:event_btn_CapNhatActionPerformed
 
     private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
@@ -503,15 +503,15 @@ public class NhanVien_JPanel extends javax.swing.JPanel {
         if(!checkForm()) return;
         NhanVien nv = service.searchNVByMaNV(readForm().getMaNhanVien());
         if(nv!=null){
-            JOptionPane.showMessageDialog(null, "Mã nhân viên đã tồn tại");
+            DialogHelper.alert(null, "Mã nhân viên đã tồn tại");
             return;
         }
         Integer chon = service.insert(readForm());
         if (chon != null) {
-            JOptionPane.showMessageDialog(null, "Thêm thành công");
+            DialogHelper.alert(null, "Thêm thành công");
             loadDataToTable();
         } else
-            JOptionPane.showMessageDialog(null, "Thêm thất bại");
+            DialogHelper.alert(null, "Thêm thất bại");
     }//GEN-LAST:event_btn_ThemActionPerformed
 
     private void tbl_NhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_NhanVienMouseClicked
@@ -639,54 +639,54 @@ public class NhanVien_JPanel extends javax.swing.JPanel {
     private boolean checkForm() {
         String maNv = txt_MaNV.getText().trim();
         if (maNv.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Mã nhân viên không được để trống");
+            DialogHelper.alert(this, "Mã nhân viên không được để trống");
             return false;
         }
         String tenNV = txt_HoTen.getText().trim();
         if (tenNV.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Tên nhân viên không được để trống");
+            DialogHelper.alert(this, "Tên nhân viên không được để trống");
             return false;
         }
         if (StringFormat.containsDigit(tenNV)) {
-            JOptionPane.showMessageDialog(this, "Tên nhân viên sai định dạng");
+            DialogHelper.alert(this, "Tên nhân viên sai định dạng");
             return false;
         }
         String matKhau=txt_MatKhau.getText().trim();
         if (matKhau.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Mật khẩu không được để trống");
+            DialogHelper.alert(this, "Mật khẩu không được để trống");
             return false;
         }
         String xacNhanMK=txt_XacNhanMK.getText().trim();
         if (xacNhanMK.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Xác nhận mật khẩu không được để trống");
+            DialogHelper.alert(this, "Xác nhận mật khẩu không được để trống");
             return false;
         }
         if (!matKhau.equals(xacNhanMK)) {
-            JOptionPane.showMessageDialog(this, "Mật khẩu và xác nhân mật khẩu không đúng");
+            DialogHelper.alert(this, "Mật khẩu và xác nhân mật khẩu không đúng");
             return false;
             
         }
         String soDienThoai=txt_SoDT.getText().trim();
         if (soDienThoai.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Số điện thoại không được để trống");
+            DialogHelper.alert(this, "Số điện thoại không được để trống");
             return false;
         }
         if (!StringFormat.isValidNumberFormat(soDienThoai)) {
-            JOptionPane.showMessageDialog(this, "Số điện thoại sai định dạng");
+            DialogHelper.alert(this, "Số điện thoại sai định dạng");
             return false;
         }
         String ngaySinh=txt_NgaySinh.getText().trim();
         if (ngaySinh.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ngày sinh không được để trống");
+            DialogHelper.alert(this, "Ngày sinh không được để trống");
             return false;
         }
         String email=txt_Email.getText().trim();
         if (email.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Email không được để trống");
+            DialogHelper.alert(this, "Email không được để trống");
             return false;
         }
         if (!StringFormat.isValidEmail(email)){
-            JOptionPane.showMessageDialog(this, "Email sai định dạng");
+            DialogHelper.alert(this, "Email sai định dạng");
             return false;
         }
         return true;

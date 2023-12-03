@@ -1,5 +1,6 @@
 package view;
 
+import helper.DialogHelper;
 import helper.XDate;
 import java.awt.Color;
 import java.text.DecimalFormat;
@@ -65,6 +66,10 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
     }
 
     void Loc() {
+        if (dateDau.getDate().after(dateCuoi.getDate())) {
+            DialogHelper.alert(this,"Ngày bắt đầu không được nhỏ hơn ngày kết thúc");
+            return;
+        }
         if (dateDau.getDate() == null || !XDate.checkDataDay(dateDau.getDate())) {
             dateDau.setDate(new Date(2022 - 1900, 0, 1));
         }
@@ -380,18 +385,18 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
         if(sls==null){
             return;
         }else if(!sls.matches("\\d+")){
-            JOptionPane.showMessageDialog(null, "sai kiểu dữ liệu");
+            DialogHelper.alert(null, "sai kiểu dữ liệu");
             return;
         }
         int sl = Integer.valueOf(sls);
         if(sl>dhct.getSoLuong()){
-            JOptionPane.showMessageDialog(null, "Quá số lượng sản phẩm");
+            DialogHelper.alert(null, "Quá số lượng sản phẩm");
             return;
         }
         dhct.setTraHang(sl);
         Integer rs = hdsv.updateDHCT(dhct);
         if(rs!=null){
-            JOptionPane.showMessageDialog(null, "trả hàng thành công");
+            DialogHelper.alert(null, "trả hàng thành công");
             fillTableDHCT();
             hdsv.updateDH(dh);
             Loc();

@@ -19,6 +19,7 @@ import com.google.zxing.NotFoundException;
 import com.google.zxing.Result;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
+import helper.DialogHelper;
 import helper.StringFormat;
 import helper.XDate;
 import java.awt.Color;
@@ -83,16 +84,15 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
     SanPhamChiTiet spct;
     DonHang dh;
     KhuyenMai km;
-    
+
     private WebcamPanel panel = null;
     private Webcam webcam = null;
     private static final long serialVersionUID = 6441489157408381878L;
     private Executor executor = Executors.newSingleThreadExecutor(this);
 
-
     public BanHang_JPanel() {
         initComponents();
-        
+
         dongHo();
         this.setBackground(new Color(37, 108, 205));
         spctmodel = (DefaultTableModel) tbl_sp.getModel();
@@ -105,7 +105,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
     }
 
     private void initWebcam() {
-        Dimension size = WebcamResolution.QVGA.getSize();
+        Dimension size = new Dimension(176, 144);
         webcam = Webcam.getWebcams().get(0); //0 is default webcam
         webcam.setViewSize(size);
 
@@ -113,10 +113,10 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         panel.setPreferredSize(size);
         panel.setFPSDisplayed(true);
 
-        qrcode.add(panel,new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 340, 120));
+        qrcode.add(panel);
+//      qrcode.add(panel,new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 340, 120));
 
         executor.execute((Runnable) this);
-
     }
 
     public void sclose() {
@@ -653,7 +653,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
                     .addGroup(panelhdLayout.createSequentialGroup()
                         .addGroup(panelhdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 339, Short.MAX_VALUE)
-                            .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, 339, Short.MAX_VALUE)
                             .addGroup(panelhdLayout.createSequentialGroup()
                                 .addGroup(panelhdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(btn_hoanThanh, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -886,7 +886,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 736, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(checkbox)
@@ -918,7 +918,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         );
 
         qrcode.setBorder(javax.swing.BorderFactory.createTitledBorder("Quét mã QRCode"));
-        qrcode.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        qrcode.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -941,7 +941,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -949,10 +949,10 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(qrcode, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(qrcode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -987,8 +987,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         txt_tienhang.setText(formattedAmount);
         formattedAmount = decimalFormat.format(dh.getTienGiam());
         txt_giaGiam.setText(formattedAmount);
-        formattedAmount = decimalFormat.format(dh.getPhiKhac());
-        txt_phiship.setText(formattedAmount);
+        txt_phiship.setText(String.valueOf(dh.getPhiKhac()));
         txt_sdt.setText(dh.getDienThoai());
         txt_diaChi.setText(dh.getDiaChi());
         formattedAmount = decimalFormat.format(dh.getTongTien());
@@ -1004,7 +1003,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
             btn_thanhToan.setEnabled(true);
             txt_khachtra.setEnabled(true);
             cbo_httt.setEnabled(true);
-            
+
         } else {
             cbo_httt.setSelectedItem("Chuyển khoản");
             cbo_httt.setEnabled(false);
@@ -1032,10 +1031,10 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         }
         Integer rs = donHangService.insertDH(dh);
         if (rs != null) {
-            JOptionPane.showMessageDialog(null, "Tạo đơn hàng thành công");
+            DialogHelper.alert(null, "Tạo đơn hàng thành công");
             loadDataToDH();
         } else {
-            JOptionPane.showMessageDialog(null, "Tạo đơn hàng thất bại");
+            DialogHelper.alert(null, "Tạo đơn hàng thất bại");
         }
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -1046,7 +1045,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         spct = spctlist.get(index);
         km = kmlist.get(index);
         if (maDH == -1) {
-            JOptionPane.showMessageDialog(null, "Mời chọn đơn hàng");
+            DialogHelper.alert(null, "Mời chọn đơn hàng");
             return;
         }
         themSPtoDHCT();
@@ -1063,7 +1062,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         SanPhamChiTiet spct = sanPhamChiTietService.searchByIdSPCT(dhct.getMaSanPhamChiTiet());
         spct.setSoLuong(spct.getSoLuong() + sl);
         if (kq != null) {
-            JOptionPane.showMessageDialog(null, "Bỏ thành công");
+            DialogHelper.alert(null, "Bỏ thành công");
             loadDataToDHCT(maDH);
             donHangService.updateDH(dh);
             loadDataToDH();
@@ -1123,8 +1122,8 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
 
     private void btn_thanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_thanhToanActionPerformed
         // TODO add your handling code here:
-        if(dhctlist.size()==0){
-            JOptionPane.showMessageDialog(null, "Mời chọn sản phẩm");
+        if (dhctlist.size() == 0) {
+            DialogHelper.alert(null, "Mời chọn sản phẩm");
             return;
         }
         readForm();
@@ -1132,16 +1131,16 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         Integer rs = donHangService.updateDH(dh);
         if (rs != null) {
             exportExcel(dhctlist);
-            JOptionPane.showMessageDialog(null, "Thanh toán thành công");
+            DialogHelper.alert(null, "Thanh toán thành công");
             loadDataToDH();
-            maDH=0;
+            maDH = 0;
             loadDataToDHCT(maDH);
             tichDiem();
             newForm();
         } else {
-            JOptionPane.showMessageDialog(null, "Thanh toán thất bại");
+            DialogHelper.alert(null, "Thanh toán thất bại");
         }
-        
+
     }//GEN-LAST:event_btn_thanhToanActionPerformed
 
     private void txt_khachtraMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_khachtraMouseExited
@@ -1150,24 +1149,24 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
 
     private void btn_giaoHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_giaoHangActionPerformed
         // TODO add your handling code here:
-        if(txt_diaChi.getText().isBlank()){
-            JOptionPane.showMessageDialog(null, "Địa chỉ không được để trống");
+        if (txt_diaChi.getText().isBlank()) {
+            DialogHelper.alert(null, "Địa chỉ không được để trống");
             return;
         }
-        if(txt_sdt.getText().isBlank()){
-            JOptionPane.showMessageDialog(null, "Số điện thoại không được để trống");
+        if (txt_sdt.getText().isBlank()) {
+            DialogHelper.alert(null, "Số điện thoại không được để trống");
             return;
         }
-        if(txt_phiship.getText().isBlank()){
+        if (txt_phiship.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "Phí ship không được để trống");
             return;
         }
-        if(!StringFormat.isValidNumberFormat(txt_phiship.getText()) && !StringFormat.isValidMoneyFormat(txt_phiship.getText())){
+        if (!StringFormat.isValidNumberFormat(txt_phiship.getText()) && !StringFormat.isValidMoneyFormat(txt_phiship.getText())) {
             JOptionPane.showMessageDialog(null, "Phí ship sai định dạng");
             return;
         }
-        if(dhctlist.size()==0){
-            JOptionPane.showMessageDialog(null, "Mời chọn sản phẩm");
+        if (dhctlist.size() == 0) {
+            DialogHelper.alert(null, "Mời chọn sản phẩm");
             return;
         }
         readForm();
@@ -1179,13 +1178,13 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         dh.setLoaiDonHang(1);
         Integer rs = donHangService.updateDH(dh);
         if (rs != null) {
-            JOptionPane.showMessageDialog(null, "Đặt hàng thành công");
+            DialogHelper.alert(null, "Đặt hàng thành công");
             loadDataToDH();
             tichDiem();
             newForm();
             dhctmodel.setRowCount(0);
         } else {
-            JOptionPane.showMessageDialog(null, "Đặt hàng thất bại");
+            DialogHelper.alert(null, "Đặt hàng thất bại");
         }
     }//GEN-LAST:event_btn_giaoHangActionPerformed
 
@@ -1195,13 +1194,13 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         dh.setLoaiDonHang(2);
         Integer rs = donHangService.updateDH(dh);
         if (rs != null) {
-            JOptionPane.showMessageDialog(null, "Hoàn thành đơn hàng");
+            DialogHelper.alert(null, "Hoàn thành đơn hàng");
             loadDataToDH();
             tichDiem();
             newForm();
             dhctmodel.setRowCount(0);
         } else {
-            JOptionPane.showMessageDialog(null, "Đon hàng thất bại");
+            DialogHelper.alert(null, "Đon hàng thất bại");
         }
     }//GEN-LAST:event_btn_hoanThanhActionPerformed
 
@@ -1210,11 +1209,11 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         dh.setLoaiDonHang(3);
         Integer rs = donHangService.updateDH(dh);
         if (rs != null) {
-            JOptionPane.showMessageDialog(null, "Hủy đơn hàng thành công");
+            DialogHelper.alert(null, "Hủy đơn hàng thành công");
             loadDataToDH();
             newForm();
         } else {
-            JOptionPane.showMessageDialog(null, "Hủy đơn hàng thất bại");
+            DialogHelper.alert(null, "Hủy đơn hàng thất bại");
         }
     }//GEN-LAST:event_btn_huyActionPerformed
 
@@ -1249,7 +1248,11 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
 //        if(!StringFormat.isValidNumberFormat(txt_phiship.getText())){
 //            JOptionPane.showMessageDialog(null,"Phí ship sai định dạng");
 //        }
-        phiShip = Float.valueOf(txt_phiship.getText());
+        if (txt_phiship.getText().trim().isBlank()) {
+            return;
+        }
+        String cleanAmount = txt_phiship.getText().replaceAll("[^\\d.]", "");
+        phiShip = Float.valueOf(cleanAmount);
         tongTien = phiShip + dh.getTongTien() - tienGiam;
         String formattedAmount = decimalFormat.format(tongTien);
         txt_tongtien.setText(formattedAmount);
@@ -1271,7 +1274,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         readForm();
         Integer rs = donHangService.updateDH(dh);
         if (rs != null) {
-            JOptionPane.showMessageDialog(null, "Lưu thông tin đơn hàng thành công");
+            DialogHelper.alert(null, "Lưu thông tin đơn hàng thành công");
             loadDataToDH();
             newForm();
         }
@@ -1279,7 +1282,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
 
     private void txt_khachtraMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_khachtraMouseReleased
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_txt_khachtraMouseReleased
 
     private void cbo_trangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo_trangThaiActionPerformed
@@ -1309,7 +1312,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         float tienDua = Float.valueOf(txt_khachtra.getText());
         float tienTra = tienDua - dh.getTongTien();
         if (tienTra < 0) {
-            JOptionPane.showMessageDialog(null, "Không dủ tiền thanh toán");
+            DialogHelper.alert(null, "Không dủ tiền thanh toán");
             return;
         }
         txt_tralai.setText(String.valueOf(tienTra));
@@ -1467,12 +1470,12 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
             return;
         }
         if (!slString.matches("\\d+")) {
-            JOptionPane.showMessageDialog(null, "Sai kiểu dữ liệu");
+            DialogHelper.alert(null, "Sai kiểu dữ liệu");
             return;
         }
         int sl = Integer.valueOf(slString);
         if (sl > spct.getSoLuong()) {
-            JOptionPane.showMessageDialog(null, "Không dủ số lượng sản phẩm");
+            DialogHelper.alert(null, "Không dủ số lượng sản phẩm");
             return;
         }
         DonHangChiTiet dhct = donHangService.searchSPCTFromDH(maDH, spct.getMaSanPhamChiTiet());
@@ -1495,7 +1498,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
             donHangService.updateDH(dh);
             loadDataToDH();
         } else {
-            JOptionPane.showMessageDialog(null, "Thêm thất bại");
+            DialogHelper.alert(null, "Thêm thất bại");
         }
     }
 
@@ -1614,12 +1617,14 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
                 System.out.println(result.getText());
                 spct = sanPhamChiTietService.searchByIdBarcode(result.getText());
                 if (!spct.getTrangThai()) {
-                    JOptionPane.showMessageDialog(null, "Sản phẩm đã ngừng kinh doanh");
+                    DialogHelper.alert(null, "Sản phẩm đã ngừng kinh doanh");
                     return;
                 }
                 km = khuyenMaiService.searchKMofSP(spct.getMaSanPhamChiTiet());
                 themSPtoDHCT();
-            }else return;
+            } else {
+                return;
+            }
         } while (true);
     }
 
@@ -1645,7 +1650,10 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
     public void exportExcel(ArrayList<DonHangChiTiet> dhctList) {
         try {
             // Tạo một workbook mới
-            String defaultFilePath = "src\\utilities\\HoaDon\\";
+            String defaultFilePath = ".\\asset\\HoaDon\\";
+            if (Auth.HDH == 1) {
+                defaultFilePath = "./asset/HoaDon/";
+            }
 
             Workbook workbook = new XSSFWorkbook();
 
@@ -1684,7 +1692,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
                 sheet.autoSizeColumn(i);
             }
 
-            try (FileOutputStream outputStream = new FileOutputStream( ".xlsx")) {
+            try (FileOutputStream outputStream = new FileOutputStream(".xlsx")) {
                 workbook.write(outputStream);
             }
 
@@ -1695,6 +1703,5 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
             e.printStackTrace();
         }
     }
-    
-    
+
 }

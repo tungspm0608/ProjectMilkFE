@@ -152,7 +152,7 @@ public class ImportExcell {
     private static ImageIcon getImageIconFromCell(int hang,Cell cell, String name) {
         System.out.println(((Workbook) cell.getSheet().getWorkbook()).getAllPictures().get(hang).getData());
         byte[] pictureData = ((Workbook) cell.getSheet().getWorkbook()).getAllPictures().get(hang).getData();
-        saveImageToDirectory(pictureData, ".\\image\\imageSP\\" + name + ".jpg");
+        saveImageToDirectory(pictureData, ".\\asset\\AnhSanPham\\" + name + ".jpg");
         return new ImageIcon(pictureData);
     }
 }
