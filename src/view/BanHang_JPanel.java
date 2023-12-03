@@ -102,9 +102,11 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         spctmodel = (DefaultTableModel) tbl_sp.getModel();
         dhmodel = (DefaultTableModel) tbl_dh.getModel();
         dhctmodel = (DefaultTableModel) tbl_dhct.getModel();
+        dhlist = donHangService.getAllDH();
         loadDataToSP();
         loadDataToDH();
         txt_diem.setEnabled(false);
+
         initWebcam();
     }
 
@@ -137,8 +139,8 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        lamMoiGioHang = new javax.swing.JButton();
+        boKhoiGioHang = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
         tbl_dhct = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
@@ -174,7 +176,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         txt_tongtien = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
         txt_phiship = new javax.swing.JTextField();
-        jButton11 = new javax.swing.JButton();
+        btn_chon = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btn_thanhToan = new javax.swing.JButton();
         thanhToanDatHang = new javax.swing.JCheckBox();
@@ -208,20 +210,20 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         jPanel2.setBackground(new java.awt.Color(172, 214, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Giỏ hàng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("DialogInput", 1, 14))); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
-        jButton1.setText("Làm mới giỏ hàng");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        lamMoiGioHang.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
+        lamMoiGioHang.setText("Làm mới giỏ hàng");
+        lamMoiGioHang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                lamMoiGioHangActionPerformed(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(255, 102, 102));
-        jButton3.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
-        jButton3.setText("Bỏ khỏi giỏ hàng");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        boKhoiGioHang.setBackground(new java.awt.Color(255, 102, 102));
+        boKhoiGioHang.setFont(new java.awt.Font("DialogInput", 0, 12)); // NOI18N
+        boKhoiGioHang.setText("Bỏ khỏi giỏ hàng");
+        boKhoiGioHang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                boKhoiGioHangActionPerformed(evt);
             }
         });
 
@@ -252,9 +254,9 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(lamMoiGioHang)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3))
+                        .addComponent(boKhoiGioHang))
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 736, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -264,8 +266,8 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3)))
+                    .addComponent(lamMoiGioHang)
+                    .addComponent(boKhoiGioHang)))
         );
 
         jPanel3.setBackground(new java.awt.Color(172, 214, 255));
@@ -421,6 +423,11 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
 
         cbo_httt.setFont(new java.awt.Font("DialogInput", 1, 12)); // NOI18N
         cbo_httt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tiền mặt", "Chuyển khoản" }));
+        cbo_httt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbo_htttActionPerformed(evt);
+            }
+        });
 
         txt_khachtra.setFont(new java.awt.Font("DialogInput", 1, 12)); // NOI18N
         txt_khachtra.setForeground(new java.awt.Color(0, 0, 255));
@@ -501,11 +508,11 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
             }
         });
 
-        jButton11.setFont(new java.awt.Font("DialogInput", 1, 12)); // NOI18N
-        jButton11.setText("Chọn");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        btn_chon.setFont(new java.awt.Font("DialogInput", 1, 12)); // NOI18N
+        btn_chon.setText("Chọn");
+        btn_chon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                btn_chonActionPerformed(evt);
             }
         });
 
@@ -546,7 +553,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
                             .addGroup(jPanel14Layout.createSequentialGroup()
                                 .addComponent(txt_khachtra, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btn_chon, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())))
             .addGroup(jPanel14Layout.createSequentialGroup()
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -593,7 +600,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel42)
                     .addComponent(txt_khachtra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton11))
+                    .addComponent(btn_chon))
                 .addGap(4, 4, 4)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel43)
@@ -692,7 +699,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
                 .addGroup(panelhdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_hoanThanh)
                     .addComponent(btn_huy))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -707,9 +714,8 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(10, Short.MAX_VALUE)
-                .addComponent(panelhd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(panelhd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel4.setBackground(new java.awt.Color(172, 214, 255));
@@ -939,23 +945,23 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(qrcode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(375, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(qrcode, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(qrcode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(106, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -969,6 +975,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         newForm();
         trangThai = 0;
         loaiDonHang = 0;
+        dhlist = donHangService.getAllDH();
         loadDataToSP();
         loadDataToDH();
         maDH = -1;
@@ -996,7 +1003,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         txt_diaChi.setText(dh.getDiaChi());
         formattedAmount = decimalFormat.format(dh.getTongTien());
         txt_tongtien.setText(formattedAmount);
-        cbo_httt.setSelectedItem(dh.getMaHHTT() == 1 ? "Tiền mặt" : "Chuyển khoản");
+        cbo_httt.setSelectedItem(dh.getMaHHTT() == 0 ? "Tiền mặt" : "Chuyển khoản");
         System.out.println(dh.isLoaiDonHang());
         if (dh.isLoaiDonHang() == 4) {
             txt_diaChi.setEnabled(false);
@@ -1007,7 +1014,9 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
             btn_thanhToan.setEnabled(true);
             txt_khachtra.setEnabled(true);
             cbo_httt.setEnabled(true);
-
+            thanhToanDatHang.setEnabled(false);
+            boKhoiGioHang.setEnabled(true);
+            lamMoiGioHang.setEnabled(true);
         } else {
             cbo_httt.setSelectedItem("Chuyển khoản");
             cbo_httt.setEnabled(false);
@@ -1018,6 +1027,16 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
             btn_huy.setEnabled(true);
             btn_thanhToan.setEnabled(false);
             txt_khachtra.setEnabled(false);
+            thanhToanDatHang.setEnabled(true);
+            boKhoiGioHang.setEnabled(true);
+            lamMoiGioHang.setEnabled(true);
+            if (dh.getLoaiDonHang() == 0) {
+                btn_hoanThanh.setEnabled(false);
+            } else {
+                btn_giaoHang.setEnabled(false);
+                boKhoiGioHang.setEnabled(false);
+                lamMoiGioHang.setEnabled(false);
+            }
         }
 
     }
@@ -1036,6 +1055,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         Integer rs = donHangService.insertDH(dh);
         if (rs != null) {
             DialogHelper.alert(null, "Tạo đơn hàng thành công");
+            dhlist = donHangService.getAllDH();
             loadDataToDH();
         } else {
             DialogHelper.alert(null, "Tạo đơn hàng thất bại");
@@ -1055,7 +1075,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         themSPtoDHCT();
     }//GEN-LAST:event_tbl_spMouseClicked
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void boKhoiGioHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boKhoiGioHangActionPerformed
         // TODO add your handling code here:
         int chon = JOptionPane.showConfirmDialog(null, "Bạn chắc chắn muốn xóa chứ");
         if (chon != 0) {
@@ -1069,12 +1089,13 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
             DialogHelper.alert(null, "Bỏ thành công");
             loadDataToDHCT(maDH);
             donHangService.updateDH(dh);
+            dhlist = donHangService.getAllDH();
             loadDataToDH();
             SanPham sp = new SanPham();
             sanPhamChiTietService.updateSPCT(sp, spct);
             loadDataToSP();
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_boKhoiGioHangActionPerformed
 
     private void tbl_dhctMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_dhctMouseClicked
         // TODO add your handling code here:
@@ -1082,9 +1103,10 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         dhct = dhctlist.get(index);
     }//GEN-LAST:event_tbl_dhctMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void lamMoiGioHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lamMoiGioHangActionPerformed
         // TODO add your handling code here:
         donHangService.updateDH(dh);
+        dhlist = donHangService.getAllDH();
         loadDataToDH();
         for (DonHangChiTiet dhct : dhctlist) {
             SanPhamChiTiet spct = sanPhamChiTietService.searchByIdSPCT(dhct.getMaSanPhamChiTiet());
@@ -1095,7 +1117,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         loadDataToSP();
         donHangService.deleteAllDHCT(maDH);
         loadDataToDHCT(maDH);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_lamMoiGioHangActionPerformed
 
     private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
         // TODO add your handling code here:
@@ -1104,6 +1126,12 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
         sclose();
+        if (txt_sdt.getText().isBlank()) {
+            return;
+        } else if (!StringFormat.isValidNumberFormat(txt_sdt.getText())) {
+            JOptionPane.showMessageDialog(null, "Số điện thoại sai định dạng");
+            return;
+        }
         ArrayList<KhachHang> khs = khachHangService.paging(1, 1, txt_sdt.getText(), "");
         if (khs.size() != 0) {
             KhachHang kh = khs.get(0);
@@ -1112,6 +1140,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
             dh.setMaKhachHang(kh.getMaKhachHang());
         } else {
             txt_hoten.setText("Khách vãng lai");
+            txt_diem.setText("0");
         }
     }//GEN-LAST:event_jButton9ActionPerformed
 
@@ -1136,6 +1165,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         if (rs != null) {
             exportExcel(dhctlist);
             DialogHelper.alert(null, "Thanh toán thành công");
+            dhlist = donHangService.getAllDH();
             loadDataToDH();
             maDH = 0;
             loadDataToDHCT(maDH);
@@ -1153,24 +1183,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
 
     private void btn_giaoHangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_giaoHangActionPerformed
         // TODO add your handling code here:
-        if (txt_diaChi.getText().isBlank()) {
-            DialogHelper.alert(null, "Địa chỉ không được để trống");
-            return;
-        }
-        if (txt_sdt.getText().isBlank()) {
-            DialogHelper.alert(null, "Số điện thoại không được để trống");
-            return;
-        }
-        if (txt_phiship.getText().isBlank()) {
-            JOptionPane.showMessageDialog(null, "Phí ship không được để trống");
-            return;
-        }
-        if (!StringFormat.isValidNumberFormat(txt_phiship.getText()) && !StringFormat.isValidMoneyFormat(txt_phiship.getText())) {
-            JOptionPane.showMessageDialog(null, "Phí ship sai định dạng");
-            return;
-        }
-        if (dhctlist.size() == 0) {
-            DialogHelper.alert(null, "Mời chọn sản phẩm");
+        if (!checkForm()) {
             return;
         }
         readForm();
@@ -1183,6 +1196,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         Integer rs = donHangService.updateDH(dh);
         if (rs != null) {
             DialogHelper.alert(null, "Đặt hàng thành công");
+            dhlist = donHangService.getAllDH();
             loadDataToDH();
             tichDiem();
             newForm();
@@ -1192,6 +1206,33 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         }
     }//GEN-LAST:event_btn_giaoHangActionPerformed
 
+    public boolean checkForm() {
+        if (txt_diaChi.getText().isBlank()) {
+            DialogHelper.alert(null, "Địa chỉ không được để trống");
+            return false;
+        }
+        if (txt_sdt.getText().isBlank()) {
+            DialogHelper.alert(null, "Số điện thoại không được để trống");
+            return false;
+        }
+        if (!StringFormat.isValidNumberFormat(txt_sdt.getText())) {
+            DialogHelper.alert(null, "Số điện thoại sai định dạng");
+            return false;
+        }
+        if (txt_phiship.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Phí ship không được để trống");
+            return false;
+        }
+        if (!StringFormat.isValidNumberFormat(txt_phiship.getText()) && !StringFormat.isValidMoneyFormat(txt_phiship.getText())) {
+            JOptionPane.showMessageDialog(null, "Phí ship sai định dạng");
+            return false;
+        }
+        if (dhctlist.size() == 0) {
+            DialogHelper.alert(null, "Mời chọn sản phẩm");
+            return false;
+        }
+        return true;
+    }
     private void btn_hoanThanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_hoanThanhActionPerformed
         // TODO add your handling code here:
         dh.setTrangThai(1);
@@ -1199,6 +1240,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         Integer rs = donHangService.updateDH(dh);
         if (rs != null) {
             DialogHelper.alert(null, "Hoàn thành đơn hàng");
+            dhlist = donHangService.getAllDH();
             loadDataToDH();
             tichDiem();
             newForm();
@@ -1214,6 +1256,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         Integer rs = donHangService.updateDH(dh);
         if (rs != null) {
             DialogHelper.alert(null, "Hủy đơn hàng thành công");
+            dhlist = donHangService.getAllDH();
             loadDataToDH();
             newForm();
         } else {
@@ -1255,6 +1298,9 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         if (txt_phiship.getText().trim().isBlank()) {
             return;
         }
+        if (!StringFormat.isValidNumberFormat(txt_phiship.getText())) {
+            return;
+        }
         String cleanAmount = txt_phiship.getText().replaceAll("[^\\d.]", "");
         phiShip = Float.valueOf(cleanAmount);
         tongTien = phiShip + dh.getTongTien() - tienGiam;
@@ -1292,6 +1338,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
     private void cbo_trangThaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo_trangThaiActionPerformed
         // TODO add your handling code here:
         trangThai = cbo_trangThai.getSelectedItem().equals("Chờ thanh toán") ? 0 : 1;
+        dhlist = donHangService.searchListDH(trangThai);
         loadDataToDH();
     }//GEN-LAST:event_cbo_trangThaiActionPerformed
 
@@ -1311,8 +1358,12 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         loadDataToSP();
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void btn_chonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_chonActionPerformed
         // TODO add your handling code here:
+        if (!StringFormat.isValidNumberFormat(txt_khachtra.getText())) {
+            JOptionPane.showMessageDialog(null, "Tiền đưa sai định dạng");
+            return;
+        }
         float tienDua = Float.valueOf(txt_khachtra.getText());
         float tienTra = tienDua - dh.getTongTien();
         if (tienTra < 0) {
@@ -1320,14 +1371,27 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
             return;
         }
         txt_tralai.setText(String.valueOf(tienTra));
-    }//GEN-LAST:event_jButton11ActionPerformed
+    }//GEN-LAST:event_btn_chonActionPerformed
 
     private void txt_phishipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_phishipActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_phishipActionPerformed
 
+    private void cbo_htttActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo_htttActionPerformed
+        // TODO add your handling code here:
+        if ("Tiền mặt".equalsIgnoreCase(cbo_httt.getSelectedItem() + "")) {
+            txt_khachtra.setEnabled(true);
+            btn_chon.setEnabled(true);
+        } else {
+            txt_khachtra.setEnabled(false);
+            btn_chon.setEnabled(false);
+        }
+    }//GEN-LAST:event_cbo_htttActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton boKhoiGioHang;
+    private javax.swing.JButton btn_chon;
     private javax.swing.JButton btn_giaoHang;
     private javax.swing.JButton btn_hoanThanh;
     private javax.swing.JButton btn_huy;
@@ -1337,12 +1401,9 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
     private javax.swing.JComboBox<String> cbo_loaiDH;
     private javax.swing.JComboBox<String> cbo_trangThai;
     private javax.swing.JCheckBox checkbox;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
@@ -1373,6 +1434,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JButton lamMoiGioHang;
     private javax.swing.JLabel lbldongho;
     private javax.swing.JPanel panelhd;
     private javax.swing.JLabel phanTrang;
@@ -1454,7 +1516,6 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
 
     private void loadDataToDH() {
         dhmodel.setRowCount(0);
-        dhlist = donHangService.getAllDH(trangThai, loaiDonHang);
         int vitri = 1;
         DecimalFormat decimalFormat = new DecimalFormat("#,### VND");
         for (DonHang dh : dhlist) {
@@ -1500,6 +1561,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
             System.out.println(dh.getMaHHTT());
             dh.setMaKhachHang(0);
             donHangService.updateDH(dh);
+            dhlist = donHangService.getAllDH();
             loadDataToDH();
         } else {
             DialogHelper.alert(null, "Thêm thất bại");
