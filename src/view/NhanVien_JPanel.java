@@ -31,17 +31,16 @@ public class NhanVien_JPanel extends javax.swing.JPanel {
     int page = 1, index = -1;
     String sdt = "", ten = "";
     ArrayList<NhanVien> list = new ArrayList<>();
-    String path = ".\\image\\imageNV\\";
+    String path = "";
     String path1 = "";
 
     public NhanVien_JPanel() {
         initComponents();
         this.setBackground(new Color(37, 108, 205));
-        String os = System.getProperty("os.name").toLowerCase();
-        if (Auth.HDH==0) {
-            path = ".\\image\\imageNV\\";
-        } else if (Auth.HDH==1) {
-            path = "./image/imageNV/";
+        if (Auth.HDH==1) {
+            path = "./asset/AnhNhanVien/";
+        } else {
+            path = ".\\asset\\AnhNhanVien\\";
         }
         model = (DefaultTableModel) tbl_NhanVien.getModel();
         loadDataToTable();

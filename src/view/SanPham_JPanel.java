@@ -107,10 +107,10 @@ public class SanPham_JPanel extends javax.swing.JPanel {
         this.setBackground(new Color(37, 108, 205));
         this.init();
 
-        if (Auth.HDH == 0) {
-            path = ".\\image\\imageSP\\";
-        } else if (Auth.HDH == 1) {
-            path = "./image/imageSP/";
+        if (Auth.HDH == 1) {
+            path = "./asset/AnhSanPham/";
+        } else {
+            path = ".\\asset\\AnhSanPham\\";
         }
         fillCombox();
         mol = (DefaultTableModel) tbl_sp.getModel();
@@ -2631,9 +2631,9 @@ private void loadDataToTable() {
             BufferedImage image = MatrixToImageWriter.toBufferedImage(bitMatrix);
 
             // Đường dẫn mặc định là ổ C và tên tệp là "QRCode.png"
-            String defaultDirectory = ".\\image\\imageQRCodeSP\\";
+            String defaultDirectory = ".\\asset\\AnhQRcodeSanPham\\";
             if (Auth.HDH == 1) {
-                path = "./image/imageQRCodeSP/";
+                path = "./asset/AnhQRcodeSanPham/";
             }
             String fileName = sp.getTenSanPham() + spct.getKhoiLuong() + spct.getDonViTinhKhoiLuong() + ".png";
             File outputFile = new File(defaultDirectory, fileName);

@@ -1,0 +1,32 @@
+# Hướng Dẫn Cài Đặt Phần Mềm MilkFE
+
+## Bước 1: Tải về dự án ProjectMilkFE
+
+1. Tải về file ProjectMilkFE.zip
+2. Giải nén và nhận được thư mục ProjectMilkFE
+
+## Bước 2: Cài Đặt cơ sở dữ liệu
+
+1. Mở phần mềm  mySQl và chạy file DuAnBanSua_MilkFE.sql
+
+## Bước 3: Thay đổi biến môi trường 
+
+1. Mở file setUpVariable.txt
+2. Thay đổi file dựa theo cấu hình tài khoản kết nối tới mySQL mà bạn đã đặt theo mẫu :
+- Dòng 1: Tên tài khoản kết nối
+- Dòng 2: Mật khẩu 
+- Dòng 3: Tên database (mặc định là DuAnBanSua_MilkFE)
+3. Lưu file
+
+## Bước 4: Sử dụng phần mềm
+
+Chúc mừng bạn đã hoàn thiện hết các bước cài đặt để sử dụng phần mềm !!!
+Bây giờ hãy click vào file MilkFE.exe để sử dụng phần mềm
+
+## Lời cảm ơn
+Đội ngũ phát triển dự án xin chân thành cảm ơn bạn đã quan tâm và trải nghiệm phần mềm của chúng tôi !!!
+Nếu có thắc mắc về phần cài đặt thì xin hãy gửi mail về địa chỉ : tungspm0608@gmail.com
+Một lần nữa xin cảm ơn và chúc bạn có 1 trải nghiệm tốt về phần mềm !!!
+
+
+

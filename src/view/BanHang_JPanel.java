@@ -106,7 +106,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
     }
 
     private void initWebcam() {
-        Dimension size = WebcamResolution.QVGA.getSize();
+        Dimension size = new Dimension(340, 120);
         webcam = Webcam.getWebcams().get(0); //0 is default webcam
         webcam.setViewSize(size);
 
@@ -1630,7 +1630,10 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
     public void exportExcel(ArrayList<DonHangChiTiet> dhctList) {
         try {
             // Tạo một workbook mới
-            String defaultFilePath = "src\\utilities\\HoaDon\\";
+            String defaultFilePath = ".\\asset\\HoaDon\\";
+            if (Auth.HDH == 1) {
+                defaultFilePath = "./asset/HoaDon/";
+            }
 
             Workbook workbook = new XSSFWorkbook();
 

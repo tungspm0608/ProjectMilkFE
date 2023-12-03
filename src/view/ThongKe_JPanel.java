@@ -879,10 +879,10 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
         //Bat dau tao file excel
         try {
             Workbook workbook = new XSSFWorkbook();
-            Sheet sheet = workbook.createSheet("Sheet1");
+            Sheet sheet = workbook.createSheet("Sheet 1");
 
             // Đầu tiên tạo title cho sheet
-            String title = "Thong ke san pham " + ngayBatDau + ngayKetThuc;
+            String title = "Thống kê sản phẩm " + ngayBatDau + ngayKetThuc;
             int titleRowIndex = 0;
             Row titleRow = sheet.createRow(titleRowIndex);
             Cell cellTitle = titleRow.createCell(0);
@@ -921,7 +921,7 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
                 Row excelRow = sheet.createRow(row + 1); // Bắt đầu từ dòng 1 để tránh ghi đè tiêu đề
 
                 for (int col = 0; col < mol.getColumnCount(); col++) {
-                    Object value = mol.getValueAt(row, col);
+                    Object value = mol.getValueAt(row - titleRowIndex, col);
                     Cell cell = excelRow.createCell(col);
 
                     // Điều chỉnh kiểu dữ liệu tùy thuộc vào kiểu dữ liệu của cột trong JTable
@@ -939,7 +939,7 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
 
             // Ghi Workbook xuống tệp
             String today = XDate.toString(XDate.now(), "HH'h'-mm'm'-ss's' dd-MM-yyyy");
-            String filePath = Auth.HDH == 1 ? "image/ThongKeSanPham/" : "image\\ThongKeSanPham\\";
+            String filePath = Auth.HDH == 1 ? "asset/ThongKeSanPham/" : "asset\\ThongKeSanPham\\";
             try (FileOutputStream fileOut = new FileOutputStream(filePath + "Thống kê sản phẩm " + today + ".xlsx")) {
                 workbook.write(fileOut);
                 DialogHelper.alert(this, "Xuất Excel thành công!");

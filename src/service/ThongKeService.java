@@ -175,7 +175,7 @@ public class ThongKeService {
         int height = 700;
         /* Height of the image */
         String today = XDate.toString(XDate.now(), "HH'h'-mm'm'-ss's' dd-MM-yyyy");
-        String filePath = Auth.HDH == 1 ? "image/ThongKeDonHang/" : "image\\ThongKeDonHang\\";
+        String filePath = Auth.HDH == 1 ? "asset/ThongKeDonHang/" : "asset\\ThongKeDonHang\\";
         String title = chart.getTitle().getText() +" "+today;
         File Chart = new File(filePath + title + ".jpeg");
         try {
