@@ -385,18 +385,18 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
         if(sls==null){
             return;
         }else if(!sls.matches("\\d+")){
-            JOptionPane.showMessageDialog(null, "sai kiểu dữ liệu");
+            DialogHelper.alert(null, "sai kiểu dữ liệu");
             return;
         }
         int sl = Integer.valueOf(sls);
         if(sl>dhct.getSoLuong()){
-            JOptionPane.showMessageDialog(null, "Quá số lượng sản phẩm");
+            DialogHelper.alert(null, "Quá số lượng sản phẩm");
             return;
         }
         dhct.setTraHang(sl);
         Integer rs = hdsv.updateDHCT(dhct);
         if(rs!=null){
-            JOptionPane.showMessageDialog(null, "trả hàng thành công");
+            DialogHelper.alert(null, "trả hàng thành công");
             fillTableDHCT();
             hdsv.updateDH(dh);
             Loc();

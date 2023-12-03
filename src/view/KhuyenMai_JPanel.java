@@ -1,5 +1,6 @@
 package view;
 
+import helper.DialogHelper;
 import helper.XDate;
 import model.KhuyenMai;
 import model.KhuyenMaiChiTiet;
@@ -636,7 +637,7 @@ public class KhuyenMai_JPanel extends javax.swing.JPanel {
         if (checkForm()) {
             Integer chon = null;
             if(list1.size()==0){
-                JOptionPane.showMessageDialog(null, "Mời chọn sản phẩm");
+                DialogHelper.alert(null, "Mời chọn sản phẩm");
                 return;
             }
             for (Integer i : list1) {
@@ -650,10 +651,10 @@ public class KhuyenMai_JPanel extends javax.swing.JPanel {
             }
 
             if (chon != null) {
-                JOptionPane.showMessageDialog(this, "Thêm thành công");
+                DialogHelper.alert(this, "Thêm thành công");
                 Loc();
             } else {
-                JOptionPane.showMessageDialog(this, "Thêm thất bại");
+                DialogHelper.alert(this, "Thêm thất bại");
             }
         }
     }//GEN-LAST:event_btn_ThemActionPerformed
@@ -724,10 +725,10 @@ public class KhuyenMai_JPanel extends javax.swing.JPanel {
             }
             Integer kq = serKM.updateKMCT(kmct, km);
             if (kq != null) {
-                JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+                DialogHelper.alert(this, "Cập nhật thành công");
                 Loc();
             } else {
-                JOptionPane.showMessageDialog(this, "Cập nhật thất bại");
+                DialogHelper.alert(this, "Cập nhật thất bại");
             }
         }
     }//GEN-LAST:event_btn_CapNhatActionPerformed
@@ -883,28 +884,28 @@ public class KhuyenMai_JPanel extends javax.swing.JPanel {
     public boolean checkForm() {
         String maKM = txt_MaKhuyenMai.getText().trim();
         if (maKM.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ma khuyen mai khonh duoc de trong");
+            DialogHelper.alert(this, "Ma khuyen mai khonh duoc de trong");
             return false;
         }
         String tenKM = txt_TenChuongTrinh.getText().trim();
         if (tenKM.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ten khuyen mai khonh duoc de trong");
+            DialogHelper.alert(this, "Ten khuyen mai khonh duoc de trong");
             return false;
         }
         try {
             int giaTriGiam = Integer.parseInt(txt_GiatriGiam.getText().trim());
             if (giaTriGiam < 0) {
-                JOptionPane.showMessageDialog(this, "Gia tri giam phai lon hon 0");
+                DialogHelper.alert(this, "Gia tri giam phai lon hon 0");
                 return false;
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Gia tri giam phai la so");
+            DialogHelper.alert(this, "Gia tri giam phai la so");
             return false;
         }
 
         String moTa = txt_MoTa.getText().trim();
         if (moTa.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Mo ta khonh duoc de trong");
+            DialogHelper.alert(this, "Mo ta khonh duoc de trong");
             return false;
         }
         if(!XDate.checkDataDay(txt_NgayBatDau.getDate())){
@@ -914,7 +915,7 @@ public class KhuyenMai_JPanel extends javax.swing.JPanel {
             return false;
         }
         if(txt_NgayBatDau.getDate().after(txt_NgayKetThuc.getDate())){
-            JOptionPane.showMessageDialog(null, "Ngày bắt đầu phải sau ngày kết thúc");
+            DialogHelper.alert(null, "Ngày bắt đầu phải sau ngày kết thúc");
             return false;
         }
         return true;
