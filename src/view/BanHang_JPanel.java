@@ -23,7 +23,9 @@ import helper.DialogHelper;
 import helper.StringFormat;
 import helper.XDate;
 import java.awt.Color;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
@@ -42,6 +44,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import service.Auth;
 import service.DonHangService;
@@ -1710,60 +1713,75 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
     }
 
     public void exportExcel(ArrayList<DonHangChiTiet> dhctList) {
-        try {
-            // Tạo một workbook mới
-            String defaultFilePath = ".\\asset\\HoaDon\\";
-            if (Auth.HDH == 1) {
-                defaultFilePath = "./asset/HoaDon/";
-            }
 
-            Workbook workbook = new XSSFWorkbook();
+        // Tạo một workbook mới
+        String defaultFilePath = ".\\asset\\HoaDon\\";
+        if (Auth.HDH == 1) {
+            defaultFilePath = "./asset/HoaDon/";
+        }
+        // Đường dẫn đến file Excel gốc
+        String originalFilePath = "template.xlsx";
+        // Đường dẫn đến file Excel mới
+        String today = XDate.toString(XDate.now(), " HH'h'-mm'm'-ss's' dd-MM-yyyy");
+        String newFilePath = "HoaDon" + today + ".xlsx";
+
+        try (   FileInputStream sourceStream = new FileInputStream(originalFilePath);
+                Workbook sourceWorkbook = new XSSFWorkbook(sourceStream);
+                FileOutputStream destinationStream = new FileOutputStream(newFilePath)) 
+        {
+            Workbook workbook = new XSSFWorkbook((XSSFFactory) sourceWorkbook);
 
             // Tạo một trang tính mới
-            Sheet sheet = workbook.createSheet("Data");
-
-            // Dữ liệu mẫu từ ArrayList
-            ArrayList<Object[]> dataList = new ArrayList<>();
-
-            // Ghi dữ liệu vào trang tính
-            int rowNum = 0;
-            Row row = sheet.createRow(rowNum++);
-            row.createCell(5).setCellValue("Hóa đơn");
-            rowNum++;
-            row = sheet.createRow(rowNum++);
-            row.createCell(1).setCellValue("Tên sản phẩm");
-            row.createCell(2).setCellValue("Khối lượng");
-            row.createCell(3).setCellValue("Đơn giá");
-            row.createCell(4).setCellValue("Giá giảm");
-            row.createCell(5).setCellValue("Số lượng");
-            row.createCell(6).setCellValue("Thành tiền");
-            rowNum++;
+            Sheet sheet = workbook.getSheetAt(0);
+            
+            // Set tên nhân viên
+            Cell cellTenNhanVien = sheet.getRow(3).getCell(0);
+            String tenNhanVien = cellTenNhanVien.getStringCellValue() + Auth.user.getTenNhanVien();
+            cellTenNhanVien.setCellValue(tenNhanVien);
+            
+            //Set tên khách hàng
+            if (!dh.getDienThoai().isEmpty()) {
+                Cell cellSoDienThoai = sheet.getRow(4).getCell(0);
+                String SoDienThoai = cellSoDienThoai.getStringCellValue() + dh.getDienThoai();
+                cellSoDienThoai.setCellValue(SoDienThoai);
+            }
+            //Set địa chỉ khách hàng
+            if (!dh.getDiaChi().isEmpty()) {
+                Cell cellDiaChi = sheet.getRow(5).getCell(0);
+                String diaChi = cellDiaChi.getStringCellValue() + dh.getDiaChi();
+                cellDiaChi.setCellValue(diaChi);
+            }
+            
+            //Bắt đầu ghi sản phẩm
+            int stt = 1;
+            int rowNum = 7;
+            Row row;
             for (DonHangChiTiet dhct : dhctList) {
                 SanPhamChiTiet spct = sanPhamChiTietService.searchByIdSPCT(dhct.getMaSanPhamChiTiet());
                 SanPham sp = sanPhamChiTietService.searchByIdSP(spct.getMaSanPham());
                 row = sheet.createRow(rowNum++);
                 row.createCell(1).setCellValue(sp.getTenSanPham());
-                row.createCell(2).setCellValue(spct.getKhoiLuong() + spct.getDonViTinhKhoiLuong());
-                row.createCell(3).setCellValue(dhct.getDonGia());
-                row.createCell(4).setCellValue(dhct.getGiaGiam());
-                row.createCell(5).setCellValue(dhct.getSoLuong());
-                row.createCell(6).setCellValue(dhct.getTongGia());
+                row.createCell(0).setCellValue(stt);
+                row.createCell(3).setCellValue(dhct.getDonGia() + " VND");
+                row.createCell(4).setCellValue(dhct.getGiaTriGiam() + " " + dhct.getDonViGiam());
+                row.createCell(2).setCellValue(dhct.getSoLuong());
+                row.createCell(5).setCellValue(dhct.getTongGia() + " VND");
             }
+            
+            //Ghi tổng tiền
+            Cell cellTongTien = sheet.getRow(rowNum ++).getCell(5);
+            cellTenNhanVien.setCellValue(dh.getTongTien() + " VND");
+            
+            //Ghi ngày giờ:
+            Cell cellThoiGian = sheet.getRow(rowNum++).getCell(0);
+            String thoiGian = cellTenNhanVien.getStringCellValue() + today;
+            cellThoiGian.setCellValue(thoiGian);
 
-            for (int i = 0; i < sheet.getRow(0).getPhysicalNumberOfCells(); i++) {
-                sheet.autoSizeColumn(i);
-            }
-
-            try (FileOutputStream outputStream = new FileOutputStream(".xlsx")) {
-                workbook.write(outputStream);
-            }
-
-            // Đóng workbook
-            workbook.close();
-
-        } catch (Exception e) {
+            sourceWorkbook.write(destinationStream);
+        } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
 }
