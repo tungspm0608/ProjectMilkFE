@@ -480,7 +480,6 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         jLabel39.setText("Phí ship");
 
         txt_phiship.setFont(new java.awt.Font("DialogInput", 1, 12)); // NOI18N
-        txt_phiship.setText("0");
         txt_phiship.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 txt_phishipMouseEntered(evt);
@@ -490,6 +489,11 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 txt_phishipMouseReleased(evt);
+            }
+        });
+        txt_phiship.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_phishipActionPerformed(evt);
             }
         });
 
@@ -1154,8 +1158,12 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
             JOptionPane.showMessageDialog(null, "Số điện thoại không được để trống");
             return;
         }
-        if(StringFormat.isValidNumberFormat(txt_phiship.getText())){
-            JOptionPane.showMessageDialog(null, "Mời nhập phí ship");
+        if(txt_phiship.getText().isBlank()){
+            JOptionPane.showMessageDialog(null, "Phí ship không được để trống");
+            return;
+        }
+        if(!StringFormat.isValidNumberFormat(txt_phiship.getText()) && !StringFormat.isValidMoneyFormat(txt_phiship.getText())){
+            JOptionPane.showMessageDialog(null, "Phí ship sai định dạng");
             return;
         }
         if(dhctlist.size()==0){
@@ -1238,6 +1246,9 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
 
     private void txt_phishipMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_phishipMouseReleased
         // TODO add your handling code here:
+//        if(!StringFormat.isValidNumberFormat(txt_phiship.getText())){
+//            JOptionPane.showMessageDialog(null,"Phí ship sai định dạng");
+//        }
         phiShip = Float.valueOf(txt_phiship.getText());
         tongTien = phiShip + dh.getTongTien() - tienGiam;
         String formattedAmount = decimalFormat.format(tongTien);
@@ -1303,6 +1314,10 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         }
         txt_tralai.setText(String.valueOf(tienTra));
     }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void txt_phishipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_phishipActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_phishipActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1680,4 +1695,6 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
             e.printStackTrace();
         }
     }
+    
+    
 }

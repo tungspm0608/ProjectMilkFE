@@ -705,4 +705,4 @@ BEGIN
 END;
 GO
 
-
+select * from DonHang where ngayTao between '' and ''
