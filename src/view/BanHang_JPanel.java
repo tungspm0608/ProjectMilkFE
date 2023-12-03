@@ -23,6 +23,7 @@ import helper.DialogHelper;
 import helper.StringFormat;
 import helper.XDate;
 import java.awt.Color;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -1663,11 +1664,12 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         String today = XDate.toString(XDate.now(), " HH'h'-mm'm'-ss's' dd-MM-yyyy");
         String newFilePath = "HoaDon" + today + ".xlsx";
 
-        try (   FileInputStream sourceStream = new FileInputStream(originalFilePath);
+        try (   FileInputStream sourceStream = new FileInputStream(defaultFilePath+originalFilePath);
                 Workbook sourceWorkbook = new XSSFWorkbook(sourceStream);
-                FileOutputStream destinationStream = new FileOutputStream(newFilePath)) 
+                FileOutputStream destinationStream = new FileOutputStream(defaultFilePath+newFilePath)) 
         {
-            Workbook workbook = new XSSFWorkbook((XSSFFactory) sourceWorkbook);
+            sourceWorkbook.write(destinationStream);
+            Workbook workbook = new XSSFWorkbook(newFilePath);
 
             // Tạo một trang tính mới
             Sheet sheet = workbook.getSheetAt(0);
@@ -1715,7 +1717,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
             String thoiGian = cellTenNhanVien.getStringCellValue() + today;
             cellThoiGian.setCellValue(thoiGian);
 
-            sourceWorkbook.write(destinationStream);
+            workbook.write(destinationStream);
         } catch (IOException e) {
             e.printStackTrace();
         }
