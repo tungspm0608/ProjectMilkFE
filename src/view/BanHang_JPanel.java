@@ -41,10 +41,13 @@ import model.KhachHang;
 import model.KhuyenMai;
 import model.SanPham;
 import model.SanPhamChiTiet;
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import service.Auth;
@@ -1163,7 +1166,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         dh.setTrangThai(1);
         Integer rs = donHangService.updateDH(dh);
         if (rs != null) {
-//            exportExcel(dhctlist);
+            exportExcel(dhctlist);
             DialogHelper.alert(null, "Thanh toán thành công");
             dhlist = donHangService.getAllDH();
             loadDataToDH();
@@ -1714,7 +1717,6 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
     }
 
     public void exportExcel(ArrayList<DonHangChiTiet> dhctList) {
-
         // Tạo một workbook mới
         String defaultFilePath = ".\\asset\\HoaDon\\";
         if (Auth.HDH == 1) {
@@ -1728,35 +1730,40 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
 
         try (FileInputStream sourceStream = new FileInputStream(defaultFilePath + originalFilePath); Workbook sourceWorkbook = new XSSFWorkbook(sourceStream); FileOutputStream destinationStream = new FileOutputStream(defaultFilePath + newFilePath)) {
             sourceWorkbook.write(destinationStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        };
-
-// Tạo một trang tính mớiÏ
-        try (FileInputStream fileInputStream = new FileInputStream(defaultFilePath + originalFilePath); Workbook workbook = new XSSFWorkbook(fileInputStream)) {
-            Sheet sheet = workbook.getSheetAt(0);
+            // Tạo một trang tính mớiÏ
+            Sheet sheet = sourceWorkbook.getSheetAt(0);
 
             // Set tên nhân viên
             Cell cellTenNhanVien = sheet.getRow(3).getCell(0);
             String tenNhanVien = cellTenNhanVien.getStringCellValue() + Auth.user.getTenNhanVien();
             cellTenNhanVien.setCellValue(tenNhanVien);
 
+            //Ghi ngày giờ:
+            Cell cellThoiGian = sheet.getRow(4).getCell(0);
+            String thoiGian = cellThoiGian.getStringCellValue() + today;
+            cellThoiGian.setCellValue(thoiGian);
+
             //Set tên khách hàng
             if (!dh.getDienThoai().isEmpty()) {
-                Cell cellSoDienThoai = sheet.getRow(4).getCell(0);
+                Cell cellSoDienThoai = sheet.getRow(5).getCell(0);
                 String SoDienThoai = cellSoDienThoai.getStringCellValue() + dh.getDienThoai();
                 cellSoDienThoai.setCellValue(SoDienThoai);
             }
             //Set địa chỉ khách hàng
             if (!dh.getDiaChi().isEmpty()) {
-                Cell cellDiaChi = sheet.getRow(5).getCell(0);
+                Cell cellDiaChi = sheet.getRow(6).getCell(0);
                 String diaChi = cellDiaChi.getStringCellValue() + dh.getDiaChi();
                 cellDiaChi.setCellValue(diaChi);
             }
 
+            CellStyle borderStyle = sourceWorkbook.createCellStyle();
+            borderStyle.setBorderTop(BorderStyle.THIN);
+            borderStyle.setBorderBottom(BorderStyle.THIN);
+            borderStyle.setBorderLeft(BorderStyle.THIN);
+            borderStyle.setBorderRight(BorderStyle.THIN);
             //Bắt đầu ghi sản phẩm
             int stt = 1;
-            int rowNum = 7;
+            int rowNum = 9;
             Row row;
             for (DonHangChiTiet dhct : dhctList) {
                 SanPhamChiTiet spct = sanPhamChiTietService.searchByIdSPCT(dhct.getMaSanPhamChiTiet());
@@ -1768,22 +1775,31 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
                 row.createCell(4).setCellValue(dhct.getGiaTriGiam() + " " + dhct.getDonViGiam());
                 row.createCell(2).setCellValue(dhct.getSoLuong());
                 row.createCell(5).setCellValue(dhct.getTongGia() + " VND");
+                row.getCell(0).setCellStyle(borderStyle);
+                row.getCell(1).setCellStyle(borderStyle);
+                row.getCell(2).setCellStyle(borderStyle);
+                row.getCell(3).setCellStyle(borderStyle);
+                row.getCell(4).setCellStyle(borderStyle);
+                row.getCell(5).setCellStyle(borderStyle);
             }
 
-            //Ghi tổng tiền
-            Cell cellTongTien = sheet.getRow(rowNum++).getCell(5);
-            cellTenNhanVien.setCellValue(dh.getTongTien() + " VND");
+            CellRangeAddress mergedRegion = new CellRangeAddress(rowNum, rowNum, 0, 4);
+            sheet.addMergedRegion(mergedRegion);
+            
+            Row rowTongTien = sheet.getRow(rowNum);
+            Cell celltitleTongTien = rowTongTien.createCell(0);
+            celltitleTongTien.setCellValue("Tổng Cộng :");
+            rowTongTien.getCell(0).setCellStyle(borderStyle);
+            rowTongTien.createCell(1).setCellStyle(borderStyle);
+            rowTongTien.createCell(2).setCellStyle(borderStyle);
+            rowTongTien.createCell(3).setCellStyle(borderStyle);
+            rowTongTien.createCell(4).setCellStyle(borderStyle);
+            
+            Cell cellTongTien = rowTongTien.createCell(5);
+            cellTongTien.setCellValue(dh.getTongTien() + " VND");
+            cellTongTien.setCellStyle(borderStyle);
 
-            //Ghi ngày giờ:
-            Cell cellThoiGian = sheet.getRow(rowNum++).getCell(0);
-            String thoiGian = cellTenNhanVien.getStringCellValue() + today;
-            cellThoiGian.setCellValue(thoiGian);
-
-            try (FileOutputStream fileOutputStream = new FileOutputStream(defaultFilePath + newFilePath)) {
-                workbook.write(fileOutputStream);
-                System.out.println("File Excel đã được chỉnh sửa và lưu lại thành công.");
-            }
-
+            sourceWorkbook.write(destinationStream);
         } catch (IOException e) {
             e.printStackTrace();
         }
