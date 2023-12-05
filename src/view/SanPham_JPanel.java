@@ -934,9 +934,9 @@ public class SanPham_JPanel extends javax.swing.JPanel {
                             .addComponent(cboThuongHieu, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txt_gianhap, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txt_barcode))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                            .addComponent(jButton12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1803,7 +1803,7 @@ public class SanPham_JPanel extends javax.swing.JPanel {
                                         .addComponent(jButton26)
                                         .addGap(15, 15, 15)
                                         .addComponent(jButton27))
-                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 726, Short.MAX_VALUE))))))
+                                    .addComponent(jScrollPane6))))))
                 .addGap(20, 42, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -2666,9 +2666,17 @@ private void loadDataToTable() {
             DialogHelper.alert(this, "Ngày sản xuất không được để trống");
             return false;
         }
+        if(!XDate.isValidDateRange(ngayXk)){
+            JOptionPane.showMessageDialog(null,"Ngày sinh sai định dạng");
+            return false;
+        }
         String hanSd = txt_hansd.getText().trim();
         if (hanSd.isEmpty()) {
             DialogHelper.alert(this, "Hạn sử dụng không được để trống");
+            return false;
+        }
+        if (!XDate.isValidExpiryDate(hanSd)) {
+            DialogHelper.alert(this, "Hạn sử dụng sai định dạng");
             return false;
         }
         String sl = txt_sl.getText().trim();

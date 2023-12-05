@@ -13,6 +13,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -68,8 +69,8 @@ public class ImportExcell {
             if (rowIterator.hasNext()) {
                 rowIterator.next();
             }
-            int hang =0;
-            
+            int hang = 0;
+
             while (rowIterator.hasNext()) {
                 Row row = rowIterator.next();
                 SanPhamChiTiet x = new SanPhamChiTiet();
@@ -88,8 +89,8 @@ public class ImportExcell {
                 x.setTrangThai((int) row.getCell(17).getNumericCellValue() == 1 ? true : false);
                 Cell cell = row.getCell(8);
                 String name = x.getMaSanPham() + "x" + x.getMaSanPhamChiTiet();
-                getImageIconFromCell(hang,cell, name);
-                x.setAnhSanPham(name +  ".jpg");
+                getImageIconFromCell(hang, cell, name);
+                x.setAnhSanPham(name + "_" + hang + ".jpg");
                 data.add(x);
                 hang++;
             }
@@ -120,8 +121,9 @@ public class ImportExcell {
 
     public static int getma(String input) {
         // Tìm vị trí của dấu "-" trong chuỗi
+        
         int dashIndex = input.indexOf("-");
-
+       
         // Kiểm tra xem có dấu "-" trong chuỗi không
         if (dashIndex != -1 && dashIndex < input.length() - 1) {
             // Sử dụng substring để lấy phần sau dấu "-"
@@ -149,10 +151,27 @@ public class ImportExcell {
         }
     }
 
-    private static ImageIcon getImageIconFromCell(int hang,Cell cell, String name) {
-        System.out.println(((Workbook) cell.getSheet().getWorkbook()).getAllPictures().get(hang).getData());
-        byte[] pictureData = ((Workbook) cell.getSheet().getWorkbook()).getAllPictures().get(hang).getData();
-        saveImageToDirectory(pictureData, ".\\asset\\AnhSanPham\\" + name + ".jpg");
-        return new ImageIcon(pictureData);
+    private static ImageIcon getImageIconFromCell(int hang, Cell cell, String name) {
+        if (cell != null) {
+            Workbook workbook = (Workbook) cell.getSheet().getWorkbook();
+            List<PictureData> allPictures = (List<PictureData>) workbook.getAllPictures();
+
+            System.out.println("Total Pictures: " + allPictures.size());
+
+            if (hang >= 0 && hang < allPictures.size()) {
+                System.out.println("Processing Picture: " + hang);
+
+                byte[] pictureData = allPictures.get(hang).getData();
+                saveImageToDirectory(pictureData, ".\\asset\\AnhSanPham\\" + name + "_" + hang + ".jpg");
+
+                // In ra dữ liệu ảnh
+                System.out.println("Saved Picture Data: " + Arrays.toString(pictureData));
+
+                return new ImageIcon(pictureData);
+            }
+        }
+
+        System.out.println("No Image Found!");
+        return new ImageIcon();
     }
 }

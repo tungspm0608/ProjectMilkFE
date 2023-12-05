@@ -533,6 +533,10 @@ public class KhachHangThanThiet_JPanel extends javax.swing.JPanel {
             DialogHelper.alert(this, "Ngày sinh không được để trống");
             return false;
         }
+        if(!XDate.isValidDateRange(ngaySinh)){
+            JOptionPane.showMessageDialog(null,"Ngày sinh sai định dạng");
+            return false;
+        }
         String email = txt_Email.getText().trim();
         if (email.isEmpty()) {
             DialogHelper.alert(this, "Email không được để trống");

@@ -79,7 +79,7 @@ public class XDate {
         return true;
     }
 
-    public static boolean isDateAfter1900(String input) {
+    public static boolean isValidDateRange(String input) {
         // Định dạng ngày cần kiểm tra
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
@@ -87,8 +87,29 @@ public class XDate {
             // Parse chuỗi thành LocalDate
             LocalDate date = LocalDate.parse(input, dateFormatter);
 
-            // Kiểm tra xem năm của ngày có lớn hơn 1900 hay không
-            return date.getYear() > 1900;
+            // Lấy ngày hôm nay
+            LocalDate currentDate = LocalDate.now();
+
+            // Kiểm tra xem ngày có lớn hơn 1900 và nhỏ hơn ngày hôm nay hay không
+            return date.isAfter(LocalDate.of(1900, 1, 1)) && date.isBefore(currentDate);
+        } catch (DateTimeParseException e) {
+            return false; // Nếu có lỗi, ngày không hợp lệ
+        }
+    }
+    
+    public static boolean isValidExpiryDate(String input) {
+        // Định dạng ngày cần kiểm tra
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+        try {
+            // Parse chuỗi thành LocalDate
+            LocalDate expiryDate = LocalDate.parse(input, dateFormatter);
+
+            // Lấy ngày hiện tại
+            LocalDate currentDate = LocalDate.now();
+
+            // Kiểm tra xem ngày hết hạn có lớn hơn ngày hiện tại hay không
+            return expiryDate.isAfter(currentDate);
         } catch (DateTimeParseException e) {
             return false; // Nếu có lỗi, ngày không hợp lệ
         }

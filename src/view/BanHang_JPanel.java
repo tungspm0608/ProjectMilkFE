@@ -23,6 +23,7 @@ import helper.DialogHelper;
 import helper.StringFormat;
 import helper.XDate;
 import java.awt.Color;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -1162,7 +1163,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         dh.setTrangThai(1);
         Integer rs = donHangService.updateDH(dh);
         if (rs != null) {
-            exportExcel(dhctlist);
+//            exportExcel(dhctlist);
             DialogHelper.alert(null, "Thanh toán thành công");
             dhlist = donHangService.getAllDH();
             loadDataToDH();
@@ -1725,20 +1726,21 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
         String today = XDate.toString(XDate.now(), " HH'h'-mm'm'-ss's' dd-MM-yyyy");
         String newFilePath = "HoaDon" + today + ".xlsx";
 
-        try (   FileInputStream sourceStream = new FileInputStream(defaultFilePath + originalFilePath);
-                Workbook sourceWorkbook = new XSSFWorkbook(sourceStream);
-                FileOutputStream destinationStream = new FileOutputStream(defaultFilePath + newFilePath)) 
-        {
-            Workbook workbook = new XSSFWorkbook((XSSFFactory) sourceWorkbook);
+        try (FileInputStream sourceStream = new FileInputStream(defaultFilePath + originalFilePath); Workbook sourceWorkbook = new XSSFWorkbook(sourceStream); FileOutputStream destinationStream = new FileOutputStream(defaultFilePath + newFilePath)) {
+            sourceWorkbook.write(destinationStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        };
 
-            // Tạo một trang tính mới
+// Tạo một trang tính mớiÏ
+        try (FileInputStream fileInputStream = new FileInputStream(defaultFilePath + originalFilePath); Workbook workbook = new XSSFWorkbook(fileInputStream)) {
             Sheet sheet = workbook.getSheetAt(0);
-            
+
             // Set tên nhân viên
             Cell cellTenNhanVien = sheet.getRow(3).getCell(0);
             String tenNhanVien = cellTenNhanVien.getStringCellValue() + Auth.user.getTenNhanVien();
             cellTenNhanVien.setCellValue(tenNhanVien);
-            
+
             //Set tên khách hàng
             if (!dh.getDienThoai().isEmpty()) {
                 Cell cellSoDienThoai = sheet.getRow(4).getCell(0);
@@ -1751,7 +1753,7 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
                 String diaChi = cellDiaChi.getStringCellValue() + dh.getDiaChi();
                 cellDiaChi.setCellValue(diaChi);
             }
-            
+
             //Bắt đầu ghi sản phẩm
             int stt = 1;
             int rowNum = 7;
@@ -1767,21 +1769,23 @@ public class BanHang_JPanel extends javax.swing.JPanel implements Runnable, Thre
                 row.createCell(2).setCellValue(dhct.getSoLuong());
                 row.createCell(5).setCellValue(dhct.getTongGia() + " VND");
             }
-            
+
             //Ghi tổng tiền
-            Cell cellTongTien = sheet.getRow(rowNum ++).getCell(5);
+            Cell cellTongTien = sheet.getRow(rowNum++).getCell(5);
             cellTenNhanVien.setCellValue(dh.getTongTien() + " VND");
-            
+
             //Ghi ngày giờ:
             Cell cellThoiGian = sheet.getRow(rowNum++).getCell(0);
             String thoiGian = cellTenNhanVien.getStringCellValue() + today;
             cellThoiGian.setCellValue(thoiGian);
 
-            sourceWorkbook.write(destinationStream);
+            try (FileOutputStream fileOutputStream = new FileOutputStream(defaultFilePath + newFilePath)) {
+                workbook.write(fileOutputStream);
+                System.out.println("File Excel đã được chỉnh sửa và lưu lại thành công.");
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
 }

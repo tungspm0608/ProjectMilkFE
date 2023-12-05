@@ -5,6 +5,7 @@
 package service;
 
 import helper.DBContext;
+import helper.StringFormat;
 import helper.XDate;
 import java.io.File;
 import java.io.IOException;
@@ -38,12 +39,13 @@ public class ThongKeService {
             con = DBContext.getConnection();
 
             CallableStatement cstmt = con.prepareCall(callStatement);
-            cstmt.registerOutParameter(1, Types.FLOAT); // @doanhThu
+            cstmt.registerOutParameter(1, Types.DOUBLE); // @doanhThu
             cstmt.registerOutParameter(2, Types.INTEGER); // @donHangThanhCong
             cstmt.registerOutParameter(3, Types.INTEGER); // @donHangThatBai
             cstmt.execute();
             // Lấy giá trị của các tham số đầu ra
-            float doanhThu = cstmt.getFloat(1);
+            double doanhThu = cstmt.getDouble(1);
+            System.out.println(doanhThu);
             int donHangThanhCong = cstmt.getInt(2);
             int donHangThatBai = cstmt.getInt(3);
             return new Object[]{
@@ -94,7 +96,8 @@ public class ThongKeService {
                 int soDonHang = resultSet.getInt("SoDonHang");
                 float doanhThuTrungBinh = resultSet.getFloat("DoanhThuTrungBinh");
                 Object[] o = new Object[]{
-                    month, soDonHang, doanhThu, doanhThuTrungBinh
+                    month, soDonHang,StringFormat.changeMoneyFormat(String.valueOf(doanhThu)),
+                     StringFormat.changeMoneyFormat(String.valueOf(doanhThuTrungBinh))
                 };
                 list.add(o);
             }
@@ -116,8 +119,8 @@ public class ThongKeService {
     private CategoryDataset createDoanhThuChiTietDataset(int year) {
         final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (Object[] o : this.ThongKeTheoThangChiTiet(year)) {
-            dataset.addValue(Float.valueOf(String.valueOf(o[2])), "Doanh thu", "T" + String.valueOf(o[0]));
-            dataset.addValue(Float.valueOf(String.valueOf(o[3])), "Doanh thu trung bình", "T" + String.valueOf(o[0]));
+            dataset.addValue(Float.valueOf(String.valueOf(o[2]).replaceAll("[^\\d]", "")), "Doanh thu", "T" + String.valueOf(o[0]));
+            dataset.addValue(Float.valueOf(String.valueOf(o[3]).replaceAll("[^\\d]","")), "Doanh thu trung bình", "T" + String.valueOf(o[0]));
         }
         return dataset;
     }

@@ -10,6 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import service.Auth;
 
 /**
  *
@@ -20,9 +21,9 @@ public class FileChoose {
     public static String chooseFile() {
         JFileChooser fileChooser = new JFileChooser();
         String os = System.getProperty("os.name").toLowerCase();
-        File deFile = new File(".\\image\\imageSP\\");
+        File deFile = new File(".\\asset\\AnhSanPham\\");
         if (os.contains("mac")) {
-            deFile = new File("./image/imageSP/");
+            deFile = new File("./asset/AnhSanPham/");
         }
         fileChooser.setSelectedFile(deFile);
         int result = fileChooser.showOpenDialog(null);
@@ -44,7 +45,10 @@ public class FileChoose {
 
     public static void saveImage(File selectedFile,String name) {
         // Set the desired directory and file name
-        String destinationDirectory = ".\\image\\imageSP\\";
+        String destinationDirectory = ".\\asset\\AnhSanPham\\";
+        if (Auth.HDH==1) {
+            destinationDirectory = "./asset/AnhSanPham/";
+        }
         String fileName = name; // You can customize the file name
 
         Path destinationPath = Path.of(destinationDirectory, fileName);

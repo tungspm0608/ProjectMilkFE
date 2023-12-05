@@ -597,9 +597,9 @@ public class Main_JFrame extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        ComboSP_JFrame newFrame = new ComboSP_JFrame();
-        newFrame.setVisible(true);
-        newFrame.setLocationRelativeTo(null);
+//        ComboSP_JFrame newFrame = new ComboSP_JFrame();
+//        newFrame.setVisible(true);
+//        newFrame.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed

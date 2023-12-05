@@ -1,6 +1,7 @@
 package view;
 
 import helper.DialogHelper;
+import helper.StringFormat;
 import helper.XDate;
 import java.awt.Color;
 import java.text.DecimalFormat;
@@ -59,7 +60,8 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
             viti = (page-1) * 10+1;
         }
         for (DonHang h : hDList) {
-            mol.addRow(new Object[]{viti, h.getMaNhanVien(), h.getMaKhachHang(), h.getTienGiam(), h.getTongTien(), h.getNgayTao(),
+            mol.addRow(new Object[]{viti, h.getMaNhanVien(), h.getMaKhachHang(), StringFormat.changeMoneyFormat(String.valueOf(h.getTienGiam())),
+                StringFormat.changeMoneyFormat(String.valueOf(h.getTongTien())), h.getNgayTao(),
                 h.getLoaiDonHang() == 2 ? "Đặt hàng" : h.getLoaiDonHang() == 4 ? "Tại quầy" : "Đã hủy"});
             viti++;
         }
@@ -299,6 +301,7 @@ public class HoaDon_JPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        Loc();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tbl_dhctMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_dhctMouseClicked

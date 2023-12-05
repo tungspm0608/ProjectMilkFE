@@ -908,12 +908,6 @@ public class KhuyenMai_JPanel extends javax.swing.JPanel {
             DialogHelper.alert(this, "Mo ta khonh duoc de trong");
             return false;
         }
-        if(!XDate.checkDataDay(txt_NgayBatDau.getDate())){
-            return false;
-        }
-        if(!XDate.checkDataDay(txt_NgayKetThuc.getDate())){
-            return false;
-        }
         if(txt_NgayBatDau.getDate().after(txt_NgayKetThuc.getDate())){
             DialogHelper.alert(null, "Ngày bắt đầu phải sau ngày kết thúc");
             return false;

@@ -21,12 +21,13 @@
 ## Bước 4: Sử dụng phần mềm
 
 Chúc mừng bạn đã hoàn thiện hết các bước cài đặt để sử dụng phần mềm !!!
-Bây giờ hãy click vào file MilkFE.exe để sử dụng phần mềm
+Bây giờ hãy vào neatbean, chạy file view/welcome.java
 
 ## Lời cảm ơn
 Đội ngũ phát triển dự án xin chân thành cảm ơn bạn đã quan tâm và trải nghiệm phần mềm của chúng tôi !!!
 Nếu có thắc mắc về phần cài đặt thì xin hãy gửi mail về địa chỉ : tungspm0608@gmail.com
 Một lần nữa xin cảm ơn và chúc bạn có 1 trải nghiệm tốt về phần mềm !!!
+Thầy đọc thêm file introproduct để xem hướng dẫn sử dụng nha 
 
 
 

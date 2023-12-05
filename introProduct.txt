@@ -1,0 +1,83 @@
+Các chức năng sản phẩm đã hoàn thiện và các chức năng nổi bật:
+# Đăng nhập 
+# Đổi mật khẩu
+# Đăng xuất
+
+# Sản phẩm :
+1. import sản phẩm từ file Excel(có import dc ảnh) : (chỉ có thể import được ảnh từ thư mục asset/AnhSanPham)
+
+# Bán hàng :
+
+- quét qr sản phẩm :
+b1. Cho trực tiếp mã qr vào để quét
+b2. Khi nhận dc mã qr, sẽ hiện thông báo nhập số lượng
+b3. Nhập số lượng và bấm nút thêm
+b4. Sản phẩm tự động thêm vào giỏ hàng
+
+- tạo đơn bán hàng tại quầy :
+b1. bấm nút tạo đơn hàng 
+b2. thêm sản phẩm vào giỏ hàng
+b3. bấm nút thanh toán or  chờ thanh toán :
+- bấm thanh toán thì sẽ thanh toán đơn hàng
+- Sau khi bấm chờ thanh toán thì sẽ lưu lại thông tin khách hàng khi đã tạo đơn hàng
+
+- tạo đơn đặt hàng :
+b1. chọn nút đặt hàng và bấm tạo đơn hàng
+b2. thêm sản phẩm vào giỏ hàng
+b3. Bấm nút giao hàng
+b4. bấm nút hoàn thành hoặc huỷ
+- hoàn thành khi đơn dc giao thành công
+- huỷ khi đơn hàng bị bùng
+
+- Lưu thông tin khách hàng và tích điểm
+b1. tạo hoá đơn
+b2. Sử dụng sdt khách hàng hoặc là bỏ qua
+- Nếu điền thông tin khách hàng thì họ sẽ được tích điểm và sử dụng điểm để mua hàng
+
+# Hoá đơn :
+
+- Trả hàng :
+b1. Chọn hoá đơn và chọn sản phầm trong hoá đơn 
+b2. Bấm trả hàng
+b3. Nhập số lượng
+
+# Sản phẩm : 
+
+- Thêm ảnh sản phẩm :
+b1. Bấm thêm ảnh
+b2. Chọn ảnh từ 1 thư mục bất kì, ảnh sẽ được lưu vào thư mục asset/AnhSanPham
+
+- import excel (có thêm được file ảnh):
+b1. Chuẩn bị file importProduct.xlsx ( hiện tại sẽ chỉ thêm được từ file này, người dùng phải vào đây và chỉnh sửa sản phẩm muốn thêm theo mẫu )
+b2. Vào phần sản phầm và bấm import excel
+b3. Chọn file importProduct.xlsx 
+b4. Sản phẩm sẽ hiển thị lên bảng sản phẩm
+
+# Khuyến mãi
+
+- Thêm khuyến mãi :
+b1. Nhập thông tin của khuyến mãi,
+b2. Chọn các sản phẩm muốn khuyến mãi
+b3. Nhấn thêm
+( một sản phẩm chỉ thuộc 1 khuyến mãi )
+
+# Khách hàng
+
+- Thêm khách hàng nếu họ muốn tích điểm
+
+# Thống kê
+
+- Thống kê sản phẩm :
+b1. Chọn các trường muốn lọc sản phẩm
+b2. Lọc các sản phẩm đang hoạt động theo lượt bán
+
+- Xuất thống kê sản phẩm ra file pdf :
+b1. Chọn lọc
+b2. Bám xuất file
+
+- Thống kê doanh thu 
+- Thống kê khách hàng
+- Thống kê đơn hàng
+- Xuát thống kê đơn hàng
+
+# Nhân Viên

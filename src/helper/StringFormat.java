@@ -4,6 +4,8 @@
  */
 package helper;
 
+import java.text.DecimalFormat;
+
 /**
  *
  * @author dovan
@@ -36,5 +38,12 @@ public class StringFormat {
         return email.matches(emailRegex);
     }
 
-    
+    public static String changeMoneyFormat(String scientificNotation) {
+         double number = Double.parseDouble(scientificNotation);
+
+        // Sử dụng DecimalFormat để định dạng số thành tiền Việt Nam đồng
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,### VND");
+        String formattedNumber = decimalFormat.format(number);
+        return formattedNumber;
+    }
 }

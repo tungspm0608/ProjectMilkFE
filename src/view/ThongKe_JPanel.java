@@ -5,6 +5,7 @@
 package view;
 
 import helper.DialogHelper;
+import helper.StringFormat;
 import helper.XDate;
 import java.awt.Color;
 import java.io.FileOutputStream;
@@ -99,11 +100,11 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
 
     private void setUpjpdoanhThu() {
         Object[] o = tksv.ThongKeTheoNgay();
-        jp2tienDoanhThuHomNay.setText(String.valueOf(o[0]));
+        jp2tienDoanhThuHomNay.setText(StringFormat.changeMoneyFormat(String.valueOf(o[0])));
         jp2donHangDaBanHomNay.setText(String.valueOf(o[1]));
         jp2donHangBiHuyHomNayGT.setText(String.valueOf(o[2]));
         Object[] o1 = tksv.ThongKeTheoThang();
-        jp2tienDoanhThuThangNay.setText(String.valueOf(o1[0]));
+        jp2tienDoanhThuThangNay.setText(StringFormat.changeMoneyFormat(String.valueOf(o1[0])));
         jp2donHangDaBanThang.setText(String.valueOf(o1[1]));
         jp2donHangBiHuyThang.setText(String.valueOf(o1[2]));
 
@@ -846,7 +847,7 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         // export anh bieu đồ đơn hàng
         tksv.saveDonHangTheoThangChart(chartPanel4.getChart());
-        DialogHelper.alert(this, "Export thành công, file nằm ở thư mục chart");
+        DialogHelper.alert(this, "Export thành công, file nằm ở thư mục asset\thongKeDonHang");
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -892,19 +893,19 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
             if (!loaiHang.isEmpty()) {
                 titleRowIndex++;
                 Row filterRow1 = sheet.createRow(titleRowIndex);
-                Cell cellFilter1 = titleRow.createCell(0);
+                Cell cellFilter1 = filterRow1.createCell(0);
                 cellFilter1.setCellValue(loaiHang);
             }
             if (!dongSanPham.isEmpty()) {
                 titleRowIndex++;
                 Row filterRow1 = sheet.createRow(titleRowIndex);
-                Cell cellFilter1 = titleRow.createCell(0);
+                Cell cellFilter1 = filterRow1.createCell(0);
                 cellFilter1.setCellValue(dongSanPham);
             }
             if (!thuongHieu.isEmpty()) {
                 titleRowIndex++;
                 Row filterRow1 = sheet.createRow(titleRowIndex);
-                Cell cellFilter1 = titleRow.createCell(0);
+                Cell cellFilter1 = filterRow1.createCell(0);
                 cellFilter1.setCellValue(thuongHieu);
             }
 
@@ -917,7 +918,7 @@ public class ThongKe_JPanel extends javax.swing.JPanel {
             }
 
             // Sau đó, đi qua từng dòng của JTable và tạo dòng tương ứng trong Excel
-            for (int row = titleRowIndex; row < mol.getRowCount(); row++) {
+            for (int row = titleRowIndex; row < mol.getRowCount()+titleRowIndex; row++) {
                 Row excelRow = sheet.createRow(row + 1); // Bắt đầu từ dòng 1 để tránh ghi đè tiêu đề
 
                 for (int col = 0; col < mol.getColumnCount(); col++) {

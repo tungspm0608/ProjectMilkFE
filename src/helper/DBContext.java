@@ -10,9 +10,9 @@ import java.sql.*;
  */
 public class DBContext {
 
-    public static String USERNAME = "sa";
-    public static String PASSWORD = "A1a2345678";
-    public static String DATABASENAME = "DuAnBanSua_MilkFE";
+    public static String USERNAME = "";
+    public static String PASSWORD = "";
+    public static String DATABASENAME = "";
 
 
     static {
